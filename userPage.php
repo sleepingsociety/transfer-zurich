@@ -1,3 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dkalchofner
+ * Date: 16.11.2016
+ * Time: 08:18
+ */
+
+$dbname    = $_SERVER['DB_NAME'];
+$servername    = $_SERVER['DB_HOST'];
+$dbusername    = $_SERVER['DB_USERNAME'];
+$dbpassword = $_SERVER['DB_PASSWORD'];
+
+$connection = new mysqli($servername, $dbusername, $dbpassword);
+
+if ($connection -> connect_error) {
+    die("Connection failed: " . $connection -> connect_error);
+}
+echo "Connected successfully";
+
+?>
 <html>
 <head>
     <meta CHARSET="UTF-8">
@@ -23,33 +44,19 @@
     <link rel="stylesheet" type="text/css" href="login.css">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 </head>
-
 <body>
-
-<div id="site-canvas">
-    <div class="header-info">
-        <p>Erfahre mehr über die Website</p>
-        <button class="about-button">Click here</button>
-    </div>
-
-    <section>
-        <span></span>
-        <h1>Login</h1>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?> ">
-            <input placeholder='Benutzername' type='text'>
-            <input placeholder='Passwort' type='password'>
-        </form>
-        <button class="login-button">Login</button>
-        <h2>
-            <a href='#'>Passwort vergessen?</a>
-        </h2>
-    </section>
-</div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">Site Created by D.Kalchofner, L.Auriquio & D.O'Kerwin</p>
-    </div>
-</footer>
+<?
+session_start();
+if($_SESSION['user']==''){
+    header("Location:login.php");
+}else{
+    $dbh=new PDO('mysql:dbname=db;host=127.0.0.1', 'root', 'backstreetboys');
+    $sql=$dbh->prepare("SELECT * FROM users WHERE id=?");
+    $sql->execute(array($_SESSION['user']));
+    while($r=$sql->fetch()){
+        echo "<center><h2>Hello, ".$r['username']."</h2></center>";
+    }
+}
+?>
 </body>
 </html>
