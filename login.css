@@ -27,7 +27,7 @@ span {
     top: -62px;
     height: 80px;
     width: 275px;
-    background: url('../img/atap-logo.png') center center no-repeat;
+    background: url('img/atap-logo.png') center center no-repeat;
     border-radius: 4px;
     box-shadow: 1px 1px 2px rgba(0,0,0,.3);
 }
