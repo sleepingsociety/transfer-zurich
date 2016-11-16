@@ -48,15 +48,15 @@ if(isset($_POST['submit'])){
         }else{
             function rand_string($length) {
                 $str="";
-                $chars = "subinsblogabcdefghijklmanopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                $chars = "abcdefghijklmanopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 $size = strlen($chars);
                 for($i = 0;$i < $length;$i++) {
                     $str .= $chars[rand(0,$size-1)];
                 }
-                return $str; /* http://subinsb.com/php-generate-random-string */
+                return $str;
             }
-            $p_salt = rand_string(20); /* http://subinsb.com/php-generate-random-string */
-            $site_salt="subinsblogsalt"; /*Common Salt used for password storing on site.*/
+            $p_salt = rand_string(20); 
+            $site_salt="transzhsalt"; /*Common Salt used for password storing on site.*/
             $salted_hash = hash('sha256', $password.$site_salt.$p_salt);
             $sql=$dbh->prepare("INSERT INTO `users` (`id`, `username`, `password`, `psalt`) VALUES (NULL, ?, ?, ?);");
             $sql->execute(array($_POST['user'], $salted_hash, $p_salt));

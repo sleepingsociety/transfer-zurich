@@ -48,7 +48,7 @@ echo "Connected successfully";
 <?
 session_start();
 if($_SESSION['user']==''){
-    header("Location:login.php");
+    header("Location:index.php");
 }else{
     $dbh=new PDO($servername, $dbusername, $dbpassword);
     $sql=$dbh->prepare("SELECT * FROM users WHERE id=?");

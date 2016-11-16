@@ -61,7 +61,7 @@ echo "Connected successfully";
             <input placeholder='Passwort' type='password'>
             <?php
             session_start();
-            if(isset($_SESSION['user']) && $_SESSION['user']!=''){header("Location:home.php");}
+            if(isset($_SESSION['user']) && $_SESSION['user']!=''){header("Location:userPage.php");}
             $dbh=new PDO($servername, $dbusername, $dbpassword);/*Change The Credentials to connect to database.*/
             $email=$_POST['mail'];
             $password=$_POST['pass'];
@@ -73,11 +73,11 @@ echo "Connected successfully";
                     $p_salt=$r['psalt'];
                     $id=$r['id'];
                 }
-                $site_salt="subinsblogsalt";/*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
+                $site_salt="transzhsalt";/*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
                 $salted_hash = hash('sha256',$password.$site_salt.$p_salt);
                 if($p==$salted_hash){
                     $_SESSION['user']=$id;
-                    header("Location:home.php");
+                    header("Location:userPage.php");
                 }else{
                     echo "<h2>Username/Password is Incorrect.</h2>";
                 }
