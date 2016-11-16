@@ -50,7 +50,7 @@ session_start();
 if($_SESSION['user']==''){
     header("Location:login.php");
 }else{
-    $dbh=new PDO('mysql:dbname=db;host=127.0.0.1', 'root', 'backstreetboys');
+    $dbh=new PDO($servername, $dbusername, $dbpassword);
     $sql=$dbh->prepare("SELECT * FROM users WHERE id=?");
     $sql->execute(array($_SESSION['user']));
     while($r=$sql->fetch()){
