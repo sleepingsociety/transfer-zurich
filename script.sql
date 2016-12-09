@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS driver ;
+DROP TABLE IF EXISTS driver;
 CREATE TABLE driver (
   driver_id INTEGER NOT NULL AUTO_INCREMENT,
   initials VARCHAR(8) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE driver_compensation (
 
 DROP TABLE IF EXISTS vehicle;
 CREATE TABLE vehicle (
-  vehicle_id NOT NULL AUTO_INCREMENT,
+  vehicle_id INTEGER NOT NULL AUTO_INCREMENT,
   vehicle_type VARCHAR(255) NOT NULL,
   vehicle_seats INTEGER(50) NOT NULL,
   vehicle_license_plate VARCHAR(255) NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE income_transfer (
   cancellation_date DATE,
   cancellation_time TIME,
   PRIMARY KEY (id),
-  FOREIGN KEY (origin_fs) REFERENCES origins1(origin_id),
+  FOREIGN KEY (origin_fs) REFERENCES origins(origin_id),
   FOREIGN KEY (destination_fs) REFERENCES destinations(destination),
   FOREIGN KEY (project_id) REFERENCES wid(project_id),
   FOREIGN KEY (driver) REFERENCES driver(driver_id),
