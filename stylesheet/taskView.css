@@ -1,0 +1,164 @@
+#pageContainer {
+    margin: 10px ;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #3498db;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+    width: auto;
+    padding: 0 15px;
+}
+
+#imgLogo {
+    width: auto;
+    text-align: center;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+
+
+h2 {
+    text-align: center;
+}
+
+#Nav {
+    width: 90%;
+    margin: 50px 5% 0% 5%;
+
+}
+
+.navbar {
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #999;
+
+}/*
+ul.nav.navbar-nav.navbar-right{
+    float: right;
+    clear: both;
+    width: auto;
+}
+
+ul.nav.navbar-nav.navbar-right li{
+    float: right;
+
+}*/
+
+a {
+    font-size: 14px;
+}
+
+img.img-nav.img-responsive {
+    height: 35px;
+    margin-right: 0px;
+    display: inline-block;
+}
+
+@media(max-width: 767px)  {
+    img#imgLogo {
+        display: none;
+    }
+}
+@media(min-width: 768px)  {
+    img#imgLogo {
+        display: inline;
+    }
+}
+
+
+div#usersContainer img{
+    height: 65px;
+    width: 65px;
+    margin: 5px;
+    clear: left;
+    float: left;
+}
+
+div#usersContainer p {
+    margin-top: 10px;
+    text-align: left;
+    float: left;
+}
+
+div#usersContainer div{
+    width: 250px;
+    max-width: 250px;
+    max-height: 100px;
+    height:100px;
+    border: 1px solid #ddd;
+    margin:15px;
+    float:left;
+}
+
+thead th, tfoot th {
+    border: 1px solid black;
+    padding: 5px;
+    background-color: lightgray;
+    text-align: center;
+}
+
+table tr td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+table {
+    text-align: center;
+    margin: auto;
+}
+
+table#plan {
+    margin-bottom: 15px;
+}
+
+#plan button {
+    margin: 0 auto;
+    display: block;
+}
+
+body, #pageContainer {
+    background-color: #f8f8f8;
+}
+
+#welcomeMessage {
+    background-color: white;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    padding: 10px 0px 10px 0px;
+}
+
+#adminNotes {
+    margin-top: 20px;
+}
+
+#titleRTask, #titleATask {
+    font-size: 18px;
+    font-weight: bold;
+}
