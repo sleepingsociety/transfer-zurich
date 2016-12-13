@@ -1,4 +1,13 @@
-DROP TABLE IF EXISTS driver ;
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  username TEXT NOT NULL,
+  password TEXT NOT NULL,
+  psalt TEXT NOT NULL,
+  PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS driver;
 CREATE TABLE driver (
   driver_id INTEGER NOT NULL AUTO_INCREMENT,
   initials VARCHAR(8) NOT NULL,
@@ -26,7 +35,7 @@ CREATE TABLE destinations (
   spec_mount VARCHAR(255),
   country VARCHAR(255) NOT NULL,
   region VARCHAR(255) NOT NULL,
-  type VARCHAR(255) NOT NULL,
+  typ VARCHAR(255) NOT NULL,
   distance_from_zrh INTEGER NOT NULL,
   distance_from_bsl INTEGER NOT NULL,
   distance_from_alt INTEGER NOT NULL,
@@ -70,7 +79,7 @@ CREATE TABLE wid (
   project_id INTEGER NOT NULL,
   driver_fs INTEGER NOT NULL,
   compensation INTEGER NOT NULL,
-  date date NOT NULL,
+  datum date NOT NULL,
   start_adress VARCHAR(255),					/*REDUNDANT*/
   destination_adress VARCHAR(255),			/*IT, destination_adress*/
   passenger_number VARCHAR(255),				/*IT, passenger_number*/
@@ -98,7 +107,7 @@ CREATE TABLE driver_compensation (
 
 DROP TABLE IF EXISTS vehicle;
 CREATE TABLE vehicle (
-  vehicle_id NOT NULL AUTO_INCREMENT,
+  vehicle_id INTEGER NOT NULL AUTO_INCREMENT,
   vehicle_type VARCHAR(255) NOT NULL,
   vehicle_seats INTEGER(50) NOT NULL,
   vehicle_license_plate VARCHAR(255) NOT NULL,
@@ -118,11 +127,11 @@ CREATE TABLE vehicle (
 DROP TABLE IF EXISTS income_transfer;
 CREATE TABLE income_transfer (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  project_id INTEGER NOT NULL,
+  project_fs INTEGER NOT NULL,
   origin_fs INTEGER NOT NULL,
   destination_fs INTEGER NOT NULL,
   vehicle_typ INTEGER NOT NULL,
-  date date NOT NULL,
+  datum date NOT NULL,
   lead_Pasenger VARCHAR(255) NOT NULL,
   start_address VARCHAR(255) NOT NULL,
   pick_up_time VARCHAR(255) NOT NULL,
@@ -131,10 +140,10 @@ CREATE TABLE income_transfer (
   flight_number VARCHAR(255) NOT NULL,
   terminal VARCHAR(100) NOT NULL,
   taxi VARCHAR(255),
-  comment VARCHAR(255),
+  commente VARCHAR(255),
   phone_passenger VARCHAR(255) NOT NULL,
   special_needs VARCHAR(255),
-  driver INTEGER NOT NULL,
+  driver_fs INTEGER NOT NULL,
   vehicle_fs INTEGER NOT NULL,
   number_passengers INTEGER NOT NULL,
   small_children_seats VARCHAR(255),
@@ -188,9 +197,9 @@ CREATE TABLE income_transfer (
   cancellation_date DATE,
   cancellation_time TIME,
   PRIMARY KEY (id),
-  FOREIGN KEY (origin_fs) REFERENCES origins1(origin_id),
-  FOREIGN KEY (destination_fs) REFERENCES destinations(destination),
-  FOREIGN KEY (project_id) REFERENCES wid(project_id),
-  FOREIGN KEY (driver) REFERENCES driver(driver_id),
+  FOREIGN KEY (origin_fs) REFERENCES origins(origin_id),
+  FOREIGN KEY (destination_fs) REFERENCES destinations(destination_id),
+  FOREIGN KEY (project_fs) REFERENCES wid(project_id),
+  FOREIGN KEY (driver_fs) REFERENCES driver(driver_id),
   FOREIGN KEY (vehicle_fs) REFERENCES vehicle(vehicle_id)
 );
