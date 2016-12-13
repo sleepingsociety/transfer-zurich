@@ -86,7 +86,7 @@
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Johann Widmer</b><br>Sugar Daddy</p>
+                            <p><b>Johann Widmer</b><br>Admin</p>
                         </div><div id="users">
                             <img src="img/icon-user-default.png">
                             <p><b>Oriol Gut</b><br>Onion</p>
