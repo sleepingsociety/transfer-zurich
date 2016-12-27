@@ -47,9 +47,6 @@ if ($connection->connect_error) {
 <body>
 <section>
     <span></span>
-    <h1>Mitarbeiterlogin</h1>
-    <button onclick="changePage()">Login</button>
-
     <?php
 
     if (isset($_SESSION['login'])) {
@@ -109,11 +106,11 @@ if ($connection->connect_error) {
                 <legend>Erfolg</legend><?php echo $message['success'] ?></fieldset>
         <?php endif;
         if (isset($message['notice'])): ?>
-            <fieldset class="notice">
-                <legend>Hinweis</legend><?php echo $message['notice'] ?></fieldset>
+           <!-- <fieldset class="notice">
+                <legend>Hinweis</legend><?php /*echo $message['notice'] */?></fieldset>-->
         <?php endif; ?>
         <fieldset>
-            <legend>Benutzerdaten</legend>
+            <legend>Mitarbeiterlogin</legend>
             <div><label for="username">Benutzername</label>
                 <input type="text" name="f[username]" id="username"<?php
                 echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?> />
