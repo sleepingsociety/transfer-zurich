@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Transfer-Zurich</title>
-    <script src="javascript/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
     <!-- Latest compiled and minified CSS -->
@@ -74,7 +74,7 @@
                     <div id="usersContainer">
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Dominik O'Kerwin</b><br>Baka</p>
+                            <p><b>Dominik O'Kerwin</b><br>Driver</p>
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
@@ -86,30 +86,30 @@
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Johann Widmer</b><br>Sugar Daddy</p>
+                            <p><b>Johann Widmer</b><br>Admin</p>
                         </div><div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Oriol Gut</b><br>Onion</p>
+                            <p><b>Oriol Gut</b><br>Driver</p>
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Nizar Dübi</b><br>Profi Feeder</p>
+                            <p><b>Nizar Dübi</b><br>Driver</p>
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Olivier Amez-Droz</b><br>Franzose</p>
+                            <p><b>Olivier Amez-Droz</b><br>Driver</p>
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Selina Moser</b><br>Blond</p>
+                            <p><b>Selina Moser</b><br>Driver</p>
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Son Nam Nguyen?</b><br>Asiate</p>
+                            <p><b>Son Nam Nguyen?</b><br>Driver</p>
                         </div>
                         <div id="users">
                             <img src="img/icon-user-default.png">
-                            <p><b>Robin Meier</b><br>NyanCat</p>
+                            <p><b>Robin Meier</b><br>Driver</p>
                         </div>
                     </div>
                 </div>

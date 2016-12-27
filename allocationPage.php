@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Transfer-Zurich</title>
-    <script src="javascript/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
     <!-- Latest compiled and minified CSS -->
