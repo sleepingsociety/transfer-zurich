@@ -1,7 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: David
- * Date: 27.12.2016
- * Time: 23:17
- */
+session_start();
+session_regenerate_id();
+
+if (empty($_SESSION['login'])) {
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/index.php');
+    exit;
+} else {
+    $login_status = '
+			<div style="border: 1px solid black">
+				Sie sind als <strong>' . htmlspecialchars($_SESSION['user']['username']) . '</strong> angemeldet.<br />
+				<a href="/logout.php">Sitzung beenden</a>
+			</div>
+		';
+}
+?>
