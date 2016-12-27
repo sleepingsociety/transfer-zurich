@@ -162,3 +162,19 @@ body, #pageContainer {
     font-size: 18px;
     font-weight: bold;
 }
+
+#policyCol {
+    margin: auto;
+}
+
+
+#policyCol .row div {
+    border: 1px solid black;
+    margin: 5px;
+}
+
+#policyCol h3 {
+    margin: 0px;
+    padding-top: 15px;
+    text-align: center;
+}
