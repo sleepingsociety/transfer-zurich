@@ -34,13 +34,12 @@ body {
 #imgLogo {
     width: auto;
     text-align: center;
+    margin-top: 7px;
 }
 
 .container .text-muted {
     margin: 20px 0;
 }
-
-
 
 h2 {
     text-align: center;
@@ -90,7 +89,6 @@ img.img-nav.img-responsive {
     }
 }
 
-
 div#usersContainer img{
     height: 65px;
     width: 65px;
@@ -122,12 +120,12 @@ thead th, tfoot th {
     text-align: center;
 }
 
-table tr td {
+ table tr td {
     border: 1px solid black;
     padding: 5px;
 }
 
-table {
+ table {
     text-align: center;
     margin: auto;
 }
@@ -149,16 +147,15 @@ body, #pageContainer {
     background-color: white;
     width: 100%;
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
-    padding: 10px 0px 10px 0px;
 }
 
 #adminNotes {
     margin-top: 20px;
 }
 
-#titleRTask, #titleATask {
+#titleRTask, #titleATask, #titleUTask {
     font-size: 18px;
     font-weight: bold;
 }
@@ -166,7 +163,6 @@ body, #pageContainer {
 #policyCol {
     margin: auto;
 }
-
 
 #policyCol .row div {
     border: 1px solid black;
@@ -177,4 +173,51 @@ body, #pageContainer {
     margin: 0px;
     padding-top: 15px;
     text-align: center;
+}
+
+#upcomingTask{
+    text-align: left;
+    margin: auto;
+}
+
+#upcomingTask table tr td{
+    padding: 5px 10px 5px 10px;
+    border: none;
+    text-align: left;
+
+}
+
+#upcomingTask button {
+    margin: 10px;
+}
+
+#managmentRows img {
+    width: 100px;
+    margin: auto;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 50%;
+    clear: both;
+    display: block;
+}
+
+#managmentRows p{
+    text-align: justify;
+}
+
+#managmentRows h3{
+    text-align: center;
+}
+
+#managmentRows button {
+    display: block;
+    margin: auto;
+}
+
+
+div#vehicleRow, div#usersRow, div#profilRow {
+    /*padding: 0px;
+    */
+    margin-top: 30px;
+
 }

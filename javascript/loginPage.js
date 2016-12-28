@@ -18,15 +18,7 @@ $(document).ready(function() {
 });
 
 function changePage(which) {
-    console.log(which)
-    if(which == "allocation") {
-        document.location.href = "allocationPage.php"
-    } else if(which == "requestedTasks") {
-        document.location.href = "requestedTasks.php"
-
-    } else {
-        document.location.href = "adminOverview.php"
-    }
+    document.location.href = which;
 
 }
 

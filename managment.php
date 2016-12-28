@@ -38,11 +38,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
 
-    <script>
-        $(document).ready(function() {
-            createRows("request")
-        });
-    </script>
 
 </head>
 
@@ -65,8 +60,8 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li class="active"><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li><a href="Usermanagment.php">Verwaltung</a></li>
+                                    <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
+                                    <li class="active"><a href="Usermanagment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -75,23 +70,16 @@
                 </div>
 
                 <h2>Title</h2>
-                <hr>
                 <div class="pageContent">
-                    <table id="requestedTasksTable">
-                        <thead>
-                            <th>Firma</th>
-                            <th>Wann zugesendet</th>
-                            <th>Für wann</th>
-                            <th>Anzahl Personen</th>
-                        </thead>
-
-                        <tfoot>
-                            <th>Firma</th>
-                            <th>Wann zugesendet</th>
-                            <th>Für wann</th>
-                            <th>Anzahl Personen</th>
-                        </tfoot>
-                    </table>
+                    <div id="managmentRows" class="container-fluid">
+                        <div class="row">
+                            <?php
+                                include_once 'includes/vehicleRow.php';
+                                include_once 'includes/profileRow.php';
+                                include_once 'includes/usersRow.php';
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
