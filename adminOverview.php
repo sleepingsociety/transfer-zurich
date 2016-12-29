@@ -69,7 +69,7 @@
                             <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="active"><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                <li><a href="Usermanagment.php">Verwaltung</a></li>
+                                <li><a href="managment.php">Verwaltung</a></li>
                                 <li><a href="logout.php">Logout</a></li>
                             </ul>
                         </div>
@@ -86,10 +86,10 @@
                 <div id="adminNotes" class="container-fluid">
                     <div class="row">
                         <?php
+                            include_once 'includes/upcomingTask.php';
                             include_once 'includes/newTasks.php';
-                        include_once 'includes/allocateTasks.php';
-                        include_once 'includes/historyTasks.php';
-                        include_once 'includes/upcomingTask.php';
+                            include_once 'includes/allocateTasks.php';
+                            include_once 'includes/historyTasks.php';
                         ?>
                <!--
 

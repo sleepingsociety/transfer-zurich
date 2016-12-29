@@ -34,6 +34,12 @@
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
     <script src="javascript/loginPage.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            createUsers();
+        });
+    </script>
+
 
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
@@ -61,7 +67,7 @@
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li class="active"><a href="Usermanagment.php">Verwaltung</a></li>
+                                    <li class="active"><a href="managment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -72,45 +78,9 @@
                 <h2>Title</h2>
                 <div class="pageContent">
                     <div id="usersContainer">
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Dominik O'Kerwin</b><br>Driver</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>David Kalchofner</b><br>Admin</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Lukas Auriquio</b><br>Programmer</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Johann Widmer</b><br>Admin</p>
-                        </div><div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Oriol Gut</b><br>Driver</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Nizar Dübi</b><br>Driver</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Olivier Amez-Droz</b><br>Driver</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Selina Moser</b><br>Driver</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Son Nam Nguyen?</b><br>Driver</p>
-                        </div>
-                        <div id="users">
-                            <img src="img/icon-user-default.png">
-                            <p><b>Robin Meier</b><br>Driver</p>
-                        </div>
+                    </div>
+                    <div id="createNewUserButton">
+                        <button class="btn btn-default">Neuen Benutzer erstellen</button>
                     </div>
                 </div>
             </div>

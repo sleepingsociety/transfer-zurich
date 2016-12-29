@@ -10,11 +10,6 @@ $(document).ready(function() {
     $('#bs-example-navbar-collapse-1').on('hidden.bs.collapse', function () {
         console.log("Closed")
     });
-
-
-
-
-
 });
 
 function changePage(which) {
@@ -31,28 +26,32 @@ var users = [{name:"Dominik O'Kerwin", position:"Driver"},
     {name:"Nizar Dübi", position:"Driver"},
     {name:"Olivier Amez-Droz", position:"Driver"},
     {name:"Selina Moser", position:"Driver"},
-    {name:"Nam Nguyen?", position:"Driver"},
+    {name:"Nam Nguyen", position:"Driver"},
     {name:"Robin Meier", position:"Driver"}];
 
 
+
 function createUsers() {
-    console.log("1")
     var mixed = document.getElementById("usersContainer");
-    var div = document.createElement("div");
-    console.log(users.length)
     for(var i = 0; i < users.length; i++) {
-        console.log(i)
-        div.className = "userDiv";
+        var div = document.createElement('div');
+        div.id = 'users';
+        div.className = "col-xs-12 col-sm-6 col-md-2 col-lg-2"
+
+        div.onclick = function () {
+            changePage("singleUserPage.php");
+        };
+
         var img = document.createElement("img");
         var imgSrc = "img/icon-user-default.png";
         img.src = imgSrc;
-        text = document.createElement("p");
+
+        var text = document.createElement('p');
         text.innerHTML = users[i].name + "<br>" + users[i].position;
 
-        img.appendChild(div);
-        text.appendChild(div);
-        div.appendChild(mixed)
-        body.appendChild(div);
+        div.appendChild(img);
+        div.appendChild(text);
+        mixed.appendChild(div);
     }
 }
 
@@ -64,7 +63,7 @@ var drivers = [{name:"Dominik O'Kerwin", license:"B"},
     {name:"Nizar Dübi", license:"B"},
     {name:"Olivier Amez-Droz", license:"B"},
     {name:"Selina Moser", license:"C"},
-    {name:"Nam Nguyen?", license:"C"},
+    {name:"Nam Nguyen", license:"C"},
     {name:"Robin Meier", license:"BE"}];
 
 var cars = [{name:"Auto1", license:"B", places:"4", luggage:"3"},

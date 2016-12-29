@@ -61,7 +61,7 @@
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li class="active"><a href="Usermanagment.php">Verwaltung</a></li>
+                                    <li class="active"><a href="managment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -71,7 +71,21 @@
 
                 <h2>Title</h2>
                 <div class="pageContent">
-
+                    <div id="userInformation">
+                        <img src="img/icon-user-default.png" alt="Benutzerbild"/>
+                        <h3>Persönliche Informationen</h3>
+                        <hr>
+                        <?php
+                            $mode = 1;
+                            if($mode == 1) {
+                                include_once 'includes/changeUserinfoLow.php';
+                            } else if($mode == 2) {
+                                include_once 'includes/changeUserinfoMed.php';
+                            } else {
+                                include_once 'includes/createNewUser.php';
+                            }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

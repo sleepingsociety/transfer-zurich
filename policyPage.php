@@ -60,7 +60,7 @@
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="active"><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li><a href="Usermanagment.php">Verwaltung</a></li>
+                                    <li><a href="managment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -74,69 +74,77 @@
                     <div id="policyCol" class="container-fluid">
                         <div class="row">
                             <div id="driverPolicy" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                                <h3>Fahrer</h3>
-                                <hr>
-                                <h4>Berechtigungen</h4>
-                                <ul>
-                                    <li>Zugeteilte Aufträge anschauen</li>
-                                    <li>Auftragsvollendung melden</li>
-                                    <li>Passwort/ Email/ Benutzerbild ändern</li>
-                                </ul>
-                                <h4>Momentane Mitglieder</h4>
-                                <ul>
-                                    <li>...</li>
-                                    <li>...</li>
-                                    <li>...</li>
-                                </ul>
+                                <div>
+                                    <h3>Fahrer</h3>
+                                    <hr>
+                                    <h4>Berechtigungen</h4>
+                                    <ul>
+                                        <li>Zugeteilte Aufträge anschauen</li>
+                                        <li>Auftragsvollendung melden</li>
+                                        <li>Passwort/ Email/ Benutzerbild ändern</li>
+                                    </ul>
+                                    <h4>Momentane Mitglieder</h4>
+                                    <ul>
+                                        <li>...</li>
+                                        <li>...</li>
+                                        <li>...</li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div id="dispoPolicy" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                                <h3>Disponent</h3>
-                                <hr>
-                                <h4>Berechtigungen</h4>
-                                <ul>
-                                    <li>Kann Aufträge annehmen oder ablehnen</li>
-                                    <li>Kann Aufträge verteilen</li>
-                                    <li>Berechtigung von Fahrer</li>
-                                </ul>
-                                <h4>Momentane Mitglieder</h4>
-                                <ul>
-                                    <li>...</li>
-                                    <li>...</li>
-                                    <li>...</li>
-                                </ul>
+                                <div>
+                                    <h3>Disponent</h3>
+                                    <hr>
+                                    <h4>Berechtigungen</h4>
+                                    <ul>
+                                        <li>Kann Aufträge annehmen oder ablehnen</li>
+                                        <li>Kann Aufträge verteilen</li>
+                                        <li>Berechtigung von Fahrer</li>
+                                    </ul>
+                                    <h4>Momentane Mitglieder</h4>
+                                    <ul>
+                                        <li>...</li>
+                                        <li>...</li>
+                                        <li>...</li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div id="technicalLeaderPolicy" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                                <h3>Technische Leiter</h3>
-                                <hr>
-                                <h4>Berechtigungen</h4>
-                                <ul>
-                                    <li>Benutzer hinzufügen/ verändern/ deaktivieren</li>
-                                    <li>Fahrzeuge hinzufügen/verändern/ löschen </li>
-                                    <li>Berechtigung von Fahrer/ Disponent verändern</li>
-                                </ul>
-                                <h4>Momentane Mitglieder</h4>
-                                <ul>
-                                    <li>...</li>
-                                    <li>...</li>
-                                    <li>...</li>
-                                </ul>
+                                <div>
+                                    <h3>Technische Leiter</h3>
+                                    <hr>
+                                    <h4>Berechtigungen</h4>
+                                    <ul>
+                                        <li>Benutzer hinzufügen/ verändern/ deaktivieren</li>
+                                        <li>Fahrzeuge hinzufügen/verändern/ löschen </li>
+                                        <li>Berechtigung von Fahrer & Disponent</li>
+                                    </ul>
+                                    <h4>Momentane Mitglieder</h4>
+                                    <ul>
+                                        <li>...</li>
+                                        <li>...</li>
+                                        <li>...</li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div id="adminPolicy" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                                <h3>Admin</h3>
-                                <hr>
-                                <h4>Berechtigungen</h4>
-                                <ul>
-                                    <li>Hat auf alles vollen Zugriff</li>
-                                </ul>
-                                <h4>Momentane Mitglieder</h4>
-                                <ul>
-                                    <li>...</li>
-                                    <li>...</li>
-                                    <li>...</li>
-                                </ul>
+                                <div>
+                                    <h3>Admin</h3>
+                                    <hr>
+                                    <h4>Berechtigungen</h4>
+                                    <ul>
+                                        <li>Hat auf alles vollen Zugriff</li>
+                                    </ul>
+                                    <h4>Momentane Mitglieder</h4>
+                                    <ul>
+                                        <li>...</li>
+                                        <li>...</li>
+                                        <li>...</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
