@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Dominik O'Kerwin
- * Date: 02.12.2016
- * Time: 08:18
- */
 
 ?>
 
