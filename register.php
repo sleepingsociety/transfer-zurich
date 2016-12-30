@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dkalchofner
- * Date: 16.11.2016
- * Time: 08:52
- */
 $dbname    = $_SERVER['DB_NAME'];
 $servername    = $_SERVER['DB_HOST'];
 $dbusername    = $_SERVER['DB_USERNAME'];
@@ -15,7 +9,7 @@ $connection = new mysqli($servername, $dbusername, $dbpassword);
 if ($connection -> connect_error) {
     die("Connection failed: " . $connection -> connect_error);
 }
-//echo "Connected successfully";
+
 
 $message = array();
 if (!empty($_POST)) {

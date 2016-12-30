@@ -1,5 +1,18 @@
 <?php
+$dbname = $_SERVER['DB_NAME'];
+$servername = $_SERVER['DB_HOST'];
+$dbusername = $_SERVER['DB_USERNAME'];
+$dbpassword = $_SERVER['DB_PASSWORD'];
 
+$connection = new mysqli($servername, $dbusername, $dbpassword);
+
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+if(!isset($_SESSION)){
+    session_start();
+}
 ?>
 
 <html>
@@ -71,7 +84,12 @@
                 </nav>
             </div>
 
+            <?php
 
+            echo "Does is work? " . $_SESSION['username'] . "";
+
+
+            ?>
             <h2>Übersichtsseite</h2>
             <div class="pageContent">
                 <?php
