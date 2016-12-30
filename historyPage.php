@@ -61,7 +61,7 @@
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li class="active"><a href="Usermanagment.php">Verwaltung</a></li>
+                                    <li class="active"><a href="managment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -69,9 +69,18 @@
                     </nav>
                 </div>
 
-                <h2>Title</h2>
-                <div class="pageContent">
 
+                <div class="pageContent">
+                    <?php
+                        include_once 'includes/accessDeniedMessage.php';
+                    ?>
+                    <!--
+                    req. timestamp: changedDate/changedDateTime
+                    req. string: User who did it
+                    req. string: tasknumber
+                    req. string -> set values to choose from: what changed (example. accepted, cancelation
+                    string: reason if needed
+                    -->
                 </div>
             </div>
         </div>

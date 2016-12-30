@@ -61,7 +61,7 @@
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li class="active"><a href="Usermanagment.php">Verwaltung</a></li>
+                                    <li class="active"><a href="managment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -69,7 +69,7 @@
                     </nav>
                 </div>
 
-                <h2>Title</h2>
+                <h2>Fahrzeugverwaltung</h2>
                 <div class="pageContent">
 
                 </div>

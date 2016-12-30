@@ -69,7 +69,7 @@
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="active"><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li><a href="Usermanagment.php">Verwaltung</a></li>
+                                    <li><a href="managment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -89,14 +89,17 @@
                                         <th>Von</th>
                                         <th>Nach</th>
                                         <th>Wann</th>
+                                        <th>Erreicht</th>
                                         <th>Gepäck</th>
                                         <th>Personen</th>
+
                                     </thead>
 
                                     <tfoot>
                                         <th>Von</th>
                                         <th>Nach</th>
                                         <th>Wann</th>
+                                        <th>Erreicht</th>
                                         <th>Gepäck</th>
                                         <th>Personen</th>
                                     </tfoot>
@@ -108,11 +111,13 @@
                                     <thead>
                                         <th>Fahrer</th>
                                         <th>Lizenz</th>
+                                        <th>Übrige Arbeitszeit</th>
                                     </thead>
 
                                     <tfoot>
                                         <th>Fahrer</th>
                                         <th>Lizenz</th>
+                                        <th>Übrige Arbeitszeit</th>
                                     </tfoot>
                                 </table>
                             </div>
@@ -135,6 +140,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <div id="buttonNewEntry">
+                        <button onClick="checkingSelected()" class="btn btn-primary">Auftrag in der Tabelle einfügen</button>
+                    </div>
+
                     <hr>
                     <div id="plan">
                         <div id="allocation" class="table-responsive">
@@ -145,7 +155,7 @@
                         </div>
 
                         <hr>
-                        <button class="btn btn-default">Aufträge speichern</button>
+                        <button onclick="saveAllocation()" class="btn btn-default">Aufträge speichern</button>
 
                     </div>
 
