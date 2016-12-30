@@ -64,7 +64,7 @@
                                 </button>
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
+                                <a href="adminOverview.php"><img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo"></a>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
                                     <li class="active"><a href="managment.php">Verwaltung</a></li>
