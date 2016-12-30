@@ -66,7 +66,7 @@
                                 <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="active"><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li><a href="Usermanagment.php">Benutzerverwaltung</a></li>
+                                    <li><a href="managment.php">Verwaltung</a></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
@@ -86,10 +86,10 @@
                         </thead>
 
                         <tfoot>
-                        <th>Firma</th>
-                        <th>Wann zugesendet</th>
-                        <th>Für wann</th>
-                        <th>Anzahl Personen</th>
+                            <th>Firma</th>
+                            <th>Wann zugesendet</th>
+                            <th>Für wann</th>
+                            <th>Anzahl Personen</th>
                         </tfoot>
                     </table>
                 </div>

@@ -69,7 +69,7 @@
                             <img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo">
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="active"><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                <li><a href="Usermanagment.php">Benutzerverwaltung</a></li>
+                                <li><a href="managment.php">Verwaltung</a></li>
                                 <li><a href="logout.php">Logout</a></li>
                             </ul>
                         </div>
@@ -78,63 +78,20 @@
             </div>
 
 
-            <h2>Title</h2>
+            <h2>Übersichtsseite</h2>
             <div class="pageContent">
-                <div id="welcomeMessage">
-                    <h3>Willkommen zurück zu Atap-Transfers</h3>
-                    <p>Von hier aus können Sie auf die verschiedenen Bereiche<br>
-                        dieser Webseite zugreifen, welcher nur für den Admin zugänglich sind.<br>
-                        Sie können auch als Admin wieder zurück in die Fahreransicht gehen.</p>
-                    <button class="btn btn-default">Zur Fahreransicht</button>
-                </div>
+                <?php
+                    include_once 'includes/welcomeMessage.php';
+                ?>
                 <div id="adminNotes" class="container-fluid">
                     <div class="row">
-                        <div id="newRequest" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#collapse1"><span id="titleRTask">Unbestätigte Aufträge</span></a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse1" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <h4>Es gibt momentan 5 unbestätigte Aufträge</h4>
-                                            <button onClick="changePage('requestedTasks')" class="btn btn-default">Zu den Aufträgen</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div id="toAllocate" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#collapse2"><span id="titleATask">Auftragsverteilung</span></a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse2" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <h4>Aufträge austeilen</h4>
-                                            <p>
-                                                Für den heutigen Tag sind noch nicht alle Aufträge <br>
-                                                verteilt. Momentan müssen noch 13 Aufträge<br>
-                                                verteilt werden. Bitte verteilen Sie diese Aufträge<br>
-                                                so schnell wie möglich.
-                                            </p>
-                                            <button class="btn btn-default" onClick="changePage('allocation')">Zu Auftragsverteilung</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <!--
+                        <?php
+                            include_once 'includes/upcomingTask.php';
+                            include_once 'includes/newTasks.php';
+                            include_once 'includes/allocateTasks.php';
+                            include_once 'includes/historyTasks.php';
+                        ?>
+               <!--
 
                         Ersetzten durch das was im Heft ist.
                         Liste von Angenommen Aufträgen
@@ -148,31 +105,6 @@
                         Filter möglichkeit suchen was auch immer
 
                         -->
-
-
-                        <div id="Abgelehnte Aufträge" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                            <div class="panel-group">
-                                <div class="panel panel-default">
-                                    </h4>
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#collapse3"><span id="titleRTask">Unbestätigte Aufträge</span></a>
-                                    </div>
-                                    <div id="collapse3" class="panel-collapse collapse in">
-                                        <div class="panel-body">
-                                            <h4>Bitte überprüfen Sie die Absagen</h4>
-                                            <p>
-                                                Es gibt momentan 5 Absagen. Schauen Sie sich<br>
-                                                ihre Begründung an und bei Problemen können Sie<br>
-                                                den Fahrer kontaktieren. Die abgelehnten Aufträge<br>
-                                                werden wieder in der Auftragsverteilung gesendet.
-                                            </p>
-                                            <button class="btn btn-default">Zu den abgelehnten Aufträgen</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

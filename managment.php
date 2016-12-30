@@ -34,12 +34,6 @@
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
     <script src="javascript/loginPage.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function() {
-            createUsers();
-        });
-    </script>
-
 
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
@@ -75,12 +69,16 @@
                     </nav>
                 </div>
 
-                <h2>Title</h2>
+                <h2>Verwaltung</h2>
                 <div class="pageContent">
-                    <div id="usersContainer">
-                    </div>
-                    <div id="createNewUserButton">
-                        <button class="btn btn-default" onclick="changePage('singleUserPage.php')">Neuen Benutzer erstellen</button>
+                    <div id="managmentRows" class="container-fluid">
+                        <div class="row">
+                            <?php
+                                include_once 'includes/vehicleRow.php';
+                                include_once 'includes/profileRow.php';
+                                include_once 'includes/usersRow.php';
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>

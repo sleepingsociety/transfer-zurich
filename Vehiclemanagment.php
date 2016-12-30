@@ -34,12 +34,6 @@
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
     <script src="javascript/loginPage.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function() {
-            createUsers();
-        });
-    </script>
-
 
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
@@ -56,11 +50,11 @@
                         <div class="container-fluid">
                             <div class="navbar-heading">
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
+                                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
                                 </button>
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -75,13 +69,9 @@
                     </nav>
                 </div>
 
-                <h2>Title</h2>
+                <h2>Fahrzeugverwaltung</h2>
                 <div class="pageContent">
-                    <div id="usersContainer">
-                    </div>
-                    <div id="createNewUserButton">
-                        <button class="btn btn-default" onclick="changePage('singleUserPage.php')">Neuen Benutzer erstellen</button>
-                    </div>
+
                 </div>
             </div>
         </div>
