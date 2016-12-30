@@ -74,23 +74,6 @@ CREATE TABLE origins (
   PRIMARY KEY (origin_id)
 );
 
-DROP TABLE IF EXISTS wid;
-CREATE TABLE wid (
-  project_id INTEGER NOT NULL,
-  driver_fs INTEGER NOT NULL,
-  compensation INTEGER NOT NULL,
-  datum date NOT NULL,
-  start_adress VARCHAR(255),					/*REDUNDANT*/
-  destination_adress VARCHAR(255),			/*IT, destination_adress*/
-  passenger_number VARCHAR(255),				/*IT, passenger_number*/
-  intern_field VARCHAR(255),
-  calculation_field1 VARCHAR(255),
-  calculation_field2 VARCHAR(255),
-  billable_destination VARCHAR(255),
-  PRIMARY KEY (project_id),
-  FOREIGN KEY (driver_fs) REFERENCES driver(driver_id)
-);
-
 DROP TABLE IF EXISTS driver_compensation;
 CREATE TABLE driver_compensation (
   driver_compensation_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -203,3 +186,6 @@ CREATE TABLE income_transfer (
   FOREIGN KEY (driver_fs) REFERENCES driver(driver_id),
   FOREIGN KEY (vehicle_fs) REFERENCES vehicle(vehicle_id)
 );
+
+
+

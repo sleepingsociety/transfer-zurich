@@ -1,19 +1,18 @@
 <?php
 
-$dbname    = $_SERVER['DB_NAME'];
-$servername    = $_SERVER['DB_HOST'];
-$dbusername    = $_SERVER['DB_USERNAME'];
+$dbname = $_SERVER['DB_NAME'];
+$servername = $_SERVER['DB_HOST'];
+$dbusername = $_SERVER['DB_USERNAME'];
 $dbpassword = $_SERVER['DB_PASSWORD'];
 
 $connection = new mysqli($servername, $dbusername, $dbpassword);
 
-if ($connection -> connect_error) {
-    die("Connection failed: " . $connection -> connect_error);
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
 }
-echo "Connected successfully";
+//echo "Connected successfully";
 
 ?>
-
 <html>
 
 <head>
@@ -24,21 +23,21 @@ echo "Connected successfully";
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 
 
     <!-- Optional theme -->
     <link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-    crossorigin="anonymous">
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <script src="javascript/loginPage.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheet/login.css">
@@ -48,46 +47,81 @@ echo "Connected successfully";
 <body>
 <section>
     <span></span>
-    <h1>Mitarbeiterlogin</h1>
+    <?php
 
-    <section>
-        <span></span>
-        <h1>Login</h1>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?> ">
-            <input placeholder='Benutzername' type='text'>
-            <input placeholder='Passwort' type='password'>
-            <?php
-            session_start();
-            if(isset($_SESSION['user']) && $_SESSION['user']!=''){header("Location:userPage.php");}
-            $dbh=new PDO($servername, $dbusername, $dbpassword);/*Change The Credentials to connect to database.*/
-            $email=$_POST['mail'];
-            $password=$_POST['pass'];
-            if(isset($_POST) && $email!='' && $password!=''){
-                $sql=$dbh->prepare("SELECT id,password,psalt FROM users WHERE username=?");
-                $sql->execute(array($email));
-                while($r=$sql->fetch()){
-                    $p=$r['password'];
-                    $p_salt=$r['psalt'];
-                    $id=$r['id'];
-                }
-                $site_salt="transzhsalt";/*Common Salt used for password storing on site. You can't change it. If you want to change it, change it when you register a user.*/
-                $salted_hash = hash('sha256',$password.$site_salt.$p_salt);
-                if($p==$salted_hash){
-                    $_SESSION['user']=$id;
-                    header("Location:userPage.php");
-                }else{
-                    echo "<h2>Username/Password is Incorrect.</h2>";
+    if (isset($_SESSION['login'])) {
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/adminOverview.php');
+    } else {
+        if (!empty($_POST)) {
+            if (
+                empty($_POST['f']['username']) ||
+                empty($_POST['f']['password'])
+            ) {
+                $message['error'] = 'Es wurden nicht alle Felder ausgefüllt.';
+            } else {
+                $connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
+                if ($connection->connect_error) {
+                    $message['error'] = 'Datenbankverbindung fehlgeschlagen: ' . $connection->connect_error;
+                } else {
+                    $query = sprintf(
+                        "SELECT username, password FROM users WHERE username = '%s'",
+                        $connection->real_escape_string($_POST['f']['username'])
+                    );
+                    $result = $connection->query($query);
+                    if ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        if (crypt($_POST['f']['password'], $row['password']) == $row['password']) {
+                            session_start();
+
+                            $_SESSION = array(
+                                'login' => true,
+                                'user' => array(
+                                    'username' => $row['username']
+                                )
+                            );
+                            $message['success'] = 'Anmeldung erfolgreich, <a href="adminOverview.php">weiter zum Inhalt.';
+                            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/adminOverview.php');
+                        } else {
+                            $message['error'] = 'Das Kennwort ist nicht korrekt.';
+                        }
+                    } else {
+                        $message['error'] = 'Der Benutzer wurde nicht gefunden.';
+                    }
+                    $connection->close();
                 }
             }
-            ?>
-        </form>
-        <button class="login-button">Login</button>
-        <h2>
-            <a href='#'>Passwort vergessen?</a>
-        </h2>
-    </section>
+        } else {
+            $message['notice'] = 'Geben Sie Ihre Zugangsdaten ein um sich anzumelden.<br />' .
+                'Wenn Sie noch kein Konto haben, gehen Sie <a href="/register.php">zur Registrierung</a>.';
+        }
+    }
+    ?>
 
-    <button onclick="changePage()">Login</button>
+    <form action="/index.php" method="post">
+        <?php if (isset($message['error'])): ?>
+            <fieldset class="error">
+                <legend>Fehler</legend><?php echo $message['error'] ?></fieldset>
+        <?php endif;
+        if (isset($message['success'])): ?>
+            <fieldset class="success">
+                <legend>Erfolg</legend><?php echo $message['success'] ?></fieldset>
+        <?php endif;
+        if (isset($message['notice'])): ?>
+           <!-- <fieldset class="notice">
+                <legend>Hinweis</legend><?php /*echo $message['notice'] */?></fieldset>-->
+        <?php endif; ?>
+        <fieldset>
+            <legend>Mitarbeiterlogin</legend>
+            <div><label for="username">Benutzername</label>
+                <input type="text" name="f[username]" id="username"<?php
+                echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?> />
+            </div>
+            <div><label for="password">Kennnwort</label> <input type="password" name="f[password]" id="password"/></div>
+        </fieldset>
+        <fieldset>
+            <div><input type="submit" name="submit" value="Anmelden"/></div>
+        </fieldset>
+    </form>
+
     <h2>
         <a href='#'>Passwort vergessen?</a>
     </h2>
@@ -98,5 +132,5 @@ echo "Connected successfully";
     </div>
 </footer>
 </body>
-
 </html>
+

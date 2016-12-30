@@ -2,14 +2,6 @@ $(document).ready(function() {
     $( ".footer" ).click(function() {
         console.log("test")
     });
-
-    $('#bs-example-navbar-collapse-1').on('shown.bs.collapse', function () {
-        console.log("Opened")
-    });
-
-    $('#bs-example-navbar-collapse-1').on('hidden.bs.collapse', function () {
-        console.log("Closed")
-    });
 });
 
 function changePage(which) {
@@ -114,7 +106,7 @@ function createAllocationTable() {
     thead.appendChild(tr);
     mixed.appendChild(thead);
 
-    var times = new Array();
+    var times = [];
     var hour = 0;
     for(var i = 0; i < 48; i++) {
         if(i % 2 == 0) {
