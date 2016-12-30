@@ -80,7 +80,7 @@
                     <div id="usersContainer">
                     </div>
                     <div id="createNewUserButton">
-                        <button class="btn btn-default">Neuen Benutzer erstellen</button>
+                        <button class="btn btn-default" onclick="changePage('singleUserPage.php')">Neuen Benutzer erstellen</button>
                     </div>
                 </div>
             </div>

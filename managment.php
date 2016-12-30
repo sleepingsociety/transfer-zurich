@@ -69,7 +69,7 @@
                     </nav>
                 </div>
 
-                <h2>Title</h2>
+                <h2>Verwaltung</h2>
                 <div class="pageContent">
                     <div id="managmentRows" class="container-fluid">
                         <div class="row">

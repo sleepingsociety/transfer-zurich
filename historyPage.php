@@ -69,9 +69,18 @@
                     </nav>
                 </div>
 
-                <h2>Title</h2>
-                <div class="pageContent">
 
+                <div class="pageContent">
+                    <?php
+                        include_once 'includes/accessDeniedMessage.php';
+                    ?>
+                    <!--
+                    req. timestamp: changedDate/changedDateTime
+                    req. string: User who did it
+                    req. string: tasknumber
+                    req. string -> set values to choose from: what changed (example. accepted, cancelation
+                    string: reason if needed
+                    -->
                 </div>
             </div>
         </div>

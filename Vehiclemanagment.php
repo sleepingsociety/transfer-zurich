@@ -69,7 +69,7 @@
                     </nav>
                 </div>
 
-                <h2>Title</h2>
+                <h2>Fahrzeugverwaltung</h2>
                 <div class="pageContent">
 
                 </div>

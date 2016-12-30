@@ -78,7 +78,7 @@
             </div>
 
 
-            <h2>Title</h2>
+            <h2>Übersichtsseite</h2>
             <div class="pageContent">
                 <?php
                     include_once 'includes/welcomeMessage.php';
