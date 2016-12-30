@@ -203,3 +203,6 @@ CREATE TABLE income_transfer (
   FOREIGN KEY (driver_fs) REFERENCES driver(driver_id),
   FOREIGN KEY (vehicle_fs) REFERENCES vehicle(vehicle_id)
 );
+
+
+
