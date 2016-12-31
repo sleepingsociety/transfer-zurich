@@ -90,7 +90,9 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                     <div id="usersContainer">
                     </div>
                     <div id="createNewUserButton">
-                        <button class="btn btn-default" onclick="changePage('singleUserPage.php')">Neuen Benutzer erstellen</button>
+                        <form action="register.php">
+                            <button class="btn btn-default" type="submit" value="createNewUserButton">Neuen Benutzer erstellen</button>
+                        </form>
                     </div>
                 </div>
             </div>
