@@ -431,3 +431,7 @@ function createRows(type) {
         mixed.appendChild(tbody);
     }
 }
+
+function forgotPassword() {
+        document.getElementById("forgot-pw-div").classList.toggle("forgot-pw")
+}

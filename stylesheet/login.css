@@ -124,3 +124,11 @@ body {
 p {
     text-align: center;
 }
+
+.classy {
+    display: none;
+}
+
+.forgot-pw {
+    display: block;
+}
