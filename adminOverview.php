@@ -13,6 +13,9 @@ if ($connection->connect_error) {
 if(!isset($_SESSION)){
     session_start();
 }
+
+if (!$_SESSION["login"]) header('Location: /index.php');
+
 ?>
 
 <html>
@@ -84,12 +87,6 @@ if(!isset($_SESSION)){
                 </nav>
             </div>
 
-            <?php
-
-            echo "Does is work? " . $_SESSION['username'] . "";
-
-
-            ?>
             <h2>Übersichtsseite</h2>
             <div class="pageContent">
                 <?php

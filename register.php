@@ -10,6 +10,11 @@ if ($connection -> connect_error) {
     die("Connection failed: " . $connection -> connect_error);
 }
 
+if(!isset($_SESSION)){
+    session_start();
+}
+
+if (!$_SESSION["login"]) header('Location: /index.php');
 
 $message = array();
 if (!empty($_POST)) {
