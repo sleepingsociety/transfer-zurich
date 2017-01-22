@@ -1,10 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Dominik O'Kerwin
- * Date: 02.12.2016
- * Time: 08:18
- */
+$dbname    = $_SERVER['DB_NAME'];
+$servername    = $_SERVER['DB_HOST'];
+$dbusername    = $_SERVER['DB_USERNAME'];
+$dbpassword = $_SERVER['DB_PASSWORD'];
+
+$connection = new mysqli($servername, $dbusername, $dbpassword);
+
+if ($connection -> connect_error) {
+    die("Connection failed: " . $connection -> connect_error);
+}
+
+if(!isset($_SESSION)){
+    session_start();
+}
+
+if (!$_SESSION["login"]) header('Location: /index.php');
 
 ?>
 
@@ -80,7 +90,9 @@
                     <div id="usersContainer">
                     </div>
                     <div id="createNewUserButton">
-                        <button class="btn btn-default" onclick="changePage('singleUserPage.php')">Neuen Benutzer erstellen</button>
+                        <form action="register.php">
+                            <button class="btn btn-default" type="submit" value="createNewUserButton">Neuen Benutzer erstellen</button>
+                        </form>
                     </div>
                 </div>
             </div>

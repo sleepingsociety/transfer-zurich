@@ -3,34 +3,25 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse4"><span id="titleUTask">Nächster Auftrag</span></a>
+                    <a data-toggle="collapse" href="#collapse4"><span id="titleUTask">Auftragsübersicht</span></a>
                 </h4>
             </div>
             <div id="collapse4" class="panel-collapse collapse in">
                 <div class="panel-body">
                     <table>
                         <tr>
-                            <td>Nächster Auftrag:</td>
-                            <td>8:30 Zürich Flughafen</td>
+                            <td>Aufträge heute:</td>
+                            <td>5</td>
                         </tr>
                         <tr>
-                            <td>Zielort:</td>
-                            <td>Hotel Zürich</td>
+                            <td>Aufträge diese Woche:</td>
+                            <td>27</td>
                         </tr>
                         <tr>
-                            <td>Abholen:</td>
-                            <td>Irina Keller</td>
-                        </tr>
-                        <tr>
-                            <td>Auto:</td>
-                            <td>Mercedes E 350 CDIn</td>
-                        </tr>
-                        <tr>
-                            <td>Zusätze:</td>
-                            <td>2 Kindersitze</td>
+                            <td>Aufträge diesen Monat:</td>
+                            <td>74</td>
                         </tr>
                     </table>
-                    <button class="btn btn-default">Mehr Informationen</button><br>
                     <button class="btn btn-default">Alle Aufträge anzeigen</button>
                 </div>
             </div>

@@ -10,7 +10,7 @@ $connection = new mysqli($servername, $dbusername, $dbpassword);
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
-//echo "Connected successfully";
+
 
 ?>
 <html>
@@ -72,12 +72,16 @@ if ($connection->connect_error) {
                         if (crypt($_POST['f']['password'], $row['password']) == $row['password']) {
                             session_start();
 
-                            $_SESSION = array(
+                         /*   $_SESSION = array(
                                 'login' => true,
                                 'user' => array(
                                     'username' => $row['username']
                                 )
-                            );
+                            );*/
+
+                            $_SESSION['login'] = true;
+                            $_SESSION['username'] = $row['username'];
+
                             $message['success'] = 'Anmeldung erfolgreich, <a href="adminOverview.php">weiter zum Inhalt.';
                             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/adminOverview.php');
                         } else {
@@ -118,13 +122,20 @@ if ($connection->connect_error) {
             <div><label for="password">Kennnwort</label> <input type="password" name="f[password]" id="password"/></div>
         </fieldset>
         <fieldset>
-            <div><input type="submit" name="submit" value="Anmelden"/></div>
+            <button type="submit" name="submit" value="Anmelden">Anmelden</button>
         </fieldset>
     </form>
+    <div>
+        <button onclick="forgotPassword()">Passwort vergessen</button>
+        <div id="forgot-pw-div" class="classy">
+            <label for="Email">Email</label>
+            <input type="email" name="email" id="Email"/>
+            <button type="submit" name="submit-button" value="submit">Neues Password anfordern</button>
+        </div>
+    </div>
 
-    <h2>
-        <a href='#'>Passwort vergessen?</a>
-    </h2>
+
+
 </section>
 <footer class="footer">
     <div class="container">

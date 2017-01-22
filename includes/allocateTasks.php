@@ -3,19 +3,19 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse2"><span id="titleATask">Auftragsverteilung</span></a>
+                    <a data-toggle="collapse" href="#collapse2"><span id="titleATask">Auftragszuteilung</span></a>
                 </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <h4>Aufträge austeilen</h4>
+                    <h4>Auftragszuteilung</h4>
                     <p>
                         Für den heutigen Tag sind noch nicht alle Aufträge <br>
                         verteilt. Momentan müssen noch 13 Aufträge<br>
                         verteilt werden. Bitte verteilen Sie diese Aufträge<br>
                         so schnell wie möglich.
                     </p>
-                    <button class="btn btn-default" onClick="changePage('allocationPage.php')">Zu Auftragsverteilung</button>
+                    <button class="btn btn-default" onClick="changePage('allocationPage.php')">Zu Auftragszuteilung</button>
                 </div>
             </div>
         </div>

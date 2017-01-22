@@ -1,4 +1,20 @@
 <?php
+$dbname = $_SERVER['DB_NAME'];
+$servername = $_SERVER['DB_HOST'];
+$dbusername = $_SERVER['DB_USERNAME'];
+$dbpassword = $_SERVER['DB_PASSWORD'];
+
+$connection = new mysqli($servername, $dbusername, $dbpassword);
+
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (!$_SESSION["login"]) header('Location: /index.php');
 
 ?>
 
@@ -33,7 +49,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             createRows("task");
             createRows("driver");
             createRows("car");
@@ -60,7 +76,8 @@
                             </button>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <a href="adminOverview.php"><img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo"></a>
+                            <a href="adminOverview.php"><img src="img/atap-logo.png" class="img-nav img-responsive"
+                                                             id="imgLogo"></a>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="active"><a href="adminOverview.php">Auftragsverwaltung</a></li>
                                 <li><a href="managment.php">Verwaltung</a></li>
@@ -71,34 +88,33 @@
                 </nav>
             </div>
 
-
-            <h2>Übersichtsseite</h2>
+            <?php
+            include_once 'includes/welcomeMessage.php';
+            ?>
             <div class="pageContent">
-                <?php
-                    include_once 'includes/welcomeMessage.php';
-                ?>
+
                 <div id="adminNotes" class="container-fluid">
                     <div class="row">
                         <?php
-                            include_once 'includes/upcomingTask.php';
-                            include_once 'includes/newTasks.php';
-                            include_once 'includes/allocateTasks.php';
-                            include_once 'includes/historyTasks.php';
+                        include_once 'includes/taskIncome.php';
+                        include_once 'includes/newTasks.php';
+                        include_once 'includes/allocateTasks.php';
+                        include_once 'includes/upcomingTask.php';
                         ?>
-               <!--
+                        <!--
 
-                        Ersetzten durch das was im Heft ist.
-                        Liste von Angenommen Aufträgen
-                        abgelehnten Aufträgen/Grund
-                        Veränderungen
-                        Cancelation(Grund)
-                        Zuteilung(History)
-                        Ausgeführten
-                        Nicht ausgeführten
+                                 Ersetzten durch das was im Heft ist.
+                                 Liste von Angenommen Aufträgen
+                                 abgelehnten Aufträgen/Grund
+                                 Veränderungen
+                                 Cancelation(Grund)
+                                 Zuteilung(History)
+                                 Ausgeführten
+                                 Nicht ausgeführten
 
-                        Filter möglichkeit suchen was auch immer
+                                 Filter möglichkeit suchen was auch immer
 
-                        -->
+                                 -->
                     </div>
                 </div>
             </div>

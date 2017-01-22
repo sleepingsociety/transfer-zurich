@@ -61,18 +61,6 @@ CREATE TABLE destinations (
   PRIMARY KEY (destination_id)
 );
 
-DROP TABLE IF EXISTS origins;
-CREATE TABLE origins (
-  origin_id INTEGER NOT NULL AUTO_INCREMENT,
-  origins VARCHAR(255),
-  country VARCHAR(255),
-  distance_from_altenr VARCHAR(255),
-  distance_from_bsl VARCHAR(255),
-  distrance_from_zrh VARCHAR(255),
-  breaks INTEGER,
-  region VARCHAR(255),
-  PRIMARY KEY (origin_id)
-);
 
 DROP TABLE IF EXISTS driver_compensation;
 CREATE TABLE driver_compensation (
