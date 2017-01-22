@@ -9,7 +9,7 @@
             <div id="collapse1" class="panel-collapse collapse in">
                 <div class="panel-body">
                     <h4>Auftragseingang mit Bestätigung vom Auftrag</h4>
-                    <button onClick="changePage(/*'requestedTasks.php'*/)" class="btn btn-default">Zu den eingegangen Aufträgen</button>
+                    <button onClick="changePage('taskEntry.php')" class="btn btn-default">Zu den eingegangen Aufträgen</button>
                 </div>
             </div>
         </div>

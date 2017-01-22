@@ -87,6 +87,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                 include_once 'includes/vehicleRow.php';
                                 include_once 'includes/profileRow.php';
                                 include_once 'includes/usersRow.php';
+                                include_once 'includes/destinationRow.php';
                             ?>
                         </div>
                     </div>
