@@ -4,7 +4,7 @@ $servername = $_SERVER['DB_HOST'];
 $dbusername = $_SERVER['DB_USERNAME'];
 $dbpassword = $_SERVER['DB_PASSWORD'];
 
-$connection = @new mysqli($servername, $dbusername , $dbpassword, $dbname );
+$connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
@@ -92,30 +92,27 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                     <?php
 
 
-
-
-                        // use exec() because no results are returned
+                    // use exec() because no results are returned
 
                     if (isset($_POST["add"])) {
 
 
+                        if (!get_magic_quotes_gpc()) {
 
-                        if(! get_magic_quotes_gpc() ) {
-
-                            $destination = addslashes ($_POST["destination"]);
-                            $spec_mount = addslashes ($_POST['spec_mount']);
-                            $country = addslashes ($_POST['country']);
-                            $region = addslashes ($_POST['region']);
-                            $typ = addslashes ($_POST['typ']);
-                            $route_from_zrh = addslashes ($_POST['route_from_zrh']);
-                            $route_from_bsl = addslashes ($_POST['route_from_bsl']);
-                            $route_from_alt = addslashes ($_POST['route_from_alt']);
-                            $served_by = addslashes ($_POST['served_by']);
-                            $mount_web = addslashes ($_POST['mount_web']);
-                            $mount_preis = addslashes ($_POST['mount_preis']);
-                            $mount_info = addslashes ($_POST['mount_info']);
+                            $destination = addslashes($_POST["destination"]);
+                            $spec_mount = addslashes($_POST['spec_mount']);
+                            $country = addslashes($_POST['country']);
+                            $region = addslashes($_POST['region']);
+                            $typ = addslashes($_POST['typ']);
+                            $route_from_zrh = addslashes($_POST['route_from_zrh']);
+                            $route_from_bsl = addslashes($_POST['route_from_bsl']);
+                            $route_from_alt = addslashes($_POST['route_from_alt']);
+                            $served_by = addslashes($_POST['served_by']);
+                            $mount_web = addslashes($_POST['mount_web']);
+                            $mount_preis = addslashes($_POST['mount_preis']);
+                            $mount_info = addslashes($_POST['mount_info']);
                             var_dump($_POST['destination']);
-                        }else {
+                        } else {
                             die("test");
                             $destination = $_POST["destination"];
                             $spec_mount = $_POST['spec_mount'];
@@ -160,7 +157,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                         $retval = mysqli_query($sql1, $connection);
 
-                        if(! $retval) {
+                        if (!$retval) {
                             die('could not enter date: ' . mysqli_error());
                         }
 
@@ -168,10 +165,9 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                         if (mysqli_query($connection, $sql1)) {
                             echo "New record created successfully";
-<<<<<<< HEAD
-=======
+
                             echo '   ' . $destination = $_POST["destination"] . 'Test';
->>>>>>> 84eed4dcf6e0225f8ac121f6c092722adf60868e
+
                         } else {
                             echo "Error: " . $sql1 . "<br>" . mysqli_error($connection);
                         }
@@ -183,19 +179,21 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                         <h1>Add new Destination</h1>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <div class="row">
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="destination">Destination</label><br>
+                                    <input type="text" class="form-control" name="destination">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="spec_mount">Special Mount</label><br>
+                                    <input type="text" class="form-control" name="spec_mount" placeholder="?">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="country">Land</label><br>
+                                    <input type="text" class="form-control" name="country" placeholder="Schweiz">
+                                </div>
+                            </div>
 
-                            <div class="form-group">
-                                <label for="destination">Destination</label><br>
-                                <input type="text" class="form-control" name="destination">
-                            </div>
-                            <div class="form-group">
-                                <label for="spec_mount">Special Mount</label><br>
-                                <input type="text" class="form-control" name="spec_mount" placeholder="?">
-                            </div>
-                            <div class="form-group">
-                                <label for="country">Land</label><br>
-                                <input type="text" class="form-control" name="country" placeholder="Schweiz">
-                            </div>
                             <div class="form-group">
                                 <label for="region">Region</label><br>
                                 <input type="text" class="form-control" name="region" placeholder="Graubünden">
@@ -204,30 +202,35 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                 <label for="typ">Typ</label><br>
                                 <input type="text" class="form-control" name="typ" placeholder="?">
                             </div>
-                            <div class="form-group">
-                                <label for="distance_from_zrh">Distanz von Zürich Flugafen</label><br>
-                                <input type="text" class="form-control" name="distance_from_zrh" placeholder="40">
+                            <div class="row">
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="distance_from_zrh">Distanz von Zürich Flugafen</label><br>
+                                    <input type="text" class="form-control" name="distance_from_zrh" placeholder="40">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="distance_from_bsl">Distanz von Basel </label><br>
+                                    <input type="text" class="form-control" name="distance_from_bsl" placeholder="30">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="distance_from_alt">Distanz von Altenrieden</label><br>
+                                    <input type="text" class="form-control" name="distance_from_alt" placeholder="50">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="distance_from_bsl">Distanz von Basel </label><br>
-                                <input type="text" class="form-control" name="distance_from_bsl" placeholder="30">
+                            <div class="row">
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="route_from_zrh">Route von Zürich</label><br>
+                                    <input type="text" class="form-control" name="route_from_zrh" placeholder="Bild">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="route_from_bsl">Route von Basel</label><br>
+                                    <input type="text" class="form-control" name="route_from_bsl" placeholder="Bild">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="route_from_alt">Route von Altenrieden</label><br>
+                                    <input type="text" class="form-control" name="route_from_alt" placeholder="Bild">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="distance_from_alt">Distanz von Altenrieden</label><br>
-                                <input type="text" class="form-control" name="distance_from_alt" placeholder="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="route_from_zrh">Route von Zürich</label><br>
-                                <input type="text" class="form-control" name="route_from_zrh" placeholder="Bild">
-                            </div>
-                            <div class="form-group">
-                                <label for="route_from_bsl">Route von Basel</label><br>
-                                <input type="text" class="form-control" name="route_from_bsl" placeholder="Bild">
-                            </div>
-                            <div class="form-group">
-                                <label for="route_from_alt">Route von Altenrieden</label><br>
-                                <input type="text" class="form-control" name="route_from_alt" placeholder="Bild">
-                            </div>
+
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="time_zrh">Zeit von Zürich</label><br>
@@ -272,33 +275,36 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                 <label for="breaks">Pausen</label><br>
                                 <input type="text" class="form-control" name="breaks" placeholder="Zeit">
                             </div>
-                            <div class="form-group">
-                                <label for="regular1_4">regular1_4</label><br>
-                                <input type="text" class="form-control" name="regular1_4" placeholder="Preis">
+                            <div class="row">
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="regular1_4">regular1_4</label><br>
+                                    <input type="text" class="form-control" name="regular1_4" placeholder="Preis">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="regular5_8">regular5_8</label><br>
+                                    <input type="text" class="form-control" name="regular5_8" placeholder="Preis">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="regular9_14">regular9_14</label><br>
+                                    <input type="text" class="form-control" name="regular9_14" placeholder="Preis">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="regular5_8">regular5_8</label><br>
-                                <input type="text" class="form-control" name="regular5_8" placeholder="Preis">
+                            <div class="row">
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="regular15_16">regular15_16</label><br>
+                                    <input type="text" class="form-control" name="regular15_16" placeholder="Preis">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="vip1_3">vip1_3</label><br>
+                                    <input type="text" class="form-control" name="vip1_3" placeholder="Preis">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="vip4_7">vip4_7</label><br>
+                                    <input type="text" class="form-control" name="vip4_7" placeholder="Preis">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="regular9_14">regular9_14</label><br>
-                                <input type="text" class="form-control" name="regular9_14" placeholder="Preis">
-                            </div>
-                            <div class="form-group">
-                                <label for="regular15_16">regular15_16</label><br>
-                                <input type="text" class="form-control" name="regular15_16" placeholder="Preis">
-                            </div>
-                            <div class="form-group">
-                                <label for="vip1_3">vip1_3</label><br>
-                                <input type="text" class="form-control" name="vip1_3" placeholder="Preis">
-                            </div>
-                            <div class="form-group">
-                                <label for="vip4_7">vip4_7</label><br>
-                                <input type="text" class="form-control" name="vip4_7" placeholder="Preis">
-                            </div>
-
-                            <input name = "add" type = "submit" id = "add"
-                                   value = "Add Destination">
+                            <input name="add" type="submit" id="add"
+                                   value="Add Destination">
 
                         </form>
                         <?php
