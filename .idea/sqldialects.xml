@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+<<<<<<< HEAD
     <file url="file://$PROJECT_DIR$/../modul153/lektion3/m153script.sql" dialect="MySQL" />
+=======
+>>>>>>> 84eed4dcf6e0225f8ac121f6c092722adf60868e
     <file url="file://$PROJECT_DIR$" dialect="MySQL" />
   </component>
 </project>

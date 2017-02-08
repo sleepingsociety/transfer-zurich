@@ -96,10 +96,13 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                         // use exec() because no results are returned
 
-                    if (isset($_POST['add'])) {
+                    if (isset($_POST["add"])) {
+
+
 
                         if(! get_magic_quotes_gpc() ) {
-                            $destination = addslashes ($_POST['destination']);
+
+                            $destination = addslashes ($_POST["destination"]);
                             $spec_mount = addslashes ($_POST['spec_mount']);
                             $country = addslashes ($_POST['country']);
                             $region = addslashes ($_POST['region']);
@@ -111,8 +114,10 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                             $mount_web = addslashes ($_POST['mount_web']);
                             $mount_preis = addslashes ($_POST['mount_preis']);
                             $mount_info = addslashes ($_POST['mount_info']);
+                            var_dump($_POST['destination']);
                         }else {
-                            $destination = $_POST['destination'];
+                            die("test");
+                            $destination = $_POST["destination"];
                             $spec_mount = $_POST['spec_mount'];
                             $country = $_POST['country'];
                             $region = $_POST['region'];
@@ -151,8 +156,22 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                         $sql1 = "INSERT INTO test (destination) VALUES ('$destination')";
 
+                        mysqli_select_db($dbname);
+
+                        $retval = mysqli_query($sql1, $connection);
+
+                        if(! $retval) {
+                            die('could not enter date: ' . mysqli_error());
+                        }
+
+                        echo "Entered data successfully\n";
+
                         if (mysqli_query($connection, $sql1)) {
                             echo "New record created successfully";
+<<<<<<< HEAD
+=======
+                            echo '   ' . $destination = $_POST["destination"] . 'Test';
+>>>>>>> 84eed4dcf6e0225f8ac121f6c092722adf60868e
                         } else {
                             echo "Error: " . $sql1 . "<br>" . mysqli_error($connection);
                         }

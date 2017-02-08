@@ -2,13 +2,27 @@
 <project version="4">
   <component name="PublishConfigData">
     <serverData>
+<<<<<<< HEAD
       <paths name="transfer-zurich.ch">
+=======
+      <paths name="transfer-zurich">
+>>>>>>> 84eed4dcf6e0225f8ac121f6c092722adf60868e
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/home/transferzurich" />
           </mappings>
         </serverdata>
       </paths>
+<<<<<<< HEAD
+=======
+      <paths name="ttcproto.gecko01.snowflakehosting.ch">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+>>>>>>> 84eed4dcf6e0225f8ac121f6c092722adf60868e
     </serverData>
   </component>
 </project>
