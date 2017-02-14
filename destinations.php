@@ -219,15 +219,15 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="route_from_zrh">Route von Zürich</label><br>
-                                    <input type="text" class="form-control" name="route_from_zrh" placeholder="Bild">
+                                    <input type="file" class="form-control" name="route_from_zrh" placeholder="Bild">
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="route_from_bsl">Route von Basel</label><br>
-                                    <input type="text" class="form-control" name="route_from_bsl" placeholder="Bild">
+                                    <input type="file" class="form-control" name="route_from_bsl" placeholder="Bild">
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="route_from_alt">Route von Altenrieden</label><br>
-                                    <input type="text" class="form-control" name="route_from_alt" placeholder="Bild">
+                                    <input type="file" class="form-control" name="route_from_alt" placeholder="Bild">
                                 </div>
                             </div>
 
