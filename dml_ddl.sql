@@ -76,6 +76,7 @@ DROP TABLE IF EXISTS hotel;
 CREATE TABLE hotel (
   hotel_id INTEGER NOT NULL AUTO_INCREMENT,
   hotel VARCHAR(150) NOT NULL,
+  hotel_url VARCHAR(255) NOT NULL,
   adresse VARCHAR(200) NOT NULL,
   places_fs INTEGER NOT NULL,
   country_fs INTEGER NOT NULL,
@@ -120,8 +121,21 @@ CREATE TABLE income_transfer (
   FOREIGN KEY (passenger_fs) REFERENCES passenger(passenger_id)
 );
 
+DROP TABLE IF EXISTS maut;
+CREATE TABLE maut (
+  maut_id INTEGER NOT NULL AUTO_INCREMENT,
+  maut_strecke VARCHAR(100) NOT NULL,
+  maut_preis_saison_pw FLOAT NOT NULL,
+  maut_preis_ohne_saison_pw FLOAT NOT NULL,
+  maut_preis_saison_bus FLOAT NOT NULL,
+  maut_preis_ohne_saison_bus FLOAT NOT NULL,
+  maut_preis_saison_bus_anhaenger FLOAT NOT NULL,
+  maut_preis_ohne_saison_bus_anhaenger FLOAT NOT NULL,
+  maut_bemerkung VARCHAR(100),
+  PRIMARY KEY (maut_id)
+);
 
-
+/*
 INSERT INTO users (username, password) VALUES ('daka','*****'), ('luau', '*****'), ('maku', '*****'), ('dook', '*****');
 
 INSERT INTO places (plz, city) VALUES ('8706', 'Meilen'), ('8193', 'Eglisau'), ('8810', 'Horgen'),
@@ -170,7 +184,7 @@ INSERT INTO income_transfer (hotel_fs, passenger_fs, datum,start_address,pick_up
 '08:05:00','A2344','A2',3,'DONE','Some Water',2,4,FALSE,2,0,0,0,2,2,50.9),(2,3,'2017-02-15','Zürich Flughafen','20:20:00',
 '20:10:00','A1353','B1',4,'In progress','Aux Cord',3,2,FALSE,1,0,0,0,2,1,39.5),(4,4,'2017-02-12','Zürich Flughafen','19:00:00',
 '18:55:00','A2345','A4',2,'OPEN','Heated Seats',4,1,TRUE,6,2,1,1,12,3,150.1),(5,5,'2017-04-04','Zürich Flughafen','12:50:00',
- '12:40:00','A1252','C6',5,'OPEN','Nice Car',5,2,FALSE,3,0,0,0,5,4,70.5);
+ '12:40:00','A1252','C6',5,'OPEN','Nice Car',5,2,FALSE,3,0,0,0,5,4,70.5);*/
 
 
 
