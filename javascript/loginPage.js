@@ -1,52 +1,3 @@
-$(document).ready(function() {
-    $( ".footer" ).click(function() {
-        console.log("test")
-    });
-});
-
-function changePage(which) {
-    document.location.href = which;
-
-}
-
-
-var users = [{name:"Dominik O'Kerwin", position:"Driver"},
-    {name:"David Kalchofner", position:"Admin"},
-    {name:"Lukas Auriquio", position:"Programmer"},
-    {name:"Johann Widmer", position:"Admin"},
-    {name:"Oriol Gut", position:"Driver"},
-    {name:"Nizar Dübi", position:"Driver"},
-    {name:"Olivier Amez-Droz", position:"Driver"},
-    {name:"Selina Moser", position:"Driver"},
-    {name:"Nam Nguyen", position:"Driver"},
-    {name:"Robin Meier", position:"Driver"}];
-
-
-
-function createUsers() {
-    var mixed = document.getElementById("usersContainer");
-    for(var i = 0; i < users.length; i++) {
-        var div = document.createElement('div');
-        div.id = 'users';
-        div.className = "col-xs-12 col-sm-6 col-md-2 col-lg-2"
-
-        div.onclick = function () {
-            changePage("singleUserPage.php");
-        };
-
-        var img = document.createElement("img");
-        var imgSrc = "img/icon-user-default.png";
-        img.src = imgSrc;
-
-        var text = document.createElement('p');
-        text.innerHTML = users[i].name + "<br>" + users[i].position;
-
-        div.appendChild(img);
-        div.appendChild(text);
-        mixed.appendChild(div);
-    }
-}
-
 var drivers = [{name:"Dominik O'Kerwin", license:"B", timeLeft:"9:00"},
     {name:"David Kalchofner", license:"B", timeLeft:"9:00"},
     {name:"Lukas Auriquio", license:"BE", timeLeft:"9:00"},
@@ -90,6 +41,218 @@ var requested = [{name:"Crealogix", sendDate:"16.12.2016", forDate:"20.12.2016",
     {name:"Nexus", sendDate:"26.12.2016", forDate:"30.12.2016", people:"8"},
     {name:"NYP", sendDate:"18.12.2016", forDate:"22.12.2016", people:"7"},
     {name:"NYP", sendDate:"01.12.2016", forDate:"06.12.2016", people:"10"}];
+
+var users = [{name:"Dominik O'Kerwin", position:"Driver"},
+    {name:"David Kalchofner", position:"Admin"},
+    {name:"Lukas Auriquio", position:"Programmer"},
+    {name:"Johann Widmer", position:"Admin"},
+    {name:"Oriol Gut", position:"Driver"},
+    {name:"Nizar Dübi", position:"Driver"},
+    {name:"Olivier Amez-Droz", position:"Driver"},
+    {name:"Selina Moser", position:"Driver"},
+    {name:"Nam Nguyen", position:"Driver"},
+    {name:"Robin Meier", position:"Driver"}];
+
+
+var allTasks = [{name:"Auftrag01", date:"2017 02 14", status:"Abgeschlossen"},
+    {name:"Auftrag02", date:"2017 02 14", status:"Abgeschlossen"},
+    {name:"Auftrag03", date:"2017 02 13", status:"Abgeschlossen"},
+    {name:"Auftrag04", date:"2017 01 01", status:"Abgeschlossen"},
+    {name:"Auftrag05", date:"2017 01 23", status:"Abgeschlossen"},
+    {name:"Auftrag06", date:"2017 01 24", status:"Abgeschlossen"},
+    {name:"Auftrag07", date:"2017 02 20", status:"Angenommen"},
+    {name:"Auftrag08", date:"2017 03 02", status:"Abgelehnt"},
+    {name:"Auftrag09", date:"2017 03 31", status:"Angenommen"},
+    {name:"Auftrag10", date:"2017 03 13", status:"Abgelehnt"},
+    {name:"Auftrag11", date:"2017 04 02", status:"Abgelehnt"},
+    {name:"Auftrag12", date:"2017 04 30", status:"Angenommen"},
+    {name:"Auftrag13", date:"2017 04 13", status:"Abgelehnt"}];
+
+
+$(document).ready(function() {
+    document.getElementById("attention").hidden = true;
+    $( ".footer" ).click(function() {
+        console.log("test")
+    });
+
+});
+
+function hideAttention() {
+    document.getElementById("attention").hidden = true;
+}
+
+
+function changePage(which) {
+    document.location.href = which;
+
+}
+
+function colorAllTasksViewChanger(newSelector) {
+    var views = ["pastAllTasks", "todayAllTasks", "weekAllTasks", "monthAllTasks"]
+    for(var i = 0; i < views.length; i++) {
+
+        if(newSelector == views[i]) {
+            document.getElementById(newSelector).setAttribute('style', 'background: linear-gradient(#efefef, #c5c5c5) !important');
+        } else {
+            document.getElementById(views[i]).setAttribute('style', 'background: linear-gradient(#fafafa, #dddddd) !important');
+        }
+    }
+
+}
+
+function checkIfPastDate(value1, value2) {
+    var currentDate = new Date(value1[2]+"-"+value1[1]+"-"+value1[0])
+    var parts = value2.split(" ");
+   // console.log(parts[0]+"-"+parts[1]+"-"+parts[2])
+    var comparedDate = new Date(parts[0]+"-"+parts[1]+"-"+parts[2])
+    //console.log(currentDate.toDateString() + "   " + comparedDate.toDateString())
+    if (currentDate.getTime() > comparedDate.getTime()){
+        return true;
+    }
+    return false;
+}
+
+Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat;
+}
+
+Date.prototype.addMonths = function (m) {
+    var d = new Date(this);
+    var years = Math.floor(m / 12);
+    var months = m - (years * 12);
+    if (years) d.setFullYear(d.getFullYear() + years);
+    if (months) d.setMonth(d.getMonth() + months);
+    return d;
+}
+
+function checkIfDateLater(value1, value2, time) {
+    var currentDate = new Date(value1[2]+"-"+value1[1]+"-"+value1[0])
+    var maxDate
+    if(time == "month") {
+        maxDate = currentDate.addMonths(1)
+    } else {
+        maxDate = currentDate.addDays(7)
+    }
+
+    var parts = value2.split(" ");
+    // console.log(parts[0]+"-"+parts[1]+"-"+parts[2])
+    var comparedDate = new Date(parts[0]+"-"+parts[1]+"-"+parts[2])
+    //console.log(currentDate.toDateString() + "   " + maxDate.toDateString())
+    if (currentDate.getTime() < comparedDate.getTime() && comparedDate.getTime() <= maxDate.getTime()){
+        return true;
+    }
+
+    return false;
+}
+
+function changeAllTasksTable(which) {
+    if(which == "past") {
+        colorAllTasksViewChanger("pastAllTasks")
+        var currentDateArray = getCurrentDate();
+
+        var oTable = $('#allTaksTable').dataTable();
+        oTable.fnClearTable();
+        for(var i = 0; i < allTasks.length; i++) {
+            if(checkIfPastDate(currentDateArray, allTasks[i].date)) {
+                oTable.fnAddData([
+                    allTasks[i].name, allTasks[i].date, allTasks[i].status]);
+            }
+        }
+    } else if(which == "today") {
+        colorAllTasksViewChanger("todayAllTasks")
+        var currentDateArray = getCurrentDate();
+        var currentDate = currentDateArray[2] + " " + currentDateArray[1] + " " + currentDateArray[0];
+
+        var oTable = $('#allTaksTable').dataTable();
+        oTable.fnClearTable();
+        for(var i = 0; i < allTasks.length; i++) {
+            if(allTasks[i].date == currentDate) {
+                oTable.fnAddData([
+                    allTasks[i].name, allTasks[i].date, allTasks[i].status]);
+            }
+        }
+    } else if(which == "week") {
+        colorAllTasksViewChanger("weekAllTasks")
+        var currentDateArray = getCurrentDate();
+
+        var oTable = $('#allTaksTable').dataTable();
+        oTable.fnClearTable();
+        for(var i = 0; i < allTasks.length; i++) {
+            if(checkIfDateLater(currentDateArray, allTasks[i].date, "week")) {
+                oTable.fnAddData([
+                    allTasks[i].name, allTasks[i].date, allTasks[i].status]);
+            }
+        }
+    } else if(which == "month"){
+        colorAllTasksViewChanger("monthAllTasks")
+        var currentDateArray = getCurrentDate();
+        var oTable = $('#allTaksTable').dataTable();
+        oTable.fnClearTable();
+        for(var i = 0; i < allTasks.length; i++) {
+            if(checkIfDateLater(currentDateArray, allTasks[i].date, "month")) {
+                oTable.fnAddData([
+                    allTasks[i].name, allTasks[i].date, allTasks[i].status]);
+            }
+        }
+    }
+}
+
+function getCurrentDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    }
+
+    if(mm<10) {
+        mm='0'+mm
+    }
+    return new Array(dd, mm, yyyy)
+}
+
+function fillAllTasksTable() {
+    var currentDateArray = getCurrentDate();
+    var currentDate = currentDateArray[2] + " " + currentDateArray[1] + " " + currentDateArray[0];
+    document.getElementById("todayAllTasks").setAttribute('style', 'background: linear-gradient(#efefef, #c5c5c5) !important');
+
+    var oTable = $('#allTaksTable').dataTable();
+    oTable.fnClearTable();
+    for(var i = 0; i < allTasks.length; i++) {
+        if(allTasks[i].date == currentDate) {
+            oTable.fnAddData([
+                allTasks[i].name, allTasks[i].date, allTasks[i].status]);
+        }
+    }
+}
+
+function createUsers() {
+    var mixed = document.getElementById("usersContainer");
+    for(var i = 0; i < users.length; i++) {
+        var div = document.createElement('div');
+        div.id = 'users';
+        div.className = "col-xs-12 col-sm-6 col-md-2 col-lg-2"
+
+        div.onclick = function () {
+            changePage("singleUserPage.php");
+        };
+
+        var img = document.createElement("img");
+        var imgSrc = "img/icon-user-default.png";
+        img.src = imgSrc;
+
+        var text = document.createElement('p');
+        text.innerHTML = users[i].name + "<br>" + users[i].position;
+
+        div.appendChild(img);
+        div.appendChild(text);
+        mixed.appendChild(div);
+    }
+}
 
 function createAllocationTable() {
     var mixed = document.getElementById("allocationTable");
@@ -193,12 +356,13 @@ function select(x, which) {
 
 function saveAllocation() {
     //ajax call or something similar to save all the things correctly or so
-
     document.location.href = "adminOverview.php";
-
 }
 
+var allocatedTasks = new Array({});
+
 function checkingSelected() {
+
     if(currentPosCar != null && currentPosDriver != null && currentPosTask != null) {
         //do more checking if this even works like works with weight, license and so on
         //car not used in the moment, not gonna be under 0 hours
@@ -206,7 +370,7 @@ function checkingSelected() {
         var endTime= tasks[currentPosTask-1].arrival;
         tasks[currentPosTask-1].driver = drivers[currentPosDriver-1].name;
         tasks[currentPosTask-1].car = cars[currentPosCar-1].name;
-
+        var timeLeft = drivers[currentPosDriver + 1].timeLeft;
 
         //this part is to check if its 00 or 30 min to better add it in table
         var parts1 = startTime.split(":");
@@ -220,13 +384,13 @@ function checkingSelected() {
 
         var min = parseInt(min2) - parseInt(min1);
         var h = parseInt(h2) - parseInt(h1)
-        console.log(h2 + " " + h1)
+        //console.log(h2 + " " + h1)
         if(min < 0) {
             min = 60 + min;
             h -= 1;
         }
 
-        var timeLeft = drivers[currentPosDriver + 1].timeLeft;
+
         var parts3 = timeLeft.split(":");
         var tH = parts3[0];
         var tMin = parts3[1];
@@ -240,14 +404,11 @@ function checkingSelected() {
         if(lMin < 10) {
             lMin = "0" + lMin;
         }
-        drivers[currentPosDriver+1].timeLeft = lH + ":" + lMin;
-
-        var timeLeftTable = document.getElementById("driversTable");
-        timeLeftTable.rows[currentPosDriver].cells[2].innerHTML = drivers[currentPosDriver+1].timeLeft
-
-
-
-        console.log(h + ":" + min)
+        if(lH < 0) {
+            showAlert("Der Fahrer darf nicht mehr als 9 Stunden fahren.\n" +
+                      "Bitte verwenden Sie einen anderen Fahrer.")
+            return;
+        }
 
 
         if(parts1[1] != "00" || parts1[1] != "30") {
@@ -275,17 +436,53 @@ function checkingSelected() {
             }
         }
 
+
+
         for(var i = pos1-1; i <= pos2; i++) {
-            var table = document.getElementById("allocationTable").rows[i+1].cells[currentPosDriver]
-            table.style.backgroundColor = "#add8e6";
-            table.setAttribute('title',   "Auftrag: " + tasks[currentPosTask-1].name
-                                      + "\nVon:        " + tasks[currentPosTask-1].to
+            var table = document.getElementById("allocationTable").rows[i+1].cells[currentPosDriver];
+            var rgb1 = "rgb(173, 216, 230)";
+            var rgb2 = "rgb(204, 204, 204)";
+            if(rgb1 == table.style.backgroundColor || rgb2 == table.style.backgroundColor ) {
+                showAlert("Der Fahrer kann diesen Auftrag nicht annehmen.\n" +
+                          "Er ist zur Zeit mit einem andern Auftrag beschäftigt.")
+                return;
+            }
+            for(var j = 1; j < drivers.length; j++) {
+                var table1 = document.getElementById("allocationTable").rows[i+1].cells[j];
+                if(rgb1 == table1.style.backgroundColor || rgb2 == table1.style.backgroundColor ) {
+                    if(table1.getAttribute('title').match(cars[currentPosCar-1].name)) {
+                        showAlert("Das Auto steht im Moment nicht zur Verfügung");
+                        return;
+                    }
+                }
+            }
+        }
+        console.log(pos2)
+        for(var i = pos1-1; i <= pos2; i++) {
+            if(i == 48) {
+                break;
+            }
+            var cell = document.getElementById("allocationTable").rows[i+1].cells[currentPosDriver]
+            cell.style.backgroundColor = "#add8e6";
+            cell.setAttribute('title',   "Auftrag: " + tasks[currentPosTask-1].name
+                                      + "\nVon:        " + tasks[currentPosTask-1].from
                                       + "\nNach:     " + tasks[currentPosTask-1].to
                                       + "\nWann:    " + tasks[currentPosTask-1].when
                                       + "\nBis:         " + tasks[currentPosTask-1].arrival
                                       + "\nAuto:     " + cars[currentPosCar-1].name);
         }
-
+        for(var i = pos2+1; i <= pos2+1 +(pos2-pos1+1); i++) {
+            var table = document.getElementById("allocationTable").rows[i+1].cells[currentPosDriver]
+            table.style.backgroundColor = "#cccccc";
+            table.setAttribute('title',   "Auftrag: " + tasks[currentPosTask-1].name
+                + "\nVon:        " + tasks[currentPosTask-1].to
+                + "\nNach:     " + "ATAP Transfers"
+                + "\nAuto:     " + cars[currentPosCar-1].name
+                + "\nInfo:     " + "Auf der Rückfahrt vom Auftrag");
+        }
+        drivers[currentPosDriver+1].timeLeft = lH + ":" + lMin;
+        var timeLeftTable = document.getElementById("driversTable");
+        timeLeftTable.rows[currentPosDriver].cells[2].innerHTML = drivers[currentPosDriver+1].timeLeft
 
 
 
@@ -294,6 +491,8 @@ function checkingSelected() {
         turnedOffRow.onclick = function() {
 
         }
+
+        allocatedTasks[allocatedTasks.size] = {task:tasks[currentPosTask-1].name, driver:drivers[currentPosDriver-1].name,car:cars[currentPosCar-1].name}
         var deselect1 = document.getElementById("driversTable").rows[currentPosDriver]
         var deselect2 = document.getElementById("carsTable").rows[currentPosCar]
         deselect1.style.backgroundColor = "#ffffff"
@@ -302,6 +501,16 @@ function checkingSelected() {
         currentPosDriver = null
         currentPosTask = null
     }
+}
+
+function showAlert(message) {
+    document.getElementById("attentionMessage").innerHTML = message
+
+    $("#attention").fadeIn("slow");
+
+    setTimeout(function () {
+        $("#attention").fadeOut("slow");
+    }, 5000);
 }
 
 function createRows(type) {
