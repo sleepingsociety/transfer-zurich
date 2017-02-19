@@ -135,6 +135,72 @@ CREATE TABLE maut (
   PRIMARY KEY (maut_id)
 );
 
+
+
+DROP TABLE IF EXISTS income_transfer;
+CREATE TABLE income_transfer (
+  id INTEGER NOT NULL AUTO_INCREMENT,
+  lead_Pasenger VARCHAR(255) NOT NULL,
+  datum date NOT NULL,
+  start_address VARCHAR(255) NOT NULL,
+  pick_up_time TIME NOT NULL,
+  flight_from_to VARCHAR(255),
+  payment_methods_fs INTEGER NOT NULL,
+  special_needs VARCHAR(255),
+  number_passengers INTEGER NOT NULL,
+  small_children_seats INTEGER DEFAULT 0,
+  children INTEGER DEFAULT 0,
+  booster INTEGER DEFAULT 0,
+  destination_fs INTEGER NOT NULL,
+  landing_takeoff_time VARCHAR(30),
+  flight_number VARCHAR(15) NOT NULL,
+  terminal VARCHAR(15),
+  phone_passenger VARCHAR(20) NOT NULL,
+  suitcase_big INTEGER,
+  suitcase_medium INTEGER,
+  suitcase_small INTEGER,
+  ski_snowboard INTEGER,
+  other_luggage VARCHAR(255),
+  commente VARCHAR(255),
+
+  driver_fs INTEGER,
+  vehicle_fs INTEGER,
+  trailer BOOLEAN,
+  partner_fs INTEGER,
+  PRIMARY KEY (id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 INSERT INTO users (username, password) VALUES ('daka','*****'), ('luau', '*****'), ('maku', '*****'), ('dook', '*****');
 
