@@ -12,11 +12,11 @@ CREATE TABLE places (
   city VARCHAR(100) NOT NULL NULL,
   PRIMARY KEY (places_id)
 );
-DROP TABLE IF EXISTS payment_methods;
-CREATE TABLE payment_methods (
-  payment_id INTEGER NOT NULL AUTO_INCREMENT,
-  method VARCHAR(20) NOT NULL,
-  PRIMARY KEY (payment_id)
+DROP TABLE IF EXISTS transfer_type;
+CREATE TABLE transfer_type (
+  transfer_id INTEGER NOT NULL AUTO_INCREMENT,
+  transfer_type VARCHAR(30) NOT NULL,
+  PRIMARY KEY (transfer_id)
 );
 
 DROP TABLE IF EXISTS partner;
@@ -34,6 +34,22 @@ CREATE TABLE country (
   PRIMARY KEY (country_id)
 );
 
+
+DROP TABLE IF EXISTS maut;
+CREATE TABLE maut (
+  maut_id INTEGER NOT NULL AUTO_INCREMENT,
+  maut_strecke VARCHAR(100) NOT NULL,
+  maut_preis_saison_pw FLOAT NOT NULL,
+  maut_preis_ohne_saison_pw FLOAT NOT NULL,
+  maut_preis_saison_bus FLOAT NOT NULL,
+  maut_preis_ohne_saison_bus FLOAT NOT NULL,
+  maut_preis_saison_bus_anhaenger FLOAT NOT NULL,
+  maut_preis_ohne_saison_bus_anhaenger FLOAT NOT NULL,
+  maut_bemerkung VARCHAR(100),
+  PRIMARY KEY (maut_id)
+);
+
+
 DROP TABLE IF EXISTS vehicle;
 CREATE TABLE vehicle (
   vehicle_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -43,8 +59,17 @@ CREATE TABLE vehicle (
   created_data_on DATE NOT NULL,
   vehicle_km_stand INTEGER,
   vehicle_garage VARCHAR(200) NOT NULL,
-  vehicle_next_service DATE NOT NULL,
+  vehicle_next_service DATE,
   PRIMARY KEY (vehicle_id)
+);
+
+DROP TABLE IF EXISTS region;
+CREATE TABLE region (
+  region_id INTEGER NOT NULL AUTO_INCREMENT,
+  region VARCHAR(50) NOT NULL,
+  country_fs INTEGER NOT NULL,
+  PRIMARY KEY (region_id),
+  FOREIGN KEY (country_fs) REFERENCES country (country_id)
 );
 
 
@@ -65,30 +90,6 @@ CREATE TABLE driver (
   FOREIGN KEY (places_fs) REFERENCES places (places_id)
 );
 
-DROP TABLE IF EXISTS hotel;
-CREATE TABLE hotel (
-  hotel_id INTEGER NOT NULL AUTO_INCREMENT,
-  hotel VARCHAR(150) NOT NULL,
-  hotel_url VARCHAR(255) NOT NULL,
-  adresse VARCHAR(200) NOT NULL,
-  places_fs INTEGER NOT NULL,
-  country_fs INTEGER NOT NULL,
-  distance_from_zrh INTEGER NOT NULL,
-  route_from_zrh VARCHAR(255),
-  time_zrh TIME,
-  PRIMARY KEY (hotel_id),
-  FOREIGN KEY (places_fs) REFERENCES places(places_id),
-  FOREIGN KEY (country_fs) REFERENCES country (country_id)
-);
-
-DROP TABLE IF EXISTS region;
-CREATE TABLE region (
-  region_id INTEGER NOT NULL AUTO_INCREMENT,
-  region VARCHAR(50) NOT NULL,
-  country_fs INTEGER NOT NULL,
-  PRIMARY KEY (region_id)
-);
-
 DROP TABLE IF EXISTS destination;
 CREATE TABLE destination (
   destination_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -102,6 +103,9 @@ CREATE TABLE destination (
   served_by VARCHAR(30),
   traffic_jam_surcharge TIME,
   search_at_place TIME,
+  route_from_zh VARCHAR(255),
+  route_from_alt VARCHAR(255),
+  route_from_bsl VARCHAR(255),
   time_alt TIME,
   time_bsl TIME,
   time_zrh TIME,
@@ -113,18 +117,22 @@ CREATE TABLE destination (
   FOREIGN KEY (maut_fs) REFERENCES maut (maut_id)
 );
 
-DROP TABLE IF EXISTS maut;
-CREATE TABLE maut (
-  maut_id INTEGER NOT NULL AUTO_INCREMENT,
-  maut_strecke VARCHAR(100) NOT NULL,
-  maut_preis_saison_pw FLOAT NOT NULL,
-  maut_preis_ohne_saison_pw FLOAT NOT NULL,
-  maut_preis_saison_bus FLOAT NOT NULL,
-  maut_preis_ohne_saison_bus FLOAT NOT NULL,
-  maut_preis_saison_bus_anhaenger FLOAT NOT NULL,
-  maut_preis_ohne_saison_bus_anhaenger FLOAT NOT NULL,
-  maut_bemerkung VARCHAR(100),
-  PRIMARY KEY (maut_id)
+DROP TABLE IF EXISTS hotel;
+CREATE TABLE hotel (
+  hotel_id INTEGER NOT NULL AUTO_INCREMENT,
+  hotel VARCHAR(150) NOT NULL,
+  hotel_url VARCHAR(255) NOT NULL,
+  adresse VARCHAR(200) NOT NULL,
+  places_fs INTEGER NOT NULL,
+  country_fs INTEGER NOT NULL,
+  distance_from_zrh INTEGER NOT NULL,
+  route_from_zrh VARCHAR(255),
+  time_zrh TIME,
+  destination_fs INTEGER,
+  PRIMARY KEY (hotel_id),
+  FOREIGN KEY (places_fs) REFERENCES places(places_id),
+  FOREIGN KEY (country_fs) REFERENCES country (country_id),
+  FOREIGN KEY (destination_fs) REFERENCES destination (destination_id)
 );
 
 DROP TABLE IF EXISTS income_transfer;
@@ -132,15 +140,15 @@ CREATE TABLE income_transfer (
   id INTEGER NOT NULL AUTO_INCREMENT,
   lead_Pasenger VARCHAR(255) NOT NULL,
   datum date NOT NULL,
-  start_address VARCHAR(255) NOT NULL,
+  origin VARCHAR(255) NOT NULL, /*Destinations_fs*/
   pick_up_time TIME NOT NULL,
   flight_from_to VARCHAR(255),
-  payment_methods_fs INTEGER NOT NULL,
+  transfer_type_fs INTEGER NOT NULL,
   special_needs VARCHAR(255),
   number_passengers INTEGER NOT NULL,
-  small_children_seats INTEGER DEFAULT 0,
-  children INTEGER DEFAULT 0,
-  booster INTEGER DEFAULT 0,
+  baby_passengers VARCHAR(60) DEFAULT '0',
+  toddler_passengers VARCHAR(60) DEFAULT '0',
+  kid_passengers VARCHAR(60) DEFAULT '0',
   destination_fs INTEGER NOT NULL,
   landing_takeoff_time VARCHAR(30),
   flight_number VARCHAR(15),
@@ -151,18 +159,22 @@ CREATE TABLE income_transfer (
   suitcase_small INTEGER,
   ski_snowboard INTEGER,
   other_luggage VARCHAR(255),
-  commente VARCHAR(255),
-  link_to_accept VARCHAR(255) NOT NULL,
-  link_to_decline VARCHAR(255) NOT NULL,
+  comments VARCHAR(255),
+  accept_link VARCHAR(255) NOT NULL,
+  decline_link VARCHAR(255) NOT NULL,
   hotel_fs INTEGER,
   driver_fs INTEGER,
   vehicle_fs INTEGER,
   trailer BOOLEAN,
   partner_fs INTEGER,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (partner_fs) REFERENCES partner (partner_id),
+  FOREIGN KEY (vehicle_fs) REFERENCES vehicle (vehicle_id),
+  FOREIGN KEY (driver_fs) REFERENCES driver (driver_id),
+  FOREIGN KEY (hotel_fs) REFERENCES hotel (hotel_id),
+  FOREIGN KEY (destination_fs) REFERENCES  destination (destination_id),
+  FOREIGN KEY (transfer_type_fs) REFERENCES transfer_type (transfer_id)
 );
-
-
 
 
 

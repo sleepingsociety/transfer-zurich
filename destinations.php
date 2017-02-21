@@ -113,7 +113,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                             $mount_info = addslashes($_POST['mount_info']);
                             var_dump($_POST['destination']);
                         } else {
-                            die("test");
                             $destination = $_POST["destination"];
                             $spec_mount = $_POST['spec_mount'];
                             $country = $_POST['country'];

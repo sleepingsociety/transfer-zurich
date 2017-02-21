@@ -25,7 +25,7 @@ $wholeEmail = array();
 $contractor = "";
 $project_number;
 $lead_passenger;
-$date;
+$datum;
 $transfer_type;
 $special_needs;
 $phone_passenger;
@@ -33,7 +33,7 @@ $comments;
 $accept_link;
 $decline_link;
 
-$normal_passengers;
+$number_passengers;
 $baby_passengers;
 $toddler_passengers;
 $kid_passengers;
@@ -41,7 +41,7 @@ $kid_passengers;
 $origin;
 $pickup_time;
 $destination;
-$take_off_time;
+$landing_takeoff_time;
 
 $big_suitcase;
 $medium_suitcase;
@@ -80,9 +80,9 @@ foreach ($allContractors as $con){
 
 //if a contractor was found, the rest of the data needed will be selected here
 if($contractor != ""){
-    $sql = "SELECT t.project_number, t.lead_passenger, t.date, t.transfer_type, t.special_needs, t.phone_passenger, t.comments, t.accept_link, t.decline_link,
-            tr.origin, tr.pickup_time, tr.destination, tr.take_off_time,
-            p.normal_passengers, p.baby_passengers, p.toddler_passengers, p.kid_passengers,
+    $sql = "SELECT t.project_number, t.lead_passenger, t.datum, t.transfer_type, t.special_needs, t.phone_passenger, t.comments, t.accept_link, t.decline_link,
+            tr.origin, tr.pickup_time, tr.destination, tr.landing_takeoff_time,
+            p.number_passengers, p.baby_passengers, p.toddler_passengers, p.kid_passengers,
             l.big_suitcase, l.medium_suitcase, l.small_suitcase, l.ski_snowboard, l.other_luggage,
             f.flight_from_to, f.flightnumber, f.terminal FROM task_entry t
             JOIN travel tr ON tr.id_entry_fk = t.id_task_entry
@@ -96,7 +96,7 @@ if($contractor != ""){
     while($row = mysqli_fetch_assoc($result)) {
         $project_number = $row['project_number'];
         $lead_passenger = $row['lead_passenger'];
-        $date = $row['date'];
+        $datum = $row['datum'];
         $transfer_type = $row['transfer_type'];
         $special_needs = $row['special_needs'];
         $phone_passenger = $row['phone_passenger'];
@@ -104,7 +104,7 @@ if($contractor != ""){
         $accept_link = $row['accept_link'];
         $decline_link = $row['decline_link'];
 
-        $normal_passengers = $row['normal_passengers'];
+        $number_passengers = $row['number_passengers'];
         $baby_passengers = $row['baby_passengers'];
         $toddler_passengers = $row['toddler_passengers'];
         $kid_passengers = $row['kid_passengers'];
@@ -112,7 +112,7 @@ if($contractor != ""){
         $origin = $row['origin'];
         $pickup_time = $row['pickup_time'];
         $destination = $row['destination'];
-        $take_off_time = $row['take_off_time'];
+        $landing_takeoff_time = $row['landing_takeoff_time'];
 
         $big_suitcase = $row['big_suitcase'];
         $medium_suitcase = $row['medium_suitcase'];
@@ -146,10 +146,10 @@ if($contractor != ""){
             $tempValue = preg_replace('/\s+/', '', $tempValue);
             $_SESSION["lead_passenger"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
-        if(stripos($row, $date) !== false){
+        if(stripos($row, $datum) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
             $tempValue = preg_replace('/\s+/', '', $tempValue);
-            $_SESSION["date"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
+            $_SESSION["datum"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
         if(stripos($row, $transfer_type) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
@@ -172,10 +172,10 @@ if($contractor != ""){
             $_SESSION["comments"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
 
-        if(stripos($row, $normal_passengers) !== false){
+        if(stripos($row, $number_passengers) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
             $tempValue = preg_replace('/\s+/', '', $tempValue);
-            $_SESSION["normal_passengers"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
+            $_SESSION["number_passengers"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
         if(stripos($row, $baby_passengers) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
@@ -208,7 +208,7 @@ if($contractor != ""){
             $tempValue = preg_replace('/\s+/', '', $tempValue);
             $_SESSION["destination"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
-        if(stripos($row, $take_off_time) !== false){
+        if(stripos($row, $landing_takeoff_time) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
             $tempValue = preg_replace('/\s+/', '', $tempValue);
             $_SESSION["take_off_timne"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
@@ -261,6 +261,6 @@ if($contractor != ""){
 }
 
 
-header("location: ../index.php");
+header("location: ../taskEntry.php");
 
 ?>
