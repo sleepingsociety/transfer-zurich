@@ -26,14 +26,6 @@ CREATE TABLE partner (
   PRIMARY KEY (partner_id)
 );
 
-DROP TABLE IF EXISTS passenger;
-CREATE TABLE passenger (
-  passenger_id INTEGER NOT NULL AUTO_INCREMENT,
-  firstname VARCHAR(80) NOT NULL,
-  surname VARCHAR(80) NOT NULL,
-  phone VARCHAR(30) NOT NULL,
-  PRIMARY KEY (passenger_id)
-);
 DROP TABLE IF EXISTS country;
 CREATE TABLE country (
   country_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -88,37 +80,35 @@ CREATE TABLE hotel (
   FOREIGN KEY (country_fs) REFERENCES country (country_id)
 );
 
-DROP TABLE IF EXISTS income_transfer;
-CREATE TABLE income_transfer (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  hotel_fs INTEGER NOT NULL,
-  passenger_fs INTEGER NOT NULL,
-  datum date NOT NULL,
-  start_address VARCHAR(255) NOT NULL,
-  pick_up_time TIME NOT NULL,
-  landing_time TIME NOT NULL,
-  flight_number VARCHAR(255) NOT NULL,
-  terminal VARCHAR(100) NOT NULL,
-  partner_fs INTEGER NOT NULL,
-  status VARCHAR(20) NOT NULL,
-  special_needs VARCHAR(255),
-  driver_fs INTEGER NOT NULL,
-  vehicle_fs INTEGER NOT NULL,
-  trailer BOOLEAN NOT NULL,
-  number_passengers INTEGER NOT NULL,
-  small_children_seats INTEGER,
-  children INTEGER,
-  booster INTEGER,
-  luggage_amount INTEGER,
-  payment_methods_fs INTEGER NOT NULL,
-  price_chf FLOAT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (hotel_fs) REFERENCES hotel(hotel_id),
-  FOREIGN KEY (driver_fs) REFERENCES driver(driver_id),
-  FOREIGN KEY (vehicle_fs) REFERENCES vehicle(vehicle_id),
-  FOREIGN KEY (partner_fs) REFERENCES partner(partner_id),
-  FOREIGN KEY (payment_methods_fs) REFERENCES  payment_methods(payment_id),
-  FOREIGN KEY (passenger_fs) REFERENCES passenger(passenger_id)
+DROP TABLE IF EXISTS region;
+CREATE TABLE region (
+  region_id INTEGER NOT NULL AUTO_INCREMENT,
+  region VARCHAR(50) NOT NULL,
+  PRIMARY KEY (region_id)
+);
+
+DROP TABLE IF EXISTS destination;
+CREATE TABLE destination (
+  destination_id INTEGER NOT NULL AUTO_INCREMENT,
+  country_fs INTEGER NOT NULL,
+  destination VARCHAR(80) NOT NULL,
+  dist_from_alt INTEGER,
+  dist_from_bsl INTEGER,
+  dist_from_zrh INTEGER,
+  breaks TIME,
+  region_fs INTEGER,
+  served_by VARCHAR(30),
+  traffic_jam_surcharge TIME,
+  search_at_place TIME,
+  time_alt TIME,
+  time_bsl TIME,
+  time_zrh TIME,
+  type VARCHAR(30),
+  maut_fs INTEGER,
+  PRIMARY KEY (destination_id),
+  FOREIGN KEY (country_fs) REFERENCES country (country_id),
+  FOREIGN KEY (region_fs) REFERENCES region (region_id),
+  FOREIGN KEY (maut_fs) REFERENCES maut (maut_id)
 );
 
 DROP TABLE IF EXISTS maut;
@@ -134,8 +124,6 @@ CREATE TABLE maut (
   maut_bemerkung VARCHAR(100),
   PRIMARY KEY (maut_id)
 );
-
-
 
 DROP TABLE IF EXISTS income_transfer;
 CREATE TABLE income_transfer (
@@ -162,7 +150,9 @@ CREATE TABLE income_transfer (
   ski_snowboard INTEGER,
   other_luggage VARCHAR(255),
   commente VARCHAR(255),
-
+  link_to_accept VARCHAR(255) NOT NULL,
+  link_to_decline VARCHAR(255) NOT NULL,
+  hotel_fs INTEGER,
   driver_fs INTEGER,
   vehicle_fs INTEGER,
   trailer BOOLEAN,
