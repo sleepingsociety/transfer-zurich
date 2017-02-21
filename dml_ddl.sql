@@ -29,7 +29,8 @@ CREATE TABLE partner (
 DROP TABLE IF EXISTS country;
 CREATE TABLE country (
   country_id INTEGER NOT NULL AUTO_INCREMENT,
-  country VARCHAR(100) NOT NULL,
+  country VARCHAR(100) NOT NULL UNIQUE,
+  short VARCHAR(10) NOT NULL UNIQUE,
   PRIMARY KEY (country_id)
 );
 
@@ -84,6 +85,7 @@ DROP TABLE IF EXISTS region;
 CREATE TABLE region (
   region_id INTEGER NOT NULL AUTO_INCREMENT,
   region VARCHAR(50) NOT NULL,
+  country_fs INTEGER NOT NULL,
   PRIMARY KEY (region_id)
 );
 
@@ -141,7 +143,7 @@ CREATE TABLE income_transfer (
   booster INTEGER DEFAULT 0,
   destination_fs INTEGER NOT NULL,
   landing_takeoff_time VARCHAR(30),
-  flight_number VARCHAR(15) NOT NULL,
+  flight_number VARCHAR(15),
   terminal VARCHAR(15),
   phone_passenger VARCHAR(20) NOT NULL,
   suitcase_big INTEGER,
@@ -164,13 +166,63 @@ CREATE TABLE income_transfer (
 
 
 
+INSERT INTO country (country, short) VALUES ('Schweiz','CH'), ('Deutschland','D'), ('Östereich','A'), ('Frankreich','F'), ('Italien','I'), ('Lichtenstein', 'LI');
+/*Alle Werte für Country Tabelle*/
 
+/*
+Zum Problem bezüglich z.b Payent method das es den richtigen fs in die haupttabelle speichert. -> select statement wo aus der tabelle die ID hollt,
+ where payment_methode = $payment_method (variabel die vorhin beim absenden des Formulars gefüllt wird).
 
+ Bei all diesen Anliegen zuerst ein Select Statement machen und die entsprechenden Variabeln richtig füllen, nachher alles in die Haupttabelle.
+ */
 
+/* Falls eine Typ Tabelle erstellt wird: hier die Einträge die es gibt:
 
+City
+Resort
 
+INSERT INTO type (type_name) VALUE ('City'), ('Resort');
 
+ */
 
+/* Alle Regionen
+
+Berneroberland
+Tessin
+Zentralschweiz
+Wallis
+Graubünden
+Westschweiz
+Arlberg
+Salzburg
+Kärnten
+Vorarlberg
+Gallenkirch
+Insbruck / Innsbruck
+Laneck
+Pintzgau
+Tirol
+Savoy
+Norditalien
+Südtirol
+Torino
+Mittelland
+Ostschweiz
+Nordostschweiz
+Baden-Wütemberg / Baden-Württemberg
+Breisgau
+Lichtenstein
+Rügen
+Bodensee
+Breisach
+Elsass
+Schwarzwald
+Landeck
+Niedersachsen
+Montafon
+Baselland
+
+ */
 
 
 
@@ -199,7 +251,7 @@ INSERT INTO places (plz, city) VALUES ('8706', 'Meilen'), ('8193', 'Eglisau'), (
 
 INSERT INTO payment_methods (method) VALUES ('cash'), ('paypal'), ('bank'), ('creditcard');
 
-INSERT INTO country (country) VALUE ('Schweiz'), ('Deutschland'), ('Östereich');
+
 
 INSERT INTO driver (initials, firstname, surname, adress, places_fs, phone,
 drivers_license, drivers_license_back, identity_card, identitiy_card_back) VALUES
