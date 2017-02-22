@@ -127,7 +127,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $decline_link = $_POST["decline_link"];
                     }
                     /*variabeln die keine varchar sind*/
-                    $datum = $_POST['datum'];
                     $pickup_time = $_POST['pickup_time'];
                     $number_passengers = $_POST['number_passengers'];
                     $suitcase_big = $_POST["suitcase_big"];
@@ -144,7 +143,10 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                     $sql = "INSERT INTO income_transfer (lead_passenger, datum, origin, pick_up_time, flight_from_to,
 transfer_type_fs, special_needs, number_passengers, baby_passengers, toddler_passengers, kid_passengers, destination_fs,
 landing_takeoff_time, flight_number, terminal, phone_passenger, suitcase_big, suitcase_medium, suitcase_small,ski_snowboard,
-other_luggage, comments, accept_link, decline_link, hotel_fs, driver_fs, vehicle_fs, trailer, partner_fs) VALUES ()";
+other_luggage, comments, accept_link, decline_link, hotel_fs, driver_fs, vehicle_fs, trailer, partner_fs) VALUES ('$lead_passenger','$datum',
+'$origin', '$pickup_time', '$flight_from_to', '$transfer_type', '$special_needs', '$number_passengers', '$baby_passengers','$toddler_passengers',
+'$kid_passengers','$destination','$landing_takeoff_time','$flight_number','$terminal','$phone_passenger','$suitcase_big','$suitcase_medium','$suitcase_small',
+'$ski_snowboard','','','')";
 
 
                     mysqli_select_db($dbname);
