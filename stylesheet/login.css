@@ -5,26 +5,29 @@
 
 body {
     font: 16px Helvetica;
-    background: #fcfcfc;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
 }
 
 section {
     width: 340px;
     background: #ecf0f1;
-    padding: 0 30px 30px 30px;
+    padding: 0px 30px 30px 30px;
     margin: 120px auto;
     text-align: center;
     border-radius: 5px;
     border-top: 1px solid #aaaaaa;
     border-left: 1px solid #aaaaaa;
     box-shadow: 1px 1px 1px #222222;
+    opacity: 0.95;
 }
 
 span {
     display: block;
     position: relative;
     margin: 0 auto;
-    top: -62px;
+    top: -100px;
     height: 80px;
     width: 275px;
     background: url('../img/atap-logo.png') center center no-repeat;
@@ -117,6 +120,11 @@ body {
     max-width: 680px;
     padding: 0 15px;
 }
+
+.container p {
+    color: white;
+}
+
 .container .text-muted {
     margin: 20px 0;
 }

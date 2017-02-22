@@ -1,4 +1,4 @@
-<div id="vehicleRow" class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+<div id="vehicleRow" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
     <div>
         <h3>Fahrzeugverwaltung</h3>
         <hr>

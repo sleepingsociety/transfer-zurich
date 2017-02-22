@@ -22,7 +22,7 @@
                             <td>74</td>
                         </tr>
                     </table>
-                    <button class="btn btn-default">Alle Aufträge anzeigen</button>
+                    <button class="btn btn-default" onclick="changePage('allTasks.php')">Alle Aufträge anzeigen</button>
                 </div>
             </div>
         </div>

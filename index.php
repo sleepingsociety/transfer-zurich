@@ -42,6 +42,43 @@ if ($connection->connect_error) {
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheet/login.css">
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+
+    <script>
+        var desktop;
+        $(document).ready(function() {
+            var randNum = Math.floor((Math.random() * 7) + 1);
+            $(window).resize(function() {
+                if ($(this).width() < 768) {
+                    if(desktop == true || desktop == null) {
+                        desktop = false;
+                        document.body.style.backgroundImage = "url('img/background.png')";
+                    }
+                } else {
+                    // default setting for desktop here...
+                    if(desktop == false || desktop == null) {
+                        desktop = true;
+                        document.body.style.backgroundImage = "url('img/Background_Login_0" + randNum + ".jpg')";
+                    }
+                }
+            });
+
+            if ($(window).width() < 768) {
+                if(desktop == true || desktop == null) {
+                    desktop = false;
+                    document.body.style.backgroundImage = "url('img/background.png')";
+                }
+            } else {
+                // default setting for desktop here...
+                if(desktop == false || desktop == null) {
+                    desktop = true;
+                    document.body.style.backgroundImage = "url('img/Background_Login_0" + randNum + ".jpg')";
+                }
+            }
+
+            //var randNum = Math.floor((Math.random() * 7) + 1);
+            //document.body.style.backgroundImage = "url('img/Background_Login_0" + randNum + ".jpg')";
+        });
+    </script>
 </head>
 
 <body>

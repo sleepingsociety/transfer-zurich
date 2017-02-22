@@ -82,10 +82,31 @@ img.img-nav.img-responsive {
     img#imgLogo {
         display: none;
     }
+    #selectViewTable tbody tr td {
+        border-radius: 5px;
+        font-size: 16px;
+        background: linear-gradient(#fafafa, #dddddd);
+    }
+    #selectViewTable{
+        border-spacing: 5px;
+        border-collapse: separate;
+        margin: auto;
+    }
 }
 @media(min-width: 768px)  {
     img#imgLogo {
         display: inline;
+    }
+    #selectViewTable tbody tr td {
+        border-radius: 5px;
+        padding: 5px 30px;
+        font-size: 20px;
+        background: linear-gradient(#fafafa, #dddddd);
+    }
+    #selectViewTable{
+        border-spacing: 30px;
+        border-collapse: separate;
+        margin: auto;
     }
 }
 
@@ -213,12 +234,12 @@ body, #pageContainer {
     margin: auto;
 }
 
-div#vehicleRow, div#usersRow, div#profilRow, div#adminPolicy, div#technicalLeaderPolicy, div#dispoPolicy, div#driverPolicy {
+div#vehicleRow, div#usersRow, div#destinationRow, div#profilRow, div#adminPolicy, div#technicalLeaderPolicy, div#dispoPolicy, div#driverPolicy {
     margin-top: 30px;
 
 }
 
-div#vehicleRow div, div#usersRow div, div#profilRow div, div#adminPolicy div, div#technicalLeaderPolicy div, div#dispoPolicy div, div#driverPolicy div {
+div#vehicleRow div, div#usersRow div, div#destinationRow, div#profilRow div, div#adminPolicy div, div#technicalLeaderPolicy div, div#dispoPolicy div, div#driverPolicy div {
     background-color: white;
     padding: 15px 0px;
 }
@@ -300,3 +321,12 @@ div#forbiddenMessage {
     display: block;
     margin: auto;
 }
+
+
+/*
+#selectViewTable tbody tr td {
+    border-radius: 5px;
+    padding: 5px 30px;
+    font-size: 20px;
+    background: linear-gradient(#fafafa, #dddddd);
+}*/
