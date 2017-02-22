@@ -138,7 +138,7 @@ CREATE TABLE hotel (
 DROP TABLE IF EXISTS income_transfer;
 CREATE TABLE income_transfer (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  lead_Pasenger VARCHAR(255) NOT NULL,
+  lead_passenger VARCHAR(255) NOT NULL,
   datum date NOT NULL,
   origin VARCHAR(255) NOT NULL, /*Destinations_fs*/
   pick_up_time TIME NOT NULL,

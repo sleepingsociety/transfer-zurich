@@ -88,43 +88,63 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                     if (!get_magic_quotes_gpc()) {
                         $project_number = addslashes($_POST["project_number"]);
                         $lead_passenger = addslashes($_POST["lead_passenger"]);
+                        $datum = addslashes($_POST["datum"]);
                         $origin = addslashes($_POST["origin"]);
                         $flight_from_to = addslashes($_POST["flight_from_to"]);
                         $transfer_type = addslashes($_POST["transfer_type"]);
                         $special_needs = addslashes($_POST["special_needs"]);
-                        $number_passengers = addslashes($_POST["number_passengers"]);
                         $baby_passengers = addslashes($_POST["baby_passengers"]);
                         $toddler_passengers = addslashes($_POST["toddler_passengers"]);
                         $kid_passengers = addslashes($_POST["kid_passengers"]);
+                        $destination = addslashes($_POST["destination"]);
                         $landing_takeoff_time = addslashes($_POST["landing_takeoff_time"]);
                         $flight_number = addslashes($_POST["flight_number"]);
                         $terminal = addslashes($_POST["terminal"]);
                         $phone_passenger = addslashes($_POST["phone_passenger"]);
-                        $suitcase_big = addslashes($_POST["suitcase_big"]);
-                        $suitcase_medium = addslashes($_POST["suitcase_medium"]);
-                        $suitcase_small = addslashes($_POST["suitcase_small"]);
-                        $ski_snowboard = addslashes($_POST["ski_snowboard"]);
                         $other_luggage = addslashes($_POST["other_luggage"]);
                         $comments = addslashes($_POST["comments"]);
                         $accept_link = addslashes($_POST["accept_link"]);
                         $decline_link = addslashes($_POST["decline_link"]);
                     }else {
+                        $project_number = $_POST["project_number"];
+                        $lead_passenger = $_POST["lead_passenger"];
+                        $datum = $_POST["datum"];
+                        $origin = $_POST["origin"];
+                        $flight_from_to = $_POST["flight_from_to"];
+                        $transfer_type = $_POST["transfer_type"];
+                        $special_needs = $_POST["special_needs"];
+                        $baby_passengers = $_POST["baby_passengers"];
+                        $toddler_passengers = $_POST["toddler_passengers"];
+                        $kid_passengers = $_POST["kid_passengers"];
                         $destination = $_POST["destination"];
+                        $landing_takeoff_time = $_POST["landing_takeoff_time"];
+                        $flight_number = $_POST["flight_number"];
+                        $terminal = $_POST["terminal"];
+                        $phone_passenger = $_POST["phone_passenger"];
+                        $other_luggage = $_POST["other_luggage"];
+                        $comments = $_POST["comments"];
+                        $accept_link = $_POST["accept_link"];
+                        $decline_link = $_POST["decline_link"];
                     }
                     /*variabeln die keine varchar sind*/
                     $datum = $_POST['datum'];
                     $pickup_time = $_POST['pickup_time'];
+                    $number_passengers = $_POST['number_passengers'];
+                    $suitcase_big = $_POST["suitcase_big"];
+                    $suitcase_medium = $_POST["suitcase_medium"];
+                    $suitcase_small = $_POST["suitcase_small"];
+                    $ski_snowboard = $_POST["ski_snowboard"];
 
+              /*
+               * Select für die Destination
+               *
+               * Select für den Transfer Typ
+               */
 
-                    $datum = $_POST['transfer_type'];
-                    $pickup_time = $_POST['pickup_time'];
-                    $datum = $_POST['datum'];
-                    $pickup_time = $_POST['pickup_time'];
-                    $datum = $_POST['datum'];
-                    $pickup_time = $_POST['pickup_time'];
-
-
-                    $sql = "INSERT INTO income_transfer () VALUES ()";
+                    $sql = "INSERT INTO income_transfer (lead_passenger, datum, origin, pick_up_time, flight_from_to,
+transfer_type_fs, special_needs, number_passengers, baby_passengers, toddler_passengers, kid_passengers, destination_fs,
+landing_takeoff_time, flight_number, terminal, phone_passenger, suitcase_big, suitcase_medium, suitcase_small,ski_snowboard,
+other_luggage, comments, accept_link, decline_link, hotel_fs, driver_fs, vehicle_fs, trailer, partner_fs) VALUES ()";
 
 
                     mysqli_select_db($dbname);
