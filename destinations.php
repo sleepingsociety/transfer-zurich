@@ -136,39 +136,32 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $traffic_jam_surcharge = $_POST['traffic_jam_surcharge'];
                         $search_on_site = $_POST['search_on_site'];
                         $breaks = $_POST['breaks'];
-                        $regular1_4 = $_POST['regular1_4'];
-                        $regular5_8 = $_POST['regular5_8'];
-                        $regular9_14 = $_POST['regular9_14'];
-                        $regular15_16 = $_POST['regular15_16'];
-                        $vip1_3 = $_POST['vip1_3'];
-                        $vip4_7 = $_POST['vip4_7'];
+
 
 
                         $sql = "INSERT INTO destinations (destination, spec_mount, country, region, typ, distance_from_zrh, distance_from_bsl, distance_from_alt, route_from_zrh,
                         route_from_bsl, route_from_alt,  time_zrh, time_bsl, time_alt, served_by, mount_web, mount_preis, mount_info, traffic_jam_surcharge, search_on_site, 
-                        breaks, regular1_4, regular5_8, regular9_14, regular15_16, vip1_3, vip4_7) VALUES ('$destination', '$spec_mount', '$country', '$region', '$typ', '$distance_from_zrh',
+                        breaks) VALUES ('$destination', '$spec_mount', '$country', '$region', '$typ', '$distance_from_zrh',
                         '$distance_from_bsl', '$distance_from_alt', '$route_from_zrh', '$route_from_bsl', '$route_from_alt', '$time_zrh', '$time_bsl', '$time_alt', '$served_by', '$mount_web', '$mount_preis',
-                        '$mount_info', '$traffic_jam_surcharge', '$search_on_site', '$breaks', '$regular1_4', '$regular5_8', '$regular9_14', '$regular15_16', '$vip1_3', '$vip4_7')";
+                        '$mount_info', '$traffic_jam_surcharge', '$search_on_site', '$breaks')";
 
                         $sql1 = "INSERT INTO test (destination) VALUES ('$destination')";
 
-                        mysqli_select_db($dbname);
+                        mysqli_select_db($dbname,$connection);
 
-                        $retval = mysqli_query($sql1, $connection);
+                        $retval = mysqli_query($sql, $connection);
 
                         if (!$retval) {
-                            die('could not enter date: ' . mysqli_error());
+                            die('could not enter date: ' . mysqli_error($connection));
                         }
 
                         echo "Entered data successfully\n";
 
-                        if (mysqli_query($connection, $sql1)) {
+                        if (mysqli_query($connection, $sql)) {
                             echo "New record created successfully";
 
-                            echo '   ' . $destination = $_POST["destination"] . 'Test';
-
                         } else {
-                            echo "Error: " . $sql1 . "<br>" . mysqli_error($connection);
+                            echo "Error: " . $sql . "<br>" . mysqli_error($connection);
                         }
 
 
@@ -273,34 +266,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                             <div class="form-group">
                                 <label for="breaks">Pausen</label><br>
                                 <input type="text" class="form-control" name="breaks" placeholder="Zeit">
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="regular1_4">regular1_4</label><br>
-                                    <input type="text" class="form-control" name="regular1_4" placeholder="Preis">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="regular5_8">regular5_8</label><br>
-                                    <input type="text" class="form-control" name="regular5_8" placeholder="Preis">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="regular9_14">regular9_14</label><br>
-                                    <input type="text" class="form-control" name="regular9_14" placeholder="Preis">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="regular15_16">regular15_16</label><br>
-                                    <input type="text" class="form-control" name="regular15_16" placeholder="Preis">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="vip1_3">vip1_3</label><br>
-                                    <input type="text" class="form-control" name="vip1_3" placeholder="Preis">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="vip4_7">vip4_7</label><br>
-                                    <input type="text" class="form-control" name="vip4_7" placeholder="Preis">
-                                </div>
                             </div>
                             <input name="add" type="submit" id="add"
                                    value="Add Destination">

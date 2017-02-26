@@ -19,6 +19,7 @@ CREATE TABLE transfer_type (
   PRIMARY KEY (transfer_id)
 );
 
+insert into transfer_type (transfer_type) VALUE ('cash');
 DROP TABLE IF EXISTS partner;
 CREATE TABLE partner (
   partner_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -34,6 +35,38 @@ CREATE TABLE country (
   PRIMARY KEY (country_id)
 );
 
+DROP TABLE IF EXISTS task_entry;
+CREATE TABLE task_entry (
+  id_task_entry int(11) NOT NULL,
+  contractor varchar(45) DEFAULT NULL,
+  project_number varchar(45) DEFAULT NULL,
+  accept_link varchar(255) NOT NULL,
+  decline_link varchar(255) NOT NULL,
+  lead_passenger varchar(45) DEFAULT NULL,
+  datum varchar(45) DEFAULT NULL,
+  transfer_type varchar(150) DEFAULT NULL,
+  special_needs varchar(45) DEFAULT NULL,
+  phone_passenger varchar(45) DEFAULT NULL,
+  comments varchar(45) DEFAULT NULL,
+  number_passengers varchar(45) DEFAULT NULL,
+  baby_passengers varchar(45) DEFAULT NULL,
+  toddler_passengers varchar(45) DEFAULT NULL,
+  kid_passengers varchar(45) DEFAULT NULL,
+  suitcase_big varchar(45) DEFAULT NULL,
+  suitcase_medium varchar(45) DEFAULT NULL,
+  suitcase_small varchar(45) DEFAULT NULL,
+  ski_snowboard varchar(45) DEFAULT NULL,
+  other_luggage varchar(45) DEFAULT NULL,
+  origin varchar(150) DEFAULT NULL,
+  origin_address varchar(255) NOT NULL,
+  pickup_time varchar(45) DEFAULT NULL,
+  destination varchar(100) DEFAULT NULL,
+  destination_address varchar(255) NOT NULL,
+  landing_takeoff_time varchar(45) DEFAULT NULL,
+  flight_from_to varchar(20) DEFAULT NULL,
+  flightnumber varchar(45) DEFAULT NULL,
+  terminal varchar(45) DEFAULT NULL
+);
 
 DROP TABLE IF EXISTS maut;
 CREATE TABLE maut (
@@ -93,7 +126,7 @@ CREATE TABLE driver (
 DROP TABLE IF EXISTS destination;
 CREATE TABLE destination (
   destination_id INTEGER NOT NULL AUTO_INCREMENT,
-  country_fs INTEGER NOT NULL,
+  country_fs INTEGER,
   destination VARCHAR(80) NOT NULL,
   dist_from_alt INTEGER,
   dist_from_bsl INTEGER,
@@ -117,6 +150,8 @@ CREATE TABLE destination (
   FOREIGN KEY (maut_fs) REFERENCES maut (maut_id)
 );
 
+INSERT into destination (destination) VALUES ('Strausburg');
+
 DROP TABLE IF EXISTS hotel;
 CREATE TABLE hotel (
   hotel_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -139,16 +174,16 @@ DROP TABLE IF EXISTS income_transfer;
 CREATE TABLE income_transfer (
   id INTEGER NOT NULL AUTO_INCREMENT,
   lead_passenger VARCHAR(255) NOT NULL,
-  datum date NOT NULL,
+  datum VARCHAR(50) NOT NULL,
   origin VARCHAR(255) NOT NULL, /*Destinations_fs*/
-  pick_up_time TIME NOT NULL,
+  pick_up_time VARCHAR(50) NOT NULL,
   flight_from_to VARCHAR(255),
-  transfer_type_fs INTEGER NOT NULL,
+  transfer_type_fs INTEGER,
   special_needs VARCHAR(255),
-  number_passengers INTEGER NOT NULL,
-  baby_passengers VARCHAR(60) DEFAULT '0',
-  toddler_passengers VARCHAR(60) DEFAULT '0',
-  kid_passengers VARCHAR(60) DEFAULT '0',
+  number_passengers VARCHAR(10) NOT NULL,
+  baby_passengers VARCHAR(60),
+  toddler_passengers VARCHAR(60),
+  kid_passengers VARCHAR(60),
   destination_fs INTEGER NOT NULL,
   landing_takeoff_time VARCHAR(30),
   flight_number VARCHAR(15),
@@ -167,6 +202,7 @@ CREATE TABLE income_transfer (
   vehicle_fs INTEGER,
   trailer BOOLEAN,
   partner_fs INTEGER,
+  project_status VARCHAR(30),
   PRIMARY KEY (id),
   FOREIGN KEY (partner_fs) REFERENCES partner (partner_id),
   FOREIGN KEY (vehicle_fs) REFERENCES vehicle (vehicle_id),
@@ -175,6 +211,7 @@ CREATE TABLE income_transfer (
   FOREIGN KEY (destination_fs) REFERENCES  destination (destination_id),
   FOREIGN KEY (transfer_type_fs) REFERENCES transfer_type (transfer_id)
 );
+
 
 
 
