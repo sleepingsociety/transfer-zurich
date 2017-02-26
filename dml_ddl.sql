@@ -212,7 +212,7 @@ CREATE TABLE income_transfer (
   FOREIGN KEY (transfer_type_fs) REFERENCES transfer_type (transfer_id)
 );
 
-
+/*DELETE FROM users WHERE username='dmutluay';*/
 
 
 INSERT INTO country (country, short) VALUES ('Schweiz','CH'), ('Deutschland','D'), ('Östereich','A'), ('Frankreich','F'), ('Italien','I'), ('Lichtenstein', 'LI');

@@ -83,6 +83,43 @@ if (!$_SESSION["login"]) header('Location: /index.php');
             <div class="container">
                 <?php
 
+                if (isset($_POST{"werte_löschen"})) {
+                    $_SESSION["accept_link"] = "";
+                    $_SESSION["decline_link"] = "";
+                    $_SESSION["lead_passenger"] = "";
+                    $_SESSION["datum"] = "";
+                    $_SESSION["transfer_type"] = "";
+                    $_SESSION["special_needs"] = "";
+                    $_SESSION["phone_passenger"] = "";
+                    $_SESSION["comments"] = "";
+                    $_SESSION["number_passengers"] = "";
+                    $_SESSION["baby_passengers"] =
+                    $_SESSION["toddler_passengers"] = "";
+                    $_SESSION["kid_passengers"] = "";
+                    $_SESSION["origin"] = "";
+                    $_SESSION["pickup_time"] = "";
+                    $_SESSION["destination"] = "";
+                    $_SESSION["take_off_timne"] = "";
+                    $_SESSION["suitcase_big"] = "";
+                    $_SESSION["suitcase_medium"] = "";
+                    $_SESSION["suitcase_small"] = "";
+                    $_SESSION["ski_snowboard"] = "";
+                    $_SESSION["other_luggage"] = "";
+                    $_SESSION["flight_from_to"] = "";
+                    $_SESSION["flightnumber"] = "";
+                    $_SESSION["terminal"] = "";
+
+                } else {
+
+                    ?>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <input class="position btn btn-default" type="submit" name="werte_löschen" id="werte_löschen"
+                               value="Werte Löschen">
+                    </form>
+                    <?php
+                }
+
+
                 if (isset($_POST{"add"})) {
 
 
@@ -141,6 +178,11 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                      * Select für den Transfer Typ
                      */
 
+                    $destination = 1;
+                    $transfer_type =1;
+
+
+
                     $sql = "INSERT INTO income_transfer (lead_passenger, datum, origin, pick_up_time, flight_from_to,
 transfer_type_fs, special_needs, number_passengers, baby_passengers, toddler_passengers, kid_passengers, destination_fs,
 landing_takeoff_time, flight_number, terminal, phone_passenger, suitcase_big, suitcase_medium, suitcase_small,ski_snowboard,
@@ -150,8 +192,34 @@ other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$
 '$ski_snowboard','$other_luggage','$comments','$accept_link','$decline_link')";
 
 
-/*
-                    echo $sql;*/
+                    $_SESSION["accept_link"] = "";
+                    $_SESSION["decline_link"] = "";
+                    $_SESSION["lead_passenger"] = "";
+                    $_SESSION["datum"] = "";
+                    $_SESSION["transfer_type"] = "";
+                    $_SESSION["special_needs"] = "";
+                    $_SESSION["phone_passenger"] = "";
+                    $_SESSION["comments"] = "";
+                    $_SESSION["number_passengers"] = "";
+                    $_SESSION["baby_passengers"] =
+                    $_SESSION["toddler_passengers"] = "";
+                    $_SESSION["kid_passengers"] = "";
+                    $_SESSION["origin"] = "";
+                    $_SESSION["pickup_time"] = "";
+                    $_SESSION["destination"] = "";
+                    $_SESSION["take_off_timne"] = "";
+                    $_SESSION["suitcase_big"] = "";
+                    $_SESSION["suitcase_medium"] = "";
+                    $_SESSION["suitcase_small"] = "";
+                    $_SESSION["ski_snowboard"] = "";
+                    $_SESSION["other_luggage"] = "";
+                    $_SESSION["flight_from_to"] = "";
+                    $_SESSION["flightnumber"] = "";
+                    $_SESSION["terminal"] = "";
+
+
+                    /*
+                                        echo $sql;*/
 
                     mysqli_select_db($dbname, $connection);
 
@@ -167,6 +235,13 @@ other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$
                     if (mysqli_query($connection, $sql)) {
                         echo "New record created successfully";
 
+                        ?>
+                        <form method="post" action="taskEntry.php">
+                            <input class="position btn btn-default" type="submit" name="back_to_taskEntry" id="back_to_taskEntry"
+                                   value="Zurück zu Auftragseingabe">
+                        </form>
+                        <?php
+
                     } else {
                         echo "Error: " . $sql . "<br>" . mysqli_error($connection);
                     }
@@ -174,6 +249,8 @@ other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$
 
 
                     ?>
+
+
                     <form action="parseEmail.php" method="post" id="parseForm">
                         <label for="emailInsert">Insert Email here</label>
                         <textarea class="form-control" rows="3" name="emailInsertWindow" id="emailInsert"
@@ -187,26 +264,26 @@ other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$
 
                                 <div class="form-group">
                                     <label for="project_number">Auftrags Nummer:<br>
-                                    <input type="text" class="form-control" name="project_number"
-                                           value="<?php if (isset($_SESSION["project_number"])) {
-                                               echo $_SESSION["project_number"];
-                                           } ?>">
+                                        <input type="text" class="form-control" name="project_number"
+                                               value="<?php if (isset($_SESSION["project_number"])) {
+                                                   echo $_SESSION["project_number"];
+                                               } ?>">
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <label for="lead_passenger">Haupt Passagier:<br>
-                                    <input type="text" class="form-control" name="lead_passenger"
-                                           value="<?php if (isset($_SESSION["lead_passenger"])) {
-                                               echo $_SESSION["lead_passenger"];
-                                           } ?>">
+                                        <input type="text" class="form-control" name="lead_passenger"
+                                               value="<?php if (isset($_SESSION["lead_passenger"])) {
+                                                   echo $_SESSION["lead_passenger"];
+                                               } ?>">
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <label for="datum">Datum:<br>
-                                    <input type="text" class="form-control" name="datum"
-                                           value="<?php if (isset($_SESSION["datum"])) {
-                                               echo $_SESSION["datum"];
-                                           } ?>">
+                                        <input type="text" class="form-control" name="datum"
+                                               value="<?php if (isset($_SESSION["datum"])) {
+                                                   echo $_SESSION["datum"];
+                                               } ?>">
                                     </label>
                                 </div>
                             </div>
@@ -235,10 +312,10 @@ other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$
                                     </div>
                                     <div class="form-group col-sm-6 col-md-6 col-lg-6">
                                         <label for="flight_from_to">Flug von/nach</label>
-                                    <input type=" text" class="form-control" name="flight_from_to"
-                                        value="<?php if (isset($_SESSION["flight_from_to"])) {
-                                            echo $_SESSION["flight_from_to"];
-                                        } ?>">
+                                        <input type=" text" class="form-control" name="flight_from_to"
+                                               value="<?php if (isset($_SESSION["flight_from_to"])) {
+                                                   echo $_SESSION["flight_from_to"];
+                                               } ?>">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -423,7 +500,7 @@ other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$
         <footer class="navbar navbar-default navbar-fixed-bottom">
             <div class="container">
                 <nav class="nav navbar-nav">
-                    <p>&copy; 2016 ATAP</p>
+                    <p>&copy; 2017 ATAP</p>
                 </nav>
                 <nav class="nav navbar-nav navbar-right">
                     <a class="bot" href="#">Sitemap</a>

@@ -256,7 +256,6 @@ if($contractor != ""){
 
 
 }
-echo $_SESSION['lead_passenger'];
 
 header("location: /taskEntry.php");
 
