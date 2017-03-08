@@ -43,9 +43,9 @@ $pickup_time;
 $destination;
 $landing_takeoff_time;
 
-$big_suitcase;
-$medium_suitcase;
-$small_suitcase;
+$suitcase_big;
+$suitcase_medium;
+$suitcase_small;
 $ski_snowboard;
 $other_luggage;
 
@@ -59,7 +59,7 @@ $i = 0;
 $wholeEmail = explode("\n", $_POST["emailInsertWindow"]);
 
 $sql = "SELECT contractor FROM task_entry";
-$result = $conn->query($sql);
+$result = $connection->query($sql);
 
 while($row = mysqli_fetch_assoc($result)) {
     $temp = preg_replace('/\s+/', '', $row['contractor']);
@@ -80,18 +80,15 @@ foreach ($allContractors as $con){
 
 //if a contractor was found, the rest of the data needed will be selected here
 if($contractor != ""){
-    $sql = "SELECT t.project_number, t.lead_passenger, t.datum, t.transfer_type, t.special_needs, t.phone_passenger, t.comments, t.accept_link, t.decline_link,
-            tr.origin, tr.pickup_time, tr.destination, tr.landing_takeoff_time,
-            p.number_passengers, p.baby_passengers, p.toddler_passengers, p.kid_passengers,
-            l.big_suitcase, l.medium_suitcase, l.small_suitcase, l.ski_snowboard, l.other_luggage,
-            f.flight_from_to, f.flightnumber, f.terminal FROM task_entry t
-            JOIN travel tr ON tr.id_entry_fk = t.id_task_entry
-            JOIN passengers p ON p.id_entry_fk = t.id_task_entry
-            JOIN luggage l ON l.id_entry_fk = t.id_task_entr
-            JOIN flight f ON f.id_entry_fk = t.id_task_entry
-            WHERE t.contractor = '$contractor'";
+   $sql = "SELECT project_number, lead_passenger, datum, transfer_type, special_needs, phone_passenger, comments, accept_link, decline_link,
+            origin, pickup_time, destination, landing_takeoff_time,
+            number_passengers, baby_passengers, toddler_passengers, kid_passengers,
+            suitcase_big, suitcase_medium, suitcase_small, ski_snowboard, other_luggage,
+            flight_from_to, flightnumber, terminal FROM task_entry
+            WHERE contractor = '$contractor';";
 
-    $result = $conn->query($sql);
+
+    $result = $connection->query($sql);
 
     while($row = mysqli_fetch_assoc($result)) {
         $project_number = $row['project_number'];
@@ -114,9 +111,9 @@ if($contractor != ""){
         $destination = $row['destination'];
         $landing_takeoff_time = $row['landing_takeoff_time'];
 
-        $big_suitcase = $row['big_suitcase'];
-        $medium_suitcase = $row['medium_suitcase'];
-        $small_suitcase = $row['small_suitcase'];
+        $suitcase_big = $row['suitcase_big'];
+        $suitcase_medium = $row['suitcase_medium'];
+        $suitcase_small = $row['suitcase_small'];
         $ski_snowboard = $row['ski_snowboard'];
         $other_luggage = $row['other_luggage'];
 
@@ -214,20 +211,20 @@ if($contractor != ""){
             $_SESSION["take_off_timne"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
 
-        if(stripos($row, $big_suitcase) !== false){
+        if(stripos($row, $suitcase_big) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
             $tempValue = preg_replace('/\s+/', '', $tempValue);
-            $_SESSION["big_suitcase"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
+            $_SESSION["suitcase_big"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
-        if(stripos($row, $medium_suitcase) !== false){
+        if(stripos($row, $suitcase_medium) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
             $tempValue = preg_replace('/\s+/', '', $tempValue);
-            $_SESSION["medium_suitcase"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
+            $_SESSION["suitcase_medium"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
-        if(stripos($row, $small_suitcase) !== false){
+        if(stripos($row, $suitcase_small) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
             $tempValue = preg_replace('/\s+/', '', $tempValue);
-            $_SESSION["small_suitcase"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
+            $_SESSION["suitcase_small"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
         }
         if(stripos($row, $ski_snowboard) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
@@ -260,7 +257,7 @@ if($contractor != ""){
 
 }
 
-
-header("location: ../taskEntry.php");
+header("location: /taskEntry.php");
 
 ?>
+

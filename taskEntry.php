@@ -4,7 +4,7 @@ $servername = $_SERVER['DB_HOST'];
 $dbusername = $_SERVER['DB_USERNAME'];
 $dbpassword = $_SERVER['DB_PASSWORD'];
 
-$connection = new mysqli($servername, $dbusername, $dbpassword);
+$connection = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
@@ -83,7 +83,45 @@ if (!$_SESSION["login"]) header('Location: /index.php');
             <div class="container">
                 <?php
 
-                if (isset($_POST{"save_##changes"})) {  /* ## rausnehmen*/
+                if (isset($_POST{"werte_löschen"})) {
+                    $_SESSION["accept_link"] = "";
+                    $_SESSION["decline_link"] = "";
+                    $_SESSION["lead_passenger"] = "";
+                    $_SESSION["datum"] = "";
+                    $_SESSION["transfer_type"] = "";
+                    $_SESSION["special_needs"] = "";
+                    $_SESSION["phone_passenger"] = "";
+                    $_SESSION["comments"] = "";
+                    $_SESSION["number_passengers"] = "";
+                    $_SESSION["baby_passengers"] =
+                    $_SESSION["toddler_passengers"] = "";
+                    $_SESSION["kid_passengers"] = "";
+                    $_SESSION["origin"] = "";
+                    $_SESSION["pickup_time"] = "";
+                    $_SESSION["destination"] = "";
+                    $_SESSION["take_off_timne"] = "";
+                    $_SESSION["suitcase_big"] = "";
+                    $_SESSION["suitcase_medium"] = "";
+                    $_SESSION["suitcase_small"] = "";
+                    $_SESSION["ski_snowboard"] = "";
+                    $_SESSION["other_luggage"] = "";
+                    $_SESSION["flight_from_to"] = "";
+                    $_SESSION["flightnumber"] = "";
+                    $_SESSION["terminal"] = "";
+
+                } else {
+
+                    ?>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <input class="position btn btn-default" type="submit" name="werte_löschen" id="werte_löschen"
+                               value="Werte Löschen">
+                    </form>
+                    <?php
+                }
+
+
+                if (isset($_POST{"add"})) {
+
 
                     if (!get_magic_quotes_gpc()) {
                         $project_number = addslashes($_POST["project_number"]);
@@ -105,7 +143,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $comments = addslashes($_POST["comments"]);
                         $accept_link = addslashes($_POST["accept_link"]);
                         $decline_link = addslashes($_POST["decline_link"]);
-                    }else {
+                    } else {
                         $project_number = $_POST["project_number"];
                         $lead_passenger = $_POST["lead_passenger"];
                         $datum = $_POST["datum"];
@@ -127,7 +165,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $decline_link = $_POST["decline_link"];
                     }
                     /*variabeln die keine varchar sind*/
-                    $datum = $_POST['datum'];
                     $pickup_time = $_POST['pickup_time'];
                     $number_passengers = $_POST['number_passengers'];
                     $suitcase_big = $_POST["suitcase_big"];
@@ -135,25 +172,62 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                     $suitcase_small = $_POST["suitcase_small"];
                     $ski_snowboard = $_POST["ski_snowboard"];
 
-              /*
-               * Select für die Destination
-               *
-               * Select für den Transfer Typ
-               */
+                    /*
+                     * Select für die Destination
+                     *
+                     * Select für den Transfer Typ
+                     */
+
+                    $destination = 1;
+                    $transfer_type =1;
+
+
 
                     $sql = "INSERT INTO income_transfer (lead_passenger, datum, origin, pick_up_time, flight_from_to,
 transfer_type_fs, special_needs, number_passengers, baby_passengers, toddler_passengers, kid_passengers, destination_fs,
 landing_takeoff_time, flight_number, terminal, phone_passenger, suitcase_big, suitcase_medium, suitcase_small,ski_snowboard,
-other_luggage, comments, accept_link, decline_link, hotel_fs, driver_fs, vehicle_fs, trailer, partner_fs) VALUES ()";
+other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$datum',
+'$origin', '$pickup_time', '$flight_from_to', '$transfer_type', '$special_needs', '$number_passengers', '$baby_passengers','$toddler_passengers',
+'$kid_passengers','$destination','$landing_takeoff_time','$flight_number','$terminal','$phone_passenger','$suitcase_big','$suitcase_medium','$suitcase_small',
+'$ski_snowboard','$other_luggage','$comments','$accept_link','$decline_link')";
 
 
-                    mysqli_select_db($dbname);
+                    $_SESSION["accept_link"] = "";
+                    $_SESSION["decline_link"] = "";
+                    $_SESSION["lead_passenger"] = "";
+                    $_SESSION["datum"] = "";
+                    $_SESSION["transfer_type"] = "";
+                    $_SESSION["special_needs"] = "";
+                    $_SESSION["phone_passenger"] = "";
+                    $_SESSION["comments"] = "";
+                    $_SESSION["number_passengers"] = "";
+                    $_SESSION["baby_passengers"] =
+                    $_SESSION["toddler_passengers"] = "";
+                    $_SESSION["kid_passengers"] = "";
+                    $_SESSION["origin"] = "";
+                    $_SESSION["pickup_time"] = "";
+                    $_SESSION["destination"] = "";
+                    $_SESSION["take_off_timne"] = "";
+                    $_SESSION["suitcase_big"] = "";
+                    $_SESSION["suitcase_medium"] = "";
+                    $_SESSION["suitcase_small"] = "";
+                    $_SESSION["ski_snowboard"] = "";
+                    $_SESSION["other_luggage"] = "";
+                    $_SESSION["flight_from_to"] = "";
+                    $_SESSION["flightnumber"] = "";
+                    $_SESSION["terminal"] = "";
 
-                    $retval = mysqli_query($sql, $connection);
+
+                    /*
+                                        echo $sql;*/
+
+                    mysqli_select_db($dbname, $connection);
+
+                    $retval = mysqli_query($connection, $sql);
 
 
                     if (!$retval) {
-                        die('could not enter date: ' . mysqli_error());
+                        die('could not enter data: ' . mysqli_error($connection));
                     }
 
                     echo "Entered data successfully\n";
@@ -161,252 +235,262 @@ other_luggage, comments, accept_link, decline_link, hotel_fs, driver_fs, vehicle
                     if (mysqli_query($connection, $sql)) {
                         echo "New record created successfully";
 
-                        echo '   ' . $destination = $_POST["destination"] . 'Test';
+                        ?>
+                        <form method="post" action="taskEntry.php">
+                            <input class="position btn btn-default" type="submit" name="back_to_taskEntry" id="back_to_taskEntry"
+                                   value="Zurück zu Auftragseingabe">
+                        </form>
+                        <?php
 
                     } else {
                         echo "Error: " . $sql . "<br>" . mysqli_error($connection);
                     }
-                }
-                else {
+                } else {
 
 
-                ?>
-                <form action="parseEmail.php" method="post" id="parseForm">
-                    <label for="emailInsert">Insert Email here</label>
-                    <textarea class="form-control" rows="3" name="emailInsertWindow" id="emailInsert" form="parseForm"></textarea>
-                    <input type="submit" value="Send" id="submitButton">
-                </form>
+                    ?>
 
-                <form>
-                    <div class="form-header">
-                        <div class="form-inline">
 
-                            <div class="form-group">
-                                <label for="project_number">Project Nummer:</label><br>
-                                <input type="text" class="form-control" name="project_number"
-                                       value="<?php if (isset($_SESSION["project_number"])) {
-                                           echo $_SESSION["project_number"];
-                                       } ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="lead_passenger">Lead Passenger:</label><br>
-                                <input type="text" class="form-control" name="lead_passenger"
-                                       value="<?php if (isset($_SESSION["lead_passenger"])) {
-                                           echo $_SESSION["lead_passenger"];
-                                       } ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="datum">Datum:</label><br>
-                                <input type="text" class="form-control" name="datum"
-                                       value="<?php if (isset($_SESSION["datum"])) {
-                                           echo $_SESSION["datum"];
-                                       } ?>">
-                            </div>
-                        </div>
+                    <form action="parseEmail.php" method="post" id="parseForm">
+                        <label for="emailInsert">Insert Email here</label>
+                        <textarea class="form-control" rows="3" name="emailInsertWindow" id="emailInsert"
+                                  form="parseForm"></textarea>
+                        <input type="submit" value="Send" id="submitButton">
+                    </form>
 
-                    </div>
-                    <div class="form-body row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="origin">Origin:</label>
-                                <input type="text" class="form-control" name="origin"
-                                       value="<?php if (isset($_SESSION["origin"])) {
-                                           echo $_SESSION["origin"];
-                                       } ?>">
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <div class="form-header">
+                            <div class="form-inline">
 
-                                <label class="sr-only" for="origin-address">Origin-Address</label>
-                                <textarea class="form-control" rows="3" name="origin-address"
-                                          ></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                                    <label for="pickup_time">Pick Up Time</label>
-                                    <input type="text" class="form-control" name="pickup_time"
-                                           value="<?php if (isset($_SESSION["pickup_time"])) {
-                                               echo $_SESSION["pickup_time"];
-                                           } ?>">
+                                <div class="form-group">
+                                    <label for="project_number">Auftrags Nummer:<br>
+                                        <input type="text" class="form-control" name="project_number"
+                                               value="<?php if (isset($_SESSION["project_number"])) {
+                                                   echo $_SESSION["project_number"];
+                                               } ?>">
+                                    </label>
                                 </div>
-                                <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                                    <label for="flight_from_to>Flight from to</label>
-                                    <input type="text" class="form-control" name="flight_from_to"
-                                           value="<?php if (isset($_SESSION["flight_from_to"])) {
-                                               echo $_SESSION["flight_from_to"];
-                                           } ?>">
+                                <div class="form-group">
+                                    <label for="lead_passenger">Haupt Passagier:<br>
+                                        <input type="text" class="form-control" name="lead_passenger"
+                                               value="<?php if (isset($_SESSION["lead_passenger"])) {
+                                                   echo $_SESSION["lead_passenger"];
+                                               } ?>">
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                                    <label for="transfer_type">Transfer-Type</label>
-                                    <input type="text" class="form-control" name="transfer_type"
-                                           value="<?php if (isset($_SESSION["transfer_type"])) {
-                                               echo $_SESSION["transfer_type"];
-                                           } ?>">
+                                <div class="form-group">
+                                    <label for="datum">Datum:<br>
+                                        <input type="text" class="form-control" name="datum"
+                                               value="<?php if (isset($_SESSION["datum"])) {
+                                                   echo $_SESSION["datum"];
+                                               } ?>">
+                                    </label>
                                 </div>
-                                <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                                    <label for="special_needs">Special Needs</label>
-                                    <input type="text" class="form-control" name="special_needs"
-                                           value="<?php if (isset($_SESSION["special_needs"])) {
-                                               echo $_SESSION["special_needs"];
-                                           } ?>">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="number_passengers">Number of Passengers</label>
-                                    <input type="text" class="form-control" name="number_passengers"
-                                           value="<?php if (isset($_SESSION["number_passengers"])) {
-                                               echo $_SESSION["number_passengers"];
-                                           } ?>">
-                                </div>
-
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="baby_passengers">Number of Babys</label>
-                                    <input type="text" class="form-control" name="baby_passengers"
-                                           value="<?php if (isset($_SESSION["baby_passengers"])) {
-                                               echo $_SESSION["baby_passengers"];
-                                           } ?>">
-                                </div>
-
-
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="toddler_passengers">Number of Toddlers</label>
-                                    <input type="text" class="form-control" id="toddler_passengers"
-                                           value="<?php if (isset($_SESSION["toddler_passengers"])) {
-                                               echo $_SESSION["toddler_passengers"];
-                                           } ?>">
-                                </div>
-
-
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="kid_passengers">Number of Kids</label>
-                                    <input type="text" class="form-control" name="kid_passengers"
-                                           value="<?php if (isset($_SESSION["kid_passengers"])) {
-                                               echo $_SESSION["kid_passengers"];
-                                           } ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="destination">Destination:</label>
-                                <input type="text" class="form-control" name="destination"
-                                       value="<?php if (isset($_SESSION["destination"])) {
-                                           echo $_SESSION["destination"];
-                                       } ?>">
-
-                                <label class="sr-only" for="destination-address">Destination-Address</label>
-                                <textarea class="form-control" rows="3" name="destination-address"
-                                          ></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="landing_takeoff_time">landing takeoff time</label>
-                                    <input type="text" class="form-control" name="landing_takeoff_time"
-                                           value="<?php if (isset($_SESSION["landing_takeoff_time"])) {
-                                               echo $_SESSION["landing_takeoff_time"];
-                                           } ?>">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="flight_number">Flightnumber</label>
-                                    <input type="text" class="form-control" name="flight_number"
-                                           value="<?php if (isset($_SESSION["flight_number"])) {
-                                               echo $_SESSION["flight_number"];
-                                           } ?>">
-                                </div>
-
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="terminal">Terminal</label>
-                                    <input type="text" class="form-control" name="terminal"
-                                           value="<?php if (isset($_SESSION["terminal"])) {
-                                               echo $_SESSION["terminal"];
-                                           } ?>">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone_passenger">Phone Passenger</label>
-                                <input type="text" class="form-control" name="phone_passenger"
-                                       value="<?php if (isset($_SESSION["phone_passenger"])) {
-                                           echo $_SESSION["phone_passenger"];
-                                       } ?>">
-
-                            </div>
-                            <div class="row">
-
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="suitcase_big">Suitcase Big</label>
-                                    <input type="text" class="form-control" name="suitcase_big"
-                                           value="<?php if (isset($_SESSION["suitcase_big"])) {
-                                               echo $_SESSION["suitcase_big"];
-                                           } ?>">
-                                </div>
-
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="suitcase_medium">Suitcase Medium</label>
-                                    <input type="text" class="form-control" name="suitcase_medium"
-                                           value="<?php if (isset($_SESSION["suitcase_medium"])) {
-                                               echo $_SESSION["suitcase_medium"];
-                                           } ?>">
-                                </div>
-
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="suitcase_small">Suitcase Small</label>
-                                    <input type="text" class="form-control" name="suitcase_small"
-                                           value="<?php if (isset($_SESSION["suitcase_small"])) {
-                                               echo $_SESSION["suitcase_small"];
-                                           } ?>">
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                                    <label for="ski_snowboard">Ski / Snowboard</label>
-                                    <input type="text" class="form-control" name="ski_snowboard"
-                                           value="<?php if (isset($_SESSION["ski_snowboard"])) {
-                                               echo $_SESSION["ski_snowboard"];
-                                           } ?>">
-                                </div>
-
-
-                                <div class="form-group col-sm-6 col-md-6 col-lg-6">
-                                    <label for="other_luggage">Other Luggage</label>
-                                    <input type="text" class="form-control" name="other_luggage"
-                                           value="<?php if (isset($_SESSION["other_luggage"])) {
-                                               echo $_SESSION["other_luggage"];
-                                           } ?>">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="comments">Comments</label>
-                                <textarea class="form-control" rows="3" name="comments"
-                                          value="<?php if (isset($_SESSION["comments"])) {
-                                              echo $_SESSION["comments"];
-                                          } ?>"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="accept_link">Link to Accept</label>
-                                <input type="text" class="form-control" name="accept_link"
-                                       value="<?php if (isset($_SESSION["accept_link"])) {
-                                           echo $_SESSION["accept_link"];
-                                       } ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="decline_link">Link to Decline</label>
-                                <input type="text" class="form-control" name="decline_link"
-                                       value="<?php if (isset($_SESSION["decline_link"])) {
-                                           echo $_SESSION["decline_link"];
-                                       } ?>">
                             </div>
 
                         </div>
-                    </div>
-                    <input class="position btn btn-default" type="button" name="save_changes" id="save_changes" value="Änderungen Speichern">
+                        <div class="form-body row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="origin">Start:</label>
+                                    <input type="text" class="form-control" name="origin"
+                                           value="<?php if (isset($_SESSION["origin"])) {
+                                               echo $_SESSION["origin"];
+                                           } ?>">
 
-             <!--       <input class="position btn btn-default" type="button" value="Auftrag Bestätigen">
-                    <input class="position btn btn-default" type="button" value="Auftrag Ablehnen">-->
-                </form>
-                <?php
+                                    <label class="sr-only" for="origin-address">Start-Adresse</label>
+                                    <textarea class="form-control" rows="3" name="origin-address"
+                                    ></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                                        <label for="pickup_time">Abholzeit</label>
+                                        <input type="text" class="form-control" name="pickup_time"
+                                               value="<?php if (isset($_SESSION["pickup_time"])) {
+                                                   echo $_SESSION["pickup_time"];
+                                               } ?>">
+                                    </div>
+                                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                                        <label for="flight_from_to">Flug von/nach</label>
+                                        <input type=" text" class="form-control" name="flight_from_to"
+                                               value="<?php if (isset($_SESSION["flight_from_to"])) {
+                                                   echo $_SESSION["flight_from_to"];
+                                               } ?>">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                                        <label for="transfer_type">Transfer-Typ</label>
+                                        <input type="text" class="form-control" name="transfer_type"
+                                               value="<?php if (isset($_SESSION["transfer_type"])) {
+                                                   echo $_SESSION["transfer_type"];
+                                               } ?>">
+                                    </div>
+                                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                                        <label for="special_needs">Besondere Bedürfnisse</label>
+                                        <input type="text" class="form-control" name="special_needs"
+                                               value="<?php if (isset($_SESSION["special_needs"])) {
+                                                   echo $_SESSION["special_needs"];
+                                               } ?>">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="number_passengers">Anzahl Passagiere</label>
+                                        <input type="text" class="form-control" name="number_passengers"
+                                               value="<?php if (isset($_SESSION["number_passengers"])) {
+                                                   echo $_SESSION["number_passengers"];
+                                               } ?>">
+                                    </div>
+
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="baby_passengers">Anzahl Babys</label>
+                                        <input type="text" class="form-control" name="baby_passengers"
+                                               value="<?php if (isset($_SESSION["baby_passengers"])) {
+                                                   echo $_SESSION["baby_passengers"];
+                                               } ?>">
+                                    </div>
+
+
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="toddler_passengers">Anzahl Kleinkidner</label>
+                                        <input type="text" class="form-control" id="toddler_passengers"
+                                               value="<?php if (isset($_SESSION["toddler_passengers"])) {
+                                                   echo $_SESSION["toddler_passengers"];
+                                               } ?>">
+                                    </div>
+
+
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="kid_passengers">Anzahl Kinder</label>
+                                        <input type="text" class="form-control" name="kid_passengers"
+                                               value="<?php if (isset($_SESSION["kid_passengers"])) {
+                                                   echo $_SESSION["kid_passengers"];
+                                               } ?>">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="destination">Reiseziel:</label>
+                                    <input type="text" class="form-control" name="destination"
+                                           value="<?php if (isset($_SESSION["destination"])) {
+                                               echo $_SESSION["destination"];
+                                           } ?>">
+
+                                    <label class="sr-only" for="destination-address">Reiseziel-Address</label>
+                                    <textarea class="form-control" rows="3" name="destination-address"
+                                    ></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="landing_takeoff_time">Landungs/Abflugszeit</label>
+                                        <input type="text" class="form-control" name="landing_takeoff_time"
+                                               value="<?php if (isset($_SESSION["landing_takeoff_time"])) {
+                                                   echo $_SESSION["landing_takeoff_time"];
+                                               } ?>">
+                                    </div>
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="flight_number">Flugnummer</label>
+                                        <input type="text" class="form-control" name="flight_number"
+                                               value="<?php if (isset($_SESSION["flight_number"])) {
+                                                   echo $_SESSION["flight_number"];
+                                               } ?>">
+                                    </div>
+
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="terminal">Terminal</label>
+                                        <input type="text" class="form-control" name="terminal"
+                                               value="<?php if (isset($_SESSION["terminal"])) {
+                                                   echo $_SESSION["terminal"];
+                                               } ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone_passenger">Telefon des Passagiers</label>
+                                    <input type="text" class="form-control" name="phone_passenger"
+                                           value="<?php if (isset($_SESSION["phone_passenger"])) {
+                                               echo $_SESSION["phone_passenger"];
+                                           } ?>">
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="suitcase_big">Koffer Gross</label>
+                                        <input type="text" class="form-control" name="suitcase_big"
+                                               value="<?php if (isset($_SESSION["suitcase_big"])) {
+                                                   echo $_SESSION["suitcase_big"];
+                                               } ?>">
+                                    </div>
+
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="suitcase_medium">Koffer Medium</label>
+                                        <input type="text" class="form-control" name="suitcase_medium"
+                                               value="<?php if (isset($_SESSION["suitcase_medium"])) {
+                                                   echo $_SESSION["suitcase_medium"];
+                                               } ?>">
+                                    </div>
+
+                                    <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                        <label for="suitcase_small">Koffer Klein</label>
+                                        <input type="text" class="form-control" name="suitcase_small"
+                                               value="<?php if (isset($_SESSION["suitcase_small"])) {
+                                                   echo $_SESSION["suitcase_small"];
+                                               } ?>">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                                        <label for="ski_snowboard">Ski / Snowboard</label>
+                                        <input type="text" class="form-control" name="ski_snowboard"
+                                               value="<?php if (isset($_SESSION["ski_snowboard"])) {
+                                                   echo $_SESSION["ski_snowboard"];
+                                               } ?>">
+                                    </div>
+
+
+                                    <div class="form-group col-sm-6 col-md-6 col-lg-6">
+                                        <label for="other_luggage">Anderes Gepäck</label>
+                                        <input type="text" class="form-control" name="other_luggage"
+                                               value="<?php if (isset($_SESSION["other_luggage"])) {
+                                                   echo $_SESSION["other_luggage"];
+                                               } ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comments">Kommentar</label>
+                                    <textarea class="form-control" rows="3" name="comments"
+                                              value="<?php if (isset($_SESSION["comments"])) {
+                                                  echo $_SESSION["comments"];
+                                              } ?>"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accept_link">Link um Antrag anzunehmen</label>
+                                    <input type="text" class="form-control" name="accept_link"
+                                           value="<?php if (isset($_SESSION["accept_link"])) {
+                                               echo $_SESSION["accept_link"];
+                                           } ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="decline_link">Link um Antrag abzulehnen</label>
+                                    <input type="text" class="form-control" name="decline_link"
+                                           value="<?php if (isset($_SESSION["decline_link"])) {
+                                               echo $_SESSION["decline_link"];
+                                           } ?>">
+                                </div>
+
+                            </div>
+                        </div>
+                        <input class="position btn btn-default" type="submit" name="add" id="add"
+                               value="Änderungen Speichern">
+
+
+                    </form>
+                    <?php
                 }
                 ?>
 
@@ -416,7 +500,7 @@ other_luggage, comments, accept_link, decline_link, hotel_fs, driver_fs, vehicle
         <footer class="navbar navbar-default navbar-fixed-bottom">
             <div class="container">
                 <nav class="nav navbar-nav">
-                    <p>&copy; 2016 ATAP</p>
+                    <p>&copy; 2017 ATAP</p>
                 </nav>
                 <nav class="nav navbar-nav navbar-right">
                     <a class="bot" href="#">Sitemap</a>
