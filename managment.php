@@ -94,7 +94,8 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                     <div class="row">
                         <?php
                         include_once 'includes/destinationRow.php';
-                        include_once 'includes/partnerRow.php'
+                        include_once 'includes/partnerRow.php';
+                        include_once 'includes/hotelRow.php';
                         ?>
                     </div>
                 </div>
