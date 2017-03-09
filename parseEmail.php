@@ -55,8 +55,7 @@ $terminal;
 
 $allContractors = Array();
 $i = 0;
-
-$wholeEmail = explode("\n", $_POST["emailInsertWindow"]);
+$wholeEmail = $_POST["email_subject"] . "\n" . explode("\n", $_POST["emailInsertWindow"]);
 
 $sql = "SELECT contractor FROM task_entry";
 $result = $connection->query($sql);
@@ -130,6 +129,10 @@ if($contractor != ""){
 //            $tempValue = preg_replace('/\s+/', '', $tempValue);
 //            $_SESSION["project_number"] = ltrim(preg_replace('/(?<!\ )[A-Z]/', ' $0', $tempValue));
 //        }
+        if(strpos($row, "Booking ") !== false){
+            $tempValue = substr($row, strpos($row, ":") + 1);
+            $_SESSION["project_number"] = $tempValue;
+        }
         if(strpos($row, $accept_link) !== false){
             $tempValue = substr($row, strpos($row, ":") + 1);
             $_SESSION["accept_link"] = $tempValue;
