@@ -100,31 +100,23 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         if (!get_magic_quotes_gpc()) {
 
                             $destination = addslashes($_POST["destination"]);
-                            $spec_mount = addslashes($_POST['spec_mount']);
-                            $country = addslashes($_POST['country']);
                             $region = addslashes($_POST['region']);
                             $typ = addslashes($_POST['typ']);
                             $route_from_zrh = addslashes($_POST['route_from_zrh']);
                             $route_from_bsl = addslashes($_POST['route_from_bsl']);
                             $route_from_alt = addslashes($_POST['route_from_alt']);
-                            $served_by = addslashes($_POST['served_by']);
-                            $mount_web = addslashes($_POST['mount_web']);
-                            $mount_preis = addslashes($_POST['mount_preis']);
-                            $mount_info = addslashes($_POST['mount_info']);
-                            var_dump($_POST['destination']);
+                            $suntransfers = addslashes($_POST['suntransfers']);
+                            $foxtravels = addslashes($_POST['foxtravels']);
                         } else {
                             $destination = $_POST["destination"];
-                            $spec_mount = $_POST['spec_mount'];
-                            $country = $_POST['country'];
+
                             $region = $_POST['region'];
                             $typ = $_POST['typ'];
                             $route_from_zrh = $_POST['route_from_zrh'];
                             $route_from_bsl = $_POST['route_from_bsl'];
                             $route_from_alt = $_POST['route_from_alt'];
-                            $served_by = $_POST['served_by'];
-                            $mount_web = $_POST['mount_web'];
-                            $mount_preis = $_POST['mount_preis'];
-                            $mount_info = $_POST['mount_info'];
+                            $suntransfers = $_POST['suntransfers'];
+                            $foxtravels = $_POST['foxtravels'];
                         }
 
                         $distance_from_zrh = $_POST['distance_from_zrh'];
@@ -136,20 +128,22 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $traffic_jam_surcharge = $_POST['traffic_jam_surcharge'];
                         $search_on_site = $_POST['search_on_site'];
                         $breaks = $_POST['breaks'];
+                        $country = $_POST['country'];
 
 
+                        $maut_auswahl = 1;
+                        $region = 1;
 
-                        $sql = "INSERT INTO destinations (destination, spec_mount, country, region, typ, distance_from_zrh, distance_from_bsl, distance_from_alt, route_from_zrh,
-                        route_from_bsl, route_from_alt,  time_zrh, time_bsl, time_alt, served_by, mount_web, mount_preis, mount_info, traffic_jam_surcharge, search_on_site, 
-                        breaks) VALUES ('$destination', '$spec_mount', '$country', '$region', '$typ', '$distance_from_zrh',
-                        '$distance_from_bsl', '$distance_from_alt', '$route_from_zrh', '$route_from_bsl', '$route_from_alt', '$time_zrh', '$time_bsl', '$time_alt', '$served_by', '$mount_web', '$mount_preis',
-                        '$mount_info', '$traffic_jam_surcharge', '$search_on_site', '$breaks')";
 
-                        $sql1 = "INSERT INTO test (destination) VALUES ('$destination')";
+                        $sql = "INSERT INTO destinations (destination, , country_fs, region_fs, dist_from_zrh, dist_from_bsl, dist_from_alt, route_from_zrh,
+                        route_from_bsl, route_from_alt,  time_zrh, time_bsl, time_alt, breaks,  traffic_jam_surcharge, search_at_place, type, maut_fs, 
+                        suntransfers, foxtravels) VALUES ('$destination', '$country', '$region', , '$distance_from_zrh',
+                        '$distance_from_bsl', '$distance_from_alt', '$route_from_zrh', '$route_from_bsl', '$route_from_alt', '$time_zrh', '$time_bsl', '$time_alt',
+                          '$breaks','$traffic_jam_surcharge','$search_on_site', '$typ', '$maut_auswahl','$suntransfers', '$foxtravels')";
 
-                        mysqli_select_db($dbname,$connection);
+                        mysqli_select_db($dbname, $connection);
 
-                        $retval = mysqli_query($sql, $connection);
+                        $retval = mysqli_query($connection, $sql);
 
                         if (!$retval) {
                             die('could not enter date: ' . mysqli_error($connection));
@@ -177,22 +171,28 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                     <input type="text" class="form-control" name="destination">
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="spec_mount">Special Mount</label><br>
-                                    <input type="text" class="form-control" name="spec_mount" placeholder="?">
+                                    <label for="country">Land</label><br>
+                                    <select class="form-control" name="country">
+                                        <option value="1">Schweiz</option>
+                                        <option value="2">Deutschland</option>
+                                        <option value="3">Österreich</option>
+                                        <option value="4">Frankreich</option>
+                                        <option value="5">Italien</option>
+                                        <option value="6">Lichtenstein</option>
+                                    </select>
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="country">Land</label><br>
-                                    <input type="text" class="form-control" name="country" placeholder="Schweiz">
+                                    <label for="region">Region</label><br>
+                                    <input type="text" class="form-control" name="region" placeholder="Graubünden">
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="region">Region</label><br>
-                                <input type="text" class="form-control" name="region" placeholder="Graubünden">
                             </div>
                             <div class="form-group">
                                 <label for="typ">Typ</label><br>
                                 <input type="text" class="form-control" name="typ" placeholder="?">
+                            </div>
+                            <div class="form-group">
+                                <label for="maut_auswahl">Benötigtes Maut. (drop down Menu)</label><br>
+                                <input type="text" class="form-control" name="maut_auswahl">
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -238,34 +238,25 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="traffic_jam_surcharge">Stau Zuschlag</label><br>
+                                    <input type="text" class="form-control" name="traffic_jam_surcharge"
+                                           placeholder="5.- / h">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="search_on_site">Suche vor Ort</label><br>
+                                    <input type="text" class="form-control" name="search_on_site" placeholder="?">
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="breaks">Pausen</label><br>
+                                    <input type="text" class="form-control" name="breaks" placeholder="Zeit">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="served_by">Served by</label><br>
-                                <input type="text" class="form-control" name="served_by" placeholder="?">
-                            </div>
-                            <div class="form-group">
-                                <label for="mount_web">Maut Web?</label><br>
-                                <input type="text" class="form-control" name="mount_web" placeholder="?">
-                            </div>
-                            <div class="form-group">
-                                <label for="mount_preis">Maut Preis</label><br>
-                                <input type="text" class="form-control" name="mount_preis" placeholder="20fr">
-                            </div>
-                            <div class="form-group">
-                                <label for="mount_info">Maut Info</label><br>
-                                <input type="text" class="form-control" name="mount_info" placeholder="Info">
-                            </div>
-                            <div class="form-group">
-                                <label for="traffic_jam_surcharge">Stau Zuschlag</label><br>
-                                <input type="text" class="form-control" name="traffic_jam_surcharge"
-                                       placeholder="5.- / h">
-                            </div>
-                            <div class="form-group">
-                                <label for="search_on_site">search on site</label><br>
-                                <input type="text" class="form-control" name="search_on_site" placeholder="?">
-                            </div>
-                            <div class="form-group">
-                                <label for="breaks">Pausen</label><br>
-                                <input type="text" class="form-control" name="breaks" placeholder="Zeit">
+                                <input type="checkbox" name="suntransfers" value="TRUE">Suntransfers<br>
+                                <input type="checkbox" name="foxtravels" value="TRUE">Foxtravels<br>
                             </div>
                             <input name="add" type="submit" id="add"
                                    value="Add Destination">
