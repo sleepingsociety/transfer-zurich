@@ -18,7 +18,7 @@ body {
 section {
   width: 340px;
   background: #ecf0f1;
-  padding: 0px 30px 30px 30px;
+  padding: 0 30px 30px 30px;
   margin: 120px auto;
   text-align: center;
   border-radius: 5px;
@@ -126,4 +126,16 @@ p {
 
 .forgot-pw {
   display: block;
+}
+
+#about {
+  background-color: white;
+  margin: 20px;
+  border-radius: 5px;
+  box-shadow: 4px 4px 2px #888888;
+
+  p {
+    color: black;
+    text-align: left;
+  }
 }

@@ -65,7 +65,8 @@ CREATE TABLE task_entry (
   landing_takeoff_time varchar(45) DEFAULT NULL,
   flight_from_to varchar(20) DEFAULT NULL,
   flightnumber varchar(45) DEFAULT NULL,
-  terminal varchar(45) DEFAULT NULL
+  terminal varchar(45) DEFAULT NULL,
+  email TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS maut;
