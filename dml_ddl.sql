@@ -30,9 +30,10 @@ CREATE TABLE partner (
 DROP TABLE IF EXISTS country;
 CREATE TABLE country (
   country_id INTEGER NOT NULL AUTO_INCREMENT,
-  country VARCHAR(100) NOT NULL UNIQUE,
-  short VARCHAR(10) NOT NULL UNIQUE,
-  PRIMARY KEY (country_id)
+  country VARCHAR(100) NOT NULL,
+  short VARCHAR(10) NOT NULL,
+  PRIMARY KEY (country_id),
+  CONSTRAINT UC_country UNIQUE (country,short)
 );
 
 DROP TABLE IF EXISTS task_entry;
@@ -253,6 +254,12 @@ INSERT INTO type (type_name) VALUE ('City'), ('Resort');
  */
 
 /* Alle Regionen
+  region_id INTEGER NOT NULL AUTO_INCREMENT,
+  region VARCHAR(50) NOT NULL,
+  country_fs INTEGER NOT NULL,
+
+
+INSERT INTO region (region, country_fs) VALUES ()
 
 Berneroberland
 Tessin

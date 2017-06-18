@@ -98,6 +98,11 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         include_once 'includes/hotelRow.php';
                         ?>
                     </div>
+                    <div class="row">
+                        <?php
+                        include_once 'includes/countryRegionRow.php';
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

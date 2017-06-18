@@ -1,3 +1,17 @@
+/* Open when someone clicks on the span element */
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
+
+/* Close when someone clicks on the "x" symbol inside the overlay */
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
+
+
+
+
+
 var drivers = [{name:"Dominik O'Kerwin", license:"B", timeLeft:"9:00"},
     {name:"David Kalchofner", license:"B", timeLeft:"9:00"},
     {name:"Lukas Auriquio", license:"BE", timeLeft:"9:00"},
