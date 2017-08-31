@@ -87,14 +87,12 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
 
         <div class="pageContent row">
+
             <div class="col-md-6">
+
                 <?php
 
-
-                // use exec() because no results are returned
-
                 if (isset($_POST["saveCountry"])) {
-
 
                     if (!get_magic_quotes_gpc()) {
 
@@ -106,13 +104,10 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $short = $_POST["short"];
                     }
 
-
                     $sqlCountry = "INSERT INTO country (country, short) VALUES ('$country', '$short')";
 
 
-                    $sqlRegion = "INSERT INTO region (region, country_fs) VALUES ('$region', '$country_fs')";
-
-                    mysqli_select_db($dbname, $connection);
+                    mysqli_select_db($connection, $dbname);
 
                     $retval = mysqli_query($connection, $sqlCountry);
 
@@ -122,18 +117,16 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                     echo "Entered data successfully\n";
 
-                    if (mysqli_query($connection, $sqlCountry)) {
+            /*        if (mysqli_query($connection, $sqlCountry)) {
                         echo "New record created successfully";
 
                     } else {
                         echo "Error: " . $sqlCountry . "<br>" . mysqli_error($connection);
-                    }
+                    }*/
 
-
-                } else {
+                }
                 ?>
 
-                <!---  ////////////////////////// -->
                 <h1>Add new Country</h1>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="row">
@@ -146,17 +139,17 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                             <input type="text" class="form-control" name="short">
                         </div>
                     </div>
-                    <div id="saveEditsButton">
-                        <button name="saveCountry" class="btn btn-default" type="submit" value="saveEdits">Speichern
-                        </button>
-                    </div>
+                    <button name="saveCountry" class="btn btn-default" type="submit" value="saveCountry">Speichern
+                    </button>
 
                 </form>
 
-
             </div>
 
-            <? } ?>
+            <!--
+                SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+
+            -->
 
             <div class="col-md-6">
                 <h1>Edit Countrys</h1>
@@ -181,8 +174,37 @@ if (!$_SESSION["login"]) header('Location: /index.php');
             </div>
         </div>
 
+        <?php
 
-        <!---  ////////////////////////// -->
+        if (isset($_POST["saveRegions"])) {
+
+            if (!get_magic_quotes_gpc()) {
+
+                $country_fs = addslashes($_POST["country_fs"]);
+                $region = addslashes($_POST["region"]);
+
+            } else {
+                $country_fs = $_POST["country_fs"];
+                $region = $_POST["region"];
+            }
+
+            $sqlRegion = "INSERT INTO region (region, country_fs) VALUES ('$region', '$country_fs')";
+
+
+            mysqli_select_db($connection, $dbname);
+
+            $retval = mysqli_query($connection, $sqlRegion);
+
+            if (!$retval) {
+                die('could not enter date: ' . mysqli_error($connection));
+            }
+
+            echo "Entered data successfully\n";
+
+
+        }
+        ?>
+
         <div class="pageContent row">
             <div class="col-md-6">
                 <h1>Add new Region</h1>
@@ -195,7 +217,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
                             <label for="country">Land</label><br>
-                            <select class="form-control" name="country">
+                            <select class="form-control" name="country_fs">
                                 <?php
                                 $selectCountryQuery = "SELECT country_id, country FROM country";
 
@@ -215,6 +237,12 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                 </form>
             </div>
+
+
+            <!--
+            SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+
+            -->
 
             <div class="col-md-6 col-sm-6 col-lg-6">
                 <h1>Edit Regions</h1>

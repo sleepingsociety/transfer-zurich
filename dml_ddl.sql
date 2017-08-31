@@ -32,8 +32,7 @@ CREATE TABLE country (
   country_id INTEGER NOT NULL AUTO_INCREMENT,
   country VARCHAR(100) NOT NULL,
   short VARCHAR(10) NOT NULL,
-  PRIMARY KEY (country_id),
-  CONSTRAINT UC_country UNIQUE (country,short)
+  PRIMARY KEY (country_id)
 );
 
 DROP TABLE IF EXISTS task_entry;
