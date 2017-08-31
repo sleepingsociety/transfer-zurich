@@ -30,8 +30,8 @@ CREATE TABLE partner (
 DROP TABLE IF EXISTS country;
 CREATE TABLE country (
   country_id INTEGER NOT NULL AUTO_INCREMENT,
-  country VARCHAR(100) NOT NULL UNIQUE,
-  short VARCHAR(10) NOT NULL UNIQUE,
+  country VARCHAR(100) NOT NULL,
+  short VARCHAR(10) NOT NULL,
   PRIMARY KEY (country_id)
 );
 
@@ -65,7 +65,8 @@ CREATE TABLE task_entry (
   landing_takeoff_time varchar(45) DEFAULT NULL,
   flight_from_to varchar(20) DEFAULT NULL,
   flightnumber varchar(45) DEFAULT NULL,
-  terminal varchar(45) DEFAULT NULL
+  terminal varchar(45) DEFAULT NULL,
+  email TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS maut;
@@ -252,6 +253,12 @@ INSERT INTO type (type_name) VALUE ('City'), ('Resort');
  */
 
 /* Alle Regionen
+  region_id INTEGER NOT NULL AUTO_INCREMENT,
+  region VARCHAR(50) NOT NULL,
+  country_fs INTEGER NOT NULL,
+
+
+INSERT INTO region (region, country_fs) VALUES ()
 
 Berneroberland
 Tessin

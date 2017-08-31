@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="96a1478b-efb3-49fb-ba7f-dc4336f6bf43" name="transfer-zurich" url="http://daka01.snowflakehosting.ch">
-        <fileTransfer host="daka01.snowflakehosting.ch" port="22" privateKey="C:\Users\David\Documents\key\privat_key_openssh" rootFolder="/home/transferzurich/www" accessType="SFTP" keyPair="true">
+      <webServer id="eb6d95a4-a1a8-4d20-aec5-7093e6e129da" name="Default Transfer Zürich" url="http://daka01.snowflakehosting.ch">
+        <fileTransfer host="daka01.snowflakehosting.ch" port="22" privateKey="$USER_HOME$/Documents/key/privat_key_openssh" rootFolder="/home/transferzurich/www" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

@@ -104,31 +104,30 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                             $typ = addslashes($_POST['typ']);
                             $route_from_zrh = addslashes($_POST['route_from_zrh']);
                             $route_from_bsl = addslashes($_POST['route_from_bsl']);
-                            $route_from_alt = addslashes($_POST['route_from_alt']);
                             $suntransfers = addslashes($_POST['suntransfers']);
                             $foxtravels = addslashes($_POST['foxtravels']);
                         } else {
                             $destination = $_POST["destination"];
-
                             $region = $_POST['region'];
                             $typ = $_POST['typ'];
                             $route_from_zrh = $_POST['route_from_zrh'];
                             $route_from_bsl = $_POST['route_from_bsl'];
-                            $route_from_alt = $_POST['route_from_alt'];
                             $suntransfers = $_POST['suntransfers'];
                             $foxtravels = $_POST['foxtravels'];
                         }
 
                         $distance_from_zrh = $_POST['distance_from_zrh'];
                         $distance_from_bsl = $_POST['distance_from_bsl'];
-                        $distance_from_alt = $_POST['distance_from_alt'];
                         $time_zrh = $_POST['time_zrh'];
                         $time_bsl = $_POST['time_bsl'];
-                        $time_alt = $_POST['time_alt'];
                         $traffic_jam_surcharge = $_POST['traffic_jam_surcharge'];
                         $search_on_site = $_POST['search_on_site'];
                         $breaks = $_POST['breaks'];
                         $country = $_POST['country'];
+
+                        $distance_from_alt = "";
+                        $time_alt = "";
+                        $route_from_alt = "";
 
 
                         $maut_auswahl = 1;
@@ -171,14 +170,20 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                     <input type="text" class="form-control" name="destination">
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
+
                                     <label for="country">Land</label><br>
                                     <select class="form-control" name="country">
-                                        <option value="1">Schweiz</option>
-                                        <option value="2">Deutschland</option>
-                                        <option value="3">Österreich</option>
-                                        <option value="4">Frankreich</option>
-                                        <option value="5">Italien</option>
-                                        <option value="6">Lichtenstein</option>
+                                        <?php
+                                        $selectCountryQuery = "SELECT country_id, country FROM country";
+
+                                        $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
+
+                                        $country_id = $selectCountryRow['country_id'];
+
+                                        while($selectCountryRow = mysqli_fetch_array($selectCountryResult)) {
+                                            echo "<option value=" .$selectCountryRow['country_id']. ">" . $selectCountryRow['country']. "</option>";
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -222,6 +227,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                     <input type="file" class="form-control" name="route_from_alt" placeholder="Bild">
                                 </div>
                             </div>
+
 
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -285,3 +291,4 @@ if (!$_SESSION["login"]) header('Location: /index.php');
     </div>
 </div>
 </body>
+</html>
