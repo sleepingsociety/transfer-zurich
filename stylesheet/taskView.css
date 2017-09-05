@@ -248,14 +248,14 @@ body, #pageContainer {
     margin: auto;
 }
 
-div#vehicleRow, div#usersRow, div#destinationRow, div#profilRow, div#adminPolicy, div#technicalLeaderPolicy, div#dispoPolicy, div#driverPolicy {
+div#vehicleRow,div#countryRegionRow, div#usersRow, div#destinationRow, div#profilRow, div#hotelrow div#adminPolicy, div#technicalLeaderPolicy, div#dispoPolicy, div#driverPolicy {
     margin-top: 30px;
 
 }
 
-div#vehicleRow div, div#usersRow div, div#destinationRow, div#profilRow div, div#adminPolicy div, div#technicalLeaderPolicy div, div#dispoPolicy div, div#driverPolicy div {
+div#vehicleRow div, div#usersRow div ,div#countryRegionRow div, div#destinationRow, div#profilRow div, div#adminPolicy div, div#technicalLeaderPolicy div, div#dispoPolicy div, div#driverPolicy div {
     background-color: white;
-    padding: 15px 0px;
+    padding: 15px 0;
 }
 
 #managmentRows p, #managmentRows h4, #managmentRows h3, #policyCol p, #policyCol h4, #policyCol h3{
