@@ -30,7 +30,7 @@ CREATE TABLE partner (
 DROP TABLE IF EXISTS country;
 CREATE TABLE country (
   country_id INTEGER NOT NULL AUTO_INCREMENT,
-  country VARCHAR(100) NOT NULL,
+  country VARCHAR(100) UNIQUE NOT NULL,
   short VARCHAR(10) NOT NULL,
   PRIMARY KEY (country_id)
 );
