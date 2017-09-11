@@ -140,47 +140,57 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
             <?php
             // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
-            $getCountryId = "SELECT country_id FROM country";
+            $getCountryId = "SELECT country_id, country FROM country";
             $getCountryIdResult = mysqli_query($connection, $getCountryId) or die (mysqli_error($connection));
-
-            /*     $data = array(); // create a variable to hold the information
-                      while (($row = mysqli_fetch_array($getCountryIdResult)) !== false){
-                 $data[] = $row; // add the row in to the results (data) array
-             }*/
-            $ids_array[] = array();
-
             ?>
 
             <div class="col-md-6">
                 <h1>Edit Countrys</h1>
+
                 <?php
 
-                /*
-                 *     <h1>
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                                        </button>
-                                        Edit Destinations
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                        </button>
-                                    </h1>
-                 */
-                ?>
-                <label for="country">ID</label><br>
-                <select class="form-control" name="country_fs">
-                    <?php
-                    while ($row = mysqli_fetch_array($getCountryIdResult)) {
-                        echo "<option value=" . $row['country_id'] . ">" . $row['country_id'] . "</option>";
+                if (isset($_POST["saveCountryEdits"])) {
+
+                    if (!get_magic_quotes_gpc()) {
+
+                        $country_ID = addslashes($_POST["country_id"]);
+
+                    } else {
+                        $country_ID = $_POST["country_id"];
                     }
-                    ?>
-                </select>
-                <?php
-                $countryID = 0;
-                $sqltest = "SELECT country, short FROM country WHERE country_id = 1";
-                $sqltestResult = mysqli_query($connection, $sqltest) or die (mysqli_error($connection));
 
-               while ($row = mysqli_fetch_array($sqltestResult)) {
+                }
+                ?>
+
+                <form method="post" action=" <?php echo $_SERVER['PHP_SELF']; ?> ">
+
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <label for="country">ID</label><br>
+                            <select class="form-control" name="country_id">
+                                <?php
+                                while ($row = mysqli_fetch_array($getCountryIdResult)) {
+                                    echo "<option value=" . $row['country_id'] . ">" . $row['country'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div id="confirmCountryButton" class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <button name="saveCountryEdits" class="btn btn-default" type="submit" value="saveEdits">
+                                Auswählen
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                </form>
+                <?php
+                $getCountryAndShort = "SELECT country, short FROM country WHERE country_id = $country_ID";
+                $getCountryAndShortResult = mysqli_query($connection, $getCountryAndShort) or die (mysqli_error($connection));
+
+                while ($row = mysqli_fetch_array($getCountryAndShortResult)) {
                     ?>
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
