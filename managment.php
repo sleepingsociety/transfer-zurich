@@ -85,22 +85,23 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                 <div id="managmentRows" class="container-fluid">
                     <div class="row">
                         <?php
-                        include_once 'includes/vehicleRow.php';
-                        include_once 'includes/profileRow.php';
-                        include_once 'includes/usersRow.php';
+                        include_once 'includes/managementPage/vehicleRow.php';
+                        include_once 'includes/managementPage/profileRow.php';
+                        include_once 'includes/managementPage/usersRow.php';
 
                         ?>
                     </div>
                     <div class="row">
                         <?php
-                        include_once 'includes/destinationRow.php';
-                        include_once 'includes/partnerRow.php';
-                        include_once 'includes/hotelRow.php';
+                        include_once 'includes/managementPage/destinationRow.php';
+                        include_once 'includes/managementPage/countryRegionRow.php';
+                        include_once 'includes/managementPage/hotelRow.php';
                         ?>
                     </div>
                     <div class="row">
                         <?php
-                        include_once 'includes/countryRegionRow.php';
+                        include_once 'includes/managementPage/partnerRow.php';
+                        include_once 'includes/managementPage/mautRow.php';
                         ?>
                     </div>
                 </div>

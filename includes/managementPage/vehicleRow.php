@@ -13,6 +13,6 @@
             ihre Informationen bearbeiten.
         </p>
         <br>
-        <button class="btn btn-default" onClick="changePage('Vehiclemanagment.php')">Zur Fahrzeugverwaltung</button>
+        <button class="btn btn-default" onClick="changePage('/sites/managementSites/Vehiclemanagment.php')">Zur Fahrzeugverwaltung</button>
     </div>
 </div>

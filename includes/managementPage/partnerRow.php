@@ -10,6 +10,6 @@ In diesem Abschnitt können die Destinations verwaltet werden.
 Sie können neue hinzufügen oder alte ansehen und bearbeiten.
         </p>
         <br>
-        <button class="btn btn-default" onClick="changePage('partner.php')">Zur Partnerverwaltung</button>
+        <button class="btn btn-default" onClick="changePage('/sites/managementSites/partner.php')">Zur Partnerverwaltung</button>
     </div>
 </div>

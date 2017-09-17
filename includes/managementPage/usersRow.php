@@ -12,6 +12,6 @@
 
         </p>
         <br>
-        <button class="btn btn-default" onClick="changePage('Usermanagment.php')">Zur Benutzerverwaltung</button>
+        <button class="btn btn-default" onClick="changePage('/sites/managementSites/Usermanagment.php')">Zur Benutzerverwaltung</button>
     </div>
 </div>

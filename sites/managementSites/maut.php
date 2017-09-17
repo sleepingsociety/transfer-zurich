@@ -43,7 +43,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="javascript/loginPage.js" type="text/javascript"></script>
+    <script src="../../javascript/loginPage.js" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
             createUsers();
@@ -51,8 +51,8 @@ if (!$_SESSION["login"]) header('Location: /index.php');
     </script>
 
 
-    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../../stylesheet/taskView.css">
 
 
 </head>
@@ -73,12 +73,12 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         </button>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <a href="adminOverview.php"><img src="img/atap-logo.png" class="img-nav img-responsive"
-                                                         id="imgLogo"></a>
+                        <a href="../../adminOverview.php"><img src="../../img/atap-logo.png" class="img-nav img-responsive"
+                                                               id="imgLogo"></a>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                            <li class="active"><a href="managment.php">Verwaltung</a></li>
-                            <li><a href="logout.php">Logout</a></li>
+                            <li><a href="../../adminOverview.php">Auftragsverwaltung</a></li>
+                            <li class="active"><a href="../../managment.php">Verwaltung</a></li>
+                            <li><a href="../../logout.php">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -89,7 +89,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
         <div class="pageContent row">
 
             <div class="col-md-6">
-
                 <?php
 
                 if (isset($_POST["saveCountry"])) {
@@ -117,13 +116,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                     echo "Entered data successfully\n";
 
-            /*        if (mysqli_query($connection, $sqlCountry)) {
-                        echo "New record created successfully";
-
-                    } else {
-                        echo "Error: " . $sqlCountry . "<br>" . mysqli_error($connection);
-                    }*/
-
                 }
                 ?>
 
@@ -146,31 +138,84 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
             </div>
 
-            <!--
-                SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
-
-            -->
+            <?php
+            // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+            $getCountryId = "SELECT country_id, country FROM country";
+            $getCountryIdResult = mysqli_query($connection, $getCountryId) or die (mysqli_error($connection));
+            ?>
 
             <div class="col-md-6">
                 <h1>Edit Countrys</h1>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+                <?php
+                $country_ID = 1;
+                if (isset($_POST["confirmCountryButton"])) {
+
+                    if (!get_magic_quotes_gpc()) {
+
+                        $country_ID = addslashes($_POST["country_id"]);
+
+                    } else {
+                        $country_ID = $_POST["country_id"];
+                    }
+
+                }
+                ?>
+
+                <form method="post" action=" <?php echo $_SERVER['PHP_SELF']; ?> ">
+
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="countryEdit">Land</label><br>
-                            <input type="text" class="form-control" name="countryEdit">
+                            <label for="country">ID</label><br>
+                            <select class="form-control" name="country_id">
+                                <?php
+                                while ($row = mysqli_fetch_array($getCountryIdResult)) {
+                                    echo "<option value=" . $row['country_id'] . ">" . $row['country'] . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
 
-                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="shortEdit">Kürzel</label><br>
-                            <input type="text" class="form-control" name="shortEdit">
+                        <div id="confirmCountryButton" class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <button name="confirmCountryButton" class="btn btn-default" type="submit" value="saveEdits">
+                                Auswählen
+                            </button>
                         </div>
+
                     </div>
-                    <div id="saveEditsButton">
-                        <button name="saveCountryEdits" class="btn btn-default" type="submit" value="saveEdits">
-                            Speichern
-                        </button>
-                    </div>
+
+
                 </form>
+                <?php
+                $getCountryAndShort = "SELECT country, short FROM country WHERE country_id = $country_ID";
+                $getCountryAndShortResult = mysqli_query($connection, $getCountryAndShort) or die (mysqli_error($connection));
+
+                while ($row = mysqli_fetch_array($getCountryAndShortResult)) {
+                    ?>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="countryEdit">Land</label><br>
+                                <input type="text" value="<?php echo $row['country']; ?>" class="form-control"
+                                       name="countryEdit">
+                            </div>
+
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="shortEdit">Kürzel</label><br>
+                                <input type="text" value="<?php echo $row['short']; ?>" class="form-control"
+                                       name="shortEdit">
+                            </div>
+                        </div>
+                        <div id="saveEditsButton">
+                            <button name="saveCountryEdits" class="btn btn-default" type="submit" value="saveEdits">
+                                Speichern
+                            </button>
+                        </div
+                    </form>
+                    <?php
+                }
+                ?>
             </div>
         </div>
 
@@ -201,82 +246,8 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
             echo "Entered data successfully\n";
 
-
         }
         ?>
-
-        <div class="pageContent row">
-            <div class="col-md-6">
-                <h1>Add new Region</h1>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <div class="row">
-                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="region">Region</label><br>
-                            <input type="text" class="form-control" name="region">
-                        </div>
-                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
-
-                            <label for="country">Land</label><br>
-                            <select class="form-control" name="country_fs">
-                                <?php
-                                $selectCountryQuery = "SELECT country_id, country FROM country";
-
-                                $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
-
-                                while ($selectCountryRow = mysqli_fetch_array($selectCountryResult)) {
-                                    echo "<option value=" . $selectCountryRow['country_id'] . ">" . $selectCountryRow['country'] . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="saveEditsButton">
-                        <button name="saveRegions" class="btn btn-default" type="submit" value="saveEdits">Speichern
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-
-
-            <!--
-            SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
-
-            -->
-
-            <div class="col-md-6 col-sm-6 col-lg-6">
-                <h1>Edit Regions</h1>
-                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                    <div class="row">
-                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="region">Region</label><br>
-                            <input type="text" class="form-control" name="region">
-                        </div>
-                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
-
-                            <label for="country">Land</label><br>
-                            <select class="form-control" name="country">
-                                <?php
-                                $selectCountryQuery = "SELECT country_id, country FROM country";
-
-                                $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
-
-                                while ($selectCountryRow = mysqli_fetch_array($selectCountryResult)) {
-                                    echo "<option value=" . $selectCountryRow['country_id'] . ">" . $selectCountryRow['country'] . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="saveEditsButton">
-                        <button name="saveRegionEdits" class="btn btn-default" type="submit" value="saveEdits">
-                            Speichern
-                        </button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
 
     </div>
 </div>
