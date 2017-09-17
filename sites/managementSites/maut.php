@@ -73,7 +73,8 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         </button>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <a href="../../adminOverview.php"><img src="../../img/atap-logo.png" class="img-nav img-responsive"
+                        <a href="../../adminOverview.php"><img src="../../img/atap-logo.png"
+                                                               class="img-nav img-responsive"
                                                                id="imgLogo"></a>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="../../adminOverview.php">Auftragsverwaltung</a></li>
@@ -95,20 +96,36 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                     if (!get_magic_quotes_gpc()) {
 
-                        $country = addslashes($_POST["country"]);
-                        $short = addslashes($_POST["short"]);
+                        $maut_strecke = addslashes($_POST["maut_strecke"]);
+                        $bemerkung = addslashes($_POST["bemerkung"]);
+                        $preisSaisonPw = addslashes($_POST["preis_saison_pw"]);
+                        $preisOhneSaisonPw = addslashes($_POST["preise_ohne_saison_pw"]);
+                        $preisSaisonBus = addslashes($_POST["preis_saison_bus"]);
+                        $preisOhneSaisonBus = addslashes($_POST["preis_ohne_saison_bus"]);
+                        $preisSaisonAnhaenger = addslashes($_POST["preis_saison_anhaenger"]);
+                        $preisOhneSaisonAnhaenger = addslashes($_POST["preis_ohen_saison_anhaenger"]);
 
                     } else {
-                        $country = $_POST["country"];
-                        $short = $_POST["short"];
+                        $maut_strecke = $_POST["maut_strecke"];
+                        $bemerkung = $_POST["bemerkung"];
+                        $preisSaisonPw = $_POST["preis_saison_pw"];
+                        $preisOhneSaisonPw = $_POST["preise_ohne_saison_pw"];
+                        $preisSaisonBus = $_POST["preis_saison_bus"];
+                        $preisOhneSaisonBus = $_POST["preis_ohne_saison_bus"];
+                        $preisSaisonAnhaenger = $_POST["preis_saison_anhaenger"];
+                        $preisOhneSaisonAnhaenger = $_POST["preis_ohen_saison_anhaenger"];
+
                     }
 
-                    $sqlCountry = "INSERT INTO country (country, short) VALUES ('$country', '$short')";
+                    $sqlInsertNewMaut = "INSERT INTO maut (maut_strecke, maut_preis_saison_pw, maut_preis_ohne_saison_pw, maut_preis_saison_bus, 
+                    maut_preis_ohne_saison_bus, maut_preis_saison_bus_anhaenger, maut_preis_ohne_saison_bus_anhaenger, maut_bemerkung) 
+                    VALUES ('$maut_strecke', '$preisSaisonPw', '$preisOhneSaisonPw', '$preisSaisonBus', '$preisOhneSaisonBus', 
+                    '$preisSaisonAnhaenger', '$preisOhneSaisonAnhaenger', '$bemerkung')";
 
 
                     mysqli_select_db($connection, $dbname);
 
-                    $retval = mysqli_query($connection, $sqlCountry);
+                    $retval = mysqli_query($connection, $sqlInsertNewMaut);
 
                     if (!$retval) {
                         die('could not enter date: ' . mysqli_error($connection));
@@ -119,33 +136,66 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                 }
                 ?>
 
-                <h1>Add new Country</h1>
+                <h1>Add new Maut</h1>
+                <p>Alle Preise in CHF</p>
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="country">Land</label><br>
-                            <input type="text" class="form-control" name="country">
+                            <label for="maut_strecke">Maut</label><br>
+                            <input type="text" class="form-control" name="maut_strecke">
                         </div>
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="short">Kürzel</label><br>
-                            <input type="text" class="form-control" name="short">
+                            <label for="bemerkung">Bemerkung</label><br>
+                            <input type="text" class="form-control" name="bemerkung">
                         </div>
                     </div>
-                    <button name="saveCountry" class="btn btn-default" type="submit" value="saveCountry">Speichern
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <label for="preis_saison_pw">Preis Saison PW</label><br>
+                            <input type="number" step="0.05" class="form-control" name="preis_saison_pw">
+                        </div>
+                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <label for="preise_ohne_saison_pw">Preis ohne Saison PW</label><br>
+                            <input type="number" step="0.05" class="form-control" name="preise_ohne_saison_pw">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <label for="preis_saison_bus">Preis Saison Bus</label><br>
+                            <input type="number" step="0.05" class="form-control" name="preis_saison_bus">
+                        </div>
+                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <label for="preis_ohne_saison_bus">Preis ohne Saison Bus</label><br>
+                            <input type="number" step="0.05" class="form-control" name="preis_ohne_saison_bus">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <label for="preis_saison_anhaenger">Preis Saison Anhänger</label><br>
+                            <input type="number" step="0.05" class="form-control" name="preis_saison_anhaenger">
+                        </div>
+                        <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                            <label for="preis_ohne_saison_anhaenger">Preis ohne Saison Anhänger</label><br>
+                            <input type="number" step="0.05" class="form-control" name="preis_ohne_saison_anhaenger">
+                        </div>
+                    </div>
+
+                    <button name="saveNewMaut" class="btn btn-default" type="submit" value="saveNewMaut">Hinzufügen
                     </button>
 
                 </form>
 
             </div>
 
+
             <?php
             // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
-            $getCountryId = "SELECT country_id, country FROM country";
-            $getCountryIdResult = mysqli_query($connection, $getCountryId) or die (mysqli_error($connection));
+            $getMautId = "SELECT maut_id, maut_strecke FROM maut";
+            $getCountryIdResult = mysqli_query($connection, $getMautId) or die (mysqli_error($connection));
             ?>
 
             <div class="col-md-6">
-                <h1>Edit Countrys</h1>
+                <h1>Edit Maut</h1>
 
                 <?php
                 $country_ID = 1;
@@ -153,10 +203,10 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                     if (!get_magic_quotes_gpc()) {
 
-                        $country_ID = addslashes($_POST["country_id"]);
+                        $country_ID = addslashes($_POST["maut_id"]);
 
                     } else {
-                        $country_ID = $_POST["country_id"];
+                        $country_ID = $_POST["maut_id"];
                     }
 
                 }
@@ -170,7 +220,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                             <select class="form-control" name="country_id">
                                 <?php
                                 while ($row = mysqli_fetch_array($getCountryIdResult)) {
-                                    echo "<option value=" . $row['country_id'] . ">" . $row['country'] . "</option>";
+                                    echo "<option value=" . $row['maut_id'] . ">" . $row['maut_strecke'] . "</option>";
                                 }
                                 ?>
                             </select>
@@ -193,18 +243,47 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                 while ($row = mysqli_fetch_array($getCountryAndShortResult)) {
                     ?>
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                <label for="countryEdit">Land</label><br>
+                                <label for="maut_strecke">Maut</label><br>
                                 <input type="text" value="<?php echo $row['country']; ?>" class="form-control"
-                                       name="countryEdit">
+                                       name="maut_strecke">
                             </div>
-
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                <label for="shortEdit">Kürzel</label><br>
+                                <label for="bemerkung">Bemerkung</label><br>
                                 <input type="text" value="<?php echo $row['short']; ?>" class="form-control"
-                                       name="shortEdit">
+                                       name="bemerkung">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="preis_saison_pw">Preis Saison PW</label><br>
+                                <input type="number" step="0.05" class="form-control" name="preis_saison_pw">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="preise_ohne_saison_pw">Preis ohne Saison PW</label><br>
+                                <input type="number" step="0.05" class="form-control" name="preise_ohne_saison_pw">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="preis_saison_bus">Preis Saison Bus</label><br>
+                                <input type="number" step="0.05" class="form-control" name="preis_saison_bus">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="preis_ohne_saison_bus">Preis ohne Saison Bus</label><br>
+                                <input type="number" step="0.05" class="form-control" name="preis_ohne_saison_bus">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="preis_saison_anhaenger">Preis Saison Anhänger</label><br>
+                                <input type="number" step="0.05" class="form-control" name="preis_saison_anhaenger">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="preis_ohne_saison_anhaenger">Preis ohne Saison Anhänger</label><br>
+                                <input type="number" step="0.05" class="form-control"
+                                       name="preis_ohne_saison_anhaenger">
                             </div>
                         </div>
                         <div id="saveEditsButton">
