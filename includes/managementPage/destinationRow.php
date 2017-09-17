@@ -2,7 +2,7 @@
     <div>
         <h3>Destination verwaltung</h3>
         <hr>
-        <img src="img/vehicleImg.png" alt="Destination"/><br>
+        <img src="../../img/vehicleImg.png" alt="Destination"/><br>
         <h4>Beschreibung</h4>
         <p>
             In diesem Abschnitt können die Destinations verwaltet werden.

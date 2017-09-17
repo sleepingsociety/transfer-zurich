@@ -2,7 +2,7 @@
     <div>
         <h3>Eigenes Profil</h3>
         <hr>
-        <img src="img/icon-user-default.png" alt="Fahrzeug"/><br>
+        <img src="../../img/icon-user-default.png" alt="Fahrzeug"/><br>
         <h4>Beschreibung</h4>
         <p>
             Hier können Sie ihr Profil verändern. Sie haben

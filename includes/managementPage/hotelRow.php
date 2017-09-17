@@ -2,7 +2,7 @@
     <div>
         <h3>Hotelverwaltung</h3>
         <hr>
-        <img src="img/vehicleImg.png" alt="Hotel"/><br>
+        <img src="../../img/vehicleImg.png" alt="Hotel"/><br>
         <h4>Beschreibung</h4>
         <p>
             In diesem Abschnitt können Sie die

@@ -256,11 +256,11 @@ function createUsers() {
         };
 
         var img = document.createElement("img");
-        var imgSrc = "img/icon-user-default.png";
+        var imgSrc = "../img/icon-user-default.png";
         img.src = imgSrc;
 
         var text = document.createElement('p');
-        text.innerHTML = users[i].name + "<br>" + users[i].position;
+        text.inner
 
         div.appendChild(img);
         div.appendChild(text);
