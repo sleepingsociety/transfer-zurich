@@ -9,6 +9,6 @@
             Sie können neue hinzufügen oder alte ansehen und bearbeiten.
         </p>
         <br>
-        <button class="btn btn-default" onClick="changePage('countryRegion.php')">Zur Länder / Regionenverwaltung</button>
+        <button class="btn btn-default" onClick="changePage('/sites/managementSites/countryRegion.php')">Zur Länder / Regionenverwaltung</button>
     </div>
 </div>

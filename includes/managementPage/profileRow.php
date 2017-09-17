@@ -14,6 +14,6 @@
             werden soll.
         </p>
         <br>
-        <button class="btn btn-default" onClick="changePage('singleUserPage.php')">Zu seinem Profil</button>
+        <button class="btn btn-default" onClick="changePage('/sites/managementSites/singleUserPage.php')">Zu seinem Profil</button>
     </div>
 </div>

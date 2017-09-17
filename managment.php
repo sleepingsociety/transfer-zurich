@@ -101,6 +101,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                     <div class="row">
                         <?php
                         include_once 'includes/managementPage/partnerRow.php';
+                        include_once 'includes/managementPage/mautRow.php';
                         ?>
                     </div>
                 </div>

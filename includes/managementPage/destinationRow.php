@@ -9,6 +9,6 @@
             Sie können neue hinzufügen oder alte ansehen und bearbeiten.
         </p>
         <br>
-        <button class="btn btn-default" onClick="changePage('destinations.php')">Zur Destinationverwaltung</button>
+        <button class="btn btn-default" onClick="changePage('/sites/managementSites/destinations.php')">Zur Destinationverwaltung</button>
     </div>
 </div>

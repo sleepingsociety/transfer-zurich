@@ -43,10 +43,10 @@ if (!$_SESSION["login"]) header('Location: /index.php');
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
     crossorigin="anonymous"></script>
-    <script src="javascript/loginPage.js" type="text/javascript"></script>
+    <script src="../../javascript/loginPage.js" type="text/javascript"></script>
 
-    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../../stylesheet/taskView.css">
 
 
 </head>
@@ -68,11 +68,11 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                 </button>
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                <a href="adminOverview.php"><img src="img/atap-logo.png" class="img-nav img-responsive" id="imgLogo"></a>
+                                <a href="../../adminOverview.php"><img src="../../img/atap-logo.png" class="img-nav img-responsive" id="imgLogo"></a>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="adminOverview.php">Auftragsverwaltung</a></li>
-                                    <li class="active"><a href="managment.php">Verwaltung</a></li>
-                                    <li><a href="logout.php">Logout</a></li>
+                                    <li><a href="../../adminOverview.php">Auftragsverwaltung</a></li>
+                                    <li class="active"><a href="../../managment.php">Verwaltung</a></li>
+                                    <li><a href="../../logout.php">Logout</a></li>
                                 </ul>
                             </div>
                         </div>

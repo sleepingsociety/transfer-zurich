@@ -9,6 +9,6 @@
             vorhanden Fahrzeuge verwalten.
         </p>
         <br>
-        <button class="btn btn-default" onClick="changePage('hotels.php')">Zur Hotelverwaltung</button>
+        <button class="btn btn-default" onClick="changePage('/sites/managementSites/hotels.php')">Zur Hotelverwaltung</button>
     </div>
 </div>
