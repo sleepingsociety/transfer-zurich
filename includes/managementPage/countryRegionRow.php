@@ -2,7 +2,7 @@
     <div>
         <h3>Länder / Regionen Verwaltung</h3>
 
-        <img src="/img/vehicleImg.png" alt="Region"/><br>
+        <img src="../../img/vehicleImg.png" alt="Region"/><br>
         <h4>Beschreibung</h4>
         <p>
             In diesem Abschnitt können die Länder / Regionen verwaltet werden.

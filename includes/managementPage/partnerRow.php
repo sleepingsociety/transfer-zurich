@@ -3,7 +3,7 @@
     <div>
         <h3>Partner verwaltung</h3>
         <hr>
-        <img src="img/vehicleImg.png" alt="Partner"/><br>
+        <img src="../../img/vehicleImg.png" alt="Partner"/><br>
         <h4>Beschreibung</h4>
         <p>
 In diesem Abschnitt können die Destinations verwaltet werden.

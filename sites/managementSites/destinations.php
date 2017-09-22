@@ -1,20 +1,5 @@
 <?php
-$dbname = $_SERVER['DB_NAME'];
-$servername = $_SERVER['DB_HOST'];
-$dbusername = $_SERVER['DB_USERNAME'];
-$dbpassword = $_SERVER['DB_PASSWORD'];
-
-$connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
-
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-if (!$_SESSION["login"]) header('Location: /index.php');
+include_once ("../../includes/connection/db_connection.php");
 
 ?>
 
@@ -45,9 +30,9 @@ if (!$_SESSION["login"]) header('Location: /index.php');
             crossorigin="anonymous"></script>
     <script src="../../javascript/loginPage.js" type="text/javascript"></script>
     <script>
-        $(document).ready(function () {
+     /*   $(document).ready(function () {
             createUsers();
-        });
+        });*/
     </script>
 
 
@@ -178,7 +163,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                                         $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
 
-                                        $country_id = $selectCountryRow['country_id'];
+                                        //$country_id = $selectCountryRow['country_id'];
 
                                         while($selectCountryRow = mysqli_fetch_array($selectCountryResult)) {
                                             echo "<option value=" .$selectCountryRow['country_id']. ">" . $selectCountryRow['country']. "</option>";
@@ -188,7 +173,21 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="region">Region</label><br>
-                                    <input type="text" class="form-control" name="region" placeholder="Graubünden">
+
+                                    <?php
+                                    // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+                                    $getRegionId = "SELECT region_id, region, country_fs FROM region";
+                                    $getRegionIdResult = mysqli_query($connection, $getRegionId) or die (mysqli_error($connection));
+                                    ?>
+
+                                    <select class="form-control" name="region_id">
+                                        <?php
+                                        while ($row = mysqli_fetch_array($getRegionIdResult)) {
+                                            echo "<option value=" . $row['region_id'] . ">" . $row['region'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+
                                 </div>
                             </div>
                             <div class="form-group">
@@ -196,8 +195,23 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                                 <input type="text" class="form-control" name="typ" placeholder="?">
                             </div>
                             <div class="form-group">
-                                <label for="maut_auswahl">Benötigtes Maut. (drop down Menu)</label><br>
-                                <input type="text" class="form-control" name="maut_auswahl">
+                                <label for="maut_auswahl">Benötigtes Maut.</label><br>
+
+                                <?php
+                                // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+                                $getMautId = "SELECT maut_id, maut_strecke FROM maut";
+                                $maut_ID = 1;
+                                $getMautIdResult = mysqli_query($connection, $getMautId) or die (mysqli_error($connection));
+                                ?>
+
+
+                                <select class="form-control" name="maut_id">
+                                    <?php
+                                    while ($row = mysqli_fetch_array($getMautIdResult)) {
+                                        echo "<option value=" . $row['maut_id'] . ">" . $row['maut_strecke'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -277,7 +291,140 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6">
                     <h1>Edit Destinations</h1>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="destination">Destination</label><br>
+                                <input type="text" class="form-control" name="destination">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
+                                <label for="country">Land</label><br>
+                                <select class="form-control" name="country">
+                                    <?php
+                                    $selectCountryQuery = "SELECT country_id, country FROM country";
+
+                                    $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
+
+                                    $country_id = $selectCountryRow['country_id'];
+
+                                    while($selectCountryRow = mysqli_fetch_array($selectCountryResult)) {
+                                        echo "<option value=" .$selectCountryRow['country_id']. ">" . $selectCountryRow['country']. "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="region">Region</label><br>
+
+                                <?php
+                                // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+                                $getRegionId = "SELECT region_id, region, country_fs FROM region";
+                                $getRegionIdResult = mysqli_query($connection, $getRegionId) or die (mysqli_error($connection));
+                                ?>
+
+                                <select class="form-control" name="region_id">
+                                    <?php
+                                    while ($row = mysqli_fetch_array($getRegionIdResult)) {
+                                        echo "<option value=" . $row['region_id'] . ">" . $row['region'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="typ">Typ</label><br>
+                            <input type="text" class="form-control" name="typ" placeholder="?">
+                        </div>
+                        <div class="form-group">
+                            <label for="maut_auswahl">Benötigtes Maut.</label><br>
+
+                            <?php
+                            // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+                            $getMautId = "SELECT maut_id, maut_strecke FROM maut";
+                            $maut_ID = 1;
+                            $getMautIdResult = mysqli_query($connection, $getMautId) or die (mysqli_error($connection));
+                            ?>
+
+
+                            <select class="form-control" name="maut_id">
+                                <?php
+                                while ($row = mysqli_fetch_array($getMautIdResult)) {
+                                    echo "<option value=" . $row['maut_id'] . ">" . $row['maut_strecke'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="distance_from_zrh">Distanz von Zürich Flugafen</label><br>
+                                <input type="text" class="form-control" name="distance_from_zrh" placeholder="40">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="distance_from_bsl">Distanz von Basel </label><br>
+                                <input type="text" class="form-control" name="distance_from_bsl" placeholder="30">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="distance_from_alt">Distanz von Altenrieden</label><br>
+                                <input type="text" class="form-control" name="distance_from_alt" placeholder="50">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="route_from_zrh">Route von Zürich</label><br>
+                                <input type="file" class="form-control" name="route_from_zrh" placeholder="Bild">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="route_from_bsl">Route von Basel</label><br>
+                                <input type="file" class="form-control" name="route_from_bsl" placeholder="Bild">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="route_from_alt">Route von Altenrieden</label><br>
+                                <input type="file" class="form-control" name="route_from_alt" placeholder="Bild">
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="time_zrh">Zeit von Zürich</label><br>
+                                <input type="text" class="form-control" name="time_zrh" placeholder="01:00">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="time_bsl">Zeit von Basel</label><br>
+                                <input type="text" class="form-control" name="time_bsl" placeholder="00:40">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="time_alt">Zeit von Altenrieden</label><br>
+                                <input type="text" class="form-control" name="time_alt" placeholder="01:10">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="traffic_jam_surcharge">Stau Zuschlag</label><br>
+                                <input type="text" class="form-control" name="traffic_jam_surcharge"
+                                       placeholder="5.- / h">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="search_on_site">Suche vor Ort</label><br>
+                                <input type="text" class="form-control" name="search_on_site" placeholder="?">
+                            </div>
+                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                <label for="breaks">Pausen</label><br>
+                                <input type="text" class="form-control" name="breaks" placeholder="Zeit">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="served_by">Served by</label><br>
+                            <input type="checkbox" name="suntransfers" value="TRUE">Suntransfers<br>
+                            <input type="checkbox" name="foxtravels" value="TRUE">Foxtravels<br>
+                        </div>
+                        <input name="add" type="submit" id="add"
+                               value="Add Destination">
+
+                    </form>
                     <div id="saveEditsButton">
                         <form action="../../register.php">
                             <button class="btn btn-default" type="submit" value="saveEdits">Änderungen Speichern

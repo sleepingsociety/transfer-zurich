@@ -2,7 +2,7 @@
     <div>
         <h3>Benutzerverwaltung</h3>
         <hr>
-        <img src="img/users_icon.png" alt="Fahrzeug"/><br>
+        <img src="../../img/users_icon.png" alt="Fahrzeug"/><br>
         <h4>Beschreibung</h4>
         <p>
             In diesem Bereich werden alle Benutzer aufgelisted, welche

@@ -45,9 +45,9 @@ if (!$_SESSION["login"]) header('Location: /index.php');
             crossorigin="anonymous"></script>
     <script src="../../javascript/loginPage.js" type="text/javascript"></script>
     <script>
-        $(document).ready(function () {
+       /* $(document).ready(function () {
             createUsers();
-        });
+        });*/
     </script>
 
 

@@ -2,7 +2,7 @@
     <div>
         <h3>Fahrzeugverwaltung</h3>
         <hr>
-        <img src="img/vehicleImg.png" alt="Fahrzeug"/><br>
+        <img src="../../img/vehicleImg.png" alt="Fahrzeug"/><br>
         <h4>Beschreibung</h4>
         <p>
             In diesem Abschnitt können Sie die
