@@ -8,10 +8,6 @@ function closeNav() {
     document.getElementById("myNav").style.width = "0%";
 }
 
-
-
-
-
 var drivers = [{name:"Dominik O'Kerwin", license:"B", timeLeft:"9:00"},
     {name:"David Kalchofner", license:"B", timeLeft:"9:00"},
     {name:"Lukas Auriquio", license:"BE", timeLeft:"9:00"},
@@ -256,7 +252,7 @@ function createUsers() {
         };
 
         var img = document.createElement("img");
-        var imgSrc = "../img/icon-user-default.png";
+        var imgSrc = "../../img/icon-user-default.png";
         img.src = imgSrc;
 
         var text = document.createElement('p');

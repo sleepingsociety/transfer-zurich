@@ -216,7 +216,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="country">ID</label><br>
+                            <label for="maut_id">ID</label><br>
                             <select class="form-control" name="maut_id">
                                 <?php
                                 while ($row = mysqli_fetch_array($getMautIdResult)) {
