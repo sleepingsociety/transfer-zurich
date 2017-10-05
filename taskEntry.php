@@ -253,7 +253,7 @@ other_luggage, comments, accept_link, decline_link) VALUES ('$lead_passenger','$
                     <table id="taskEntryMainTable">
                         <tr>
                             <td width="50%">
-                                <form action="../transfer-zurich/parseEmail.php" method="post" id="parseForm">
+                                <form action="./parseEmail.php" method="post" id="parseForm">
                                     <label for="email_subject">Email Betreff</label>
                                     <input type="text" class="form-control" name="email_subject">
                                     <br>

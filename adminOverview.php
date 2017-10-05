@@ -48,15 +48,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
 
-    <script>
-        $(document).ready(function () {
-            createRows("task");
-            createRows("driver");
-            createRows("car");
-            createAllocationTable();
-        });
-    </script>
-
 </head>
 
 <body>
