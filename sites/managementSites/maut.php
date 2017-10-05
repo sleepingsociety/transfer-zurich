@@ -103,7 +103,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $preisSaisonBus = addslashes($_POST["preis_saison_bus"]);
                         $preisOhneSaisonBus = addslashes($_POST["preis_ohne_saison_bus"]);
                         $preisSaisonAnhaenger = addslashes($_POST["preis_saison_anhaenger"]);
-                        $preisOhneSaisonAnhaenger = addslashes($_POST["preis_ohen_saison_anhaenger"]);
+                        $preisOhneSaisonAnhaenger = addslashes($_POST["preis_ohne_saison_anhaenger"]);
 
                     } else {
                         $maut_strecke = $_POST["maut_strecke"];
@@ -113,7 +113,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $preisSaisonBus = $_POST["preis_saison_bus"];
                         $preisOhneSaisonBus = $_POST["preis_ohne_saison_bus"];
                         $preisSaisonAnhaenger = $_POST["preis_saison_anhaenger"];
-                        $preisOhneSaisonAnhaenger = $_POST["preis_ohen_saison_anhaenger"];
+                        $preisOhneSaisonAnhaenger = $_POST["preis_ohne_saison_anhaenger"];
 
                     }
 
