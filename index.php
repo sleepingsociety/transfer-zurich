@@ -1,13 +1,5 @@
 <?php
-/*$dbname = $_SERVER['DB_NAME'];
-$servername = $_SERVER['DB_HOST'];
-$dbusername = $_SERVER['DB_USERNAME'];
-$dbpassword = $_SERVER['DB_PASSWORD'];
-$connection = new mysqli($servername, $dbusername, $dbpassword);
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
-*/
+include_once ("./includes/connection/db_connection.php");
 ?>
 <!DOCTYPE HTML>
 <html xml:lang="de" lang="de">
@@ -38,41 +30,6 @@ if ($connection->connect_error) {
     <script src="javascript/loginPage.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="public/css/main.css">
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
-
-
-
-    <script>
-        /*$(document).ready(function() {
-
-            var desktop;
-            var randNum = Math.floor((Math.random() * 7) + 1);
-            $(window).resize(function() {
-                if ($(this).width() < 768) {
-                    if(desktop == true || desktop == null) {
-                        desktop = false;
-                        document.body.style.backgroundImage = "url('img/background.png')";
-                    }
-                } else {
-                    if(desktop == false || desktop == null) {
-                        desktop = true;
-                        document.body.style.backgroundImage = "url('img/Background_Login_0" + randNum + ".jpg')";
-                    }
-                }
-            });
-            if ($(window).width() < 768) {
-                if(desktop == true || desktop == null) {
-                    desktop = false;
-                    document.body.style.backgroundImage = "url('img/background.png')";
-                }
-            } else {
-                // default setting for desktop here...
-                if(desktop == false || desktop == null) {
-                    desktop = true;
-                    document.body.style.backgroundImage = "url('img/Background_Login_0" + randNum + ".jpg')";
-                }
-            }
-        });*/
-    </script>
 </head>
 <body>
 

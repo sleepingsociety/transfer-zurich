@@ -1,7 +1,3 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: david
- * Date: 17.09.17
- * Time: 21:32
- */
+include_once ("../../includes/connection/db_connection.php");
+?>
