@@ -1,21 +1,5 @@
 <?php
-$dbname = $_SERVER['DB_NAME'];
-$servername = $_SERVER['DB_HOST'];
-$dbusername = $_SERVER['DB_USERNAME'];
-$dbpassword = $_SERVER['DB_PASSWORD'];
-
-$connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
-
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-if (!$_SESSION["login"]) header('Location: /index.php');
-
+include_once ("../../includes/connection/db_connection.php");
 ?>
 
 <html>
@@ -103,7 +87,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $preisSaisonBus = addslashes($_POST["preis_saison_bus"]);
                         $preisOhneSaisonBus = addslashes($_POST["preis_ohne_saison_bus"]);
                         $preisSaisonAnhaenger = addslashes($_POST["preis_saison_anhaenger"]);
-                        $preisOhneSaisonAnhaenger = addslashes($_POST["preis_ohen_saison_anhaenger"]);
+                        $preisOhneSaisonAnhaenger = addslashes($_POST["preis_ohne_saison_anhaenger"]);
 
                     } else {
                         $maut_strecke = $_POST["maut_strecke"];
@@ -113,7 +97,7 @@ if (!$_SESSION["login"]) header('Location: /index.php');
                         $preisSaisonBus = $_POST["preis_saison_bus"];
                         $preisOhneSaisonBus = $_POST["preis_ohne_saison_bus"];
                         $preisSaisonAnhaenger = $_POST["preis_saison_anhaenger"];
-                        $preisOhneSaisonAnhaenger = $_POST["preis_ohen_saison_anhaenger"];
+                        $preisOhneSaisonAnhaenger = $_POST["preis_ohne_saison_anhaenger"];
 
                     }
 

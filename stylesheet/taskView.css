@@ -33,7 +33,7 @@ td {
 }
 
 .form-body{
-    margin: 0%;
+    margin: 0;
 }
 
 /* Custom page CSS
@@ -61,7 +61,7 @@ h2 {
 
 #Nav {
     width: 90%;
-    margin: 50px 5% 0% 5%;
+    margin: 50px 5% 0 5%;
 
 }
 
@@ -88,7 +88,7 @@ a {
 
 img.img-nav.img-responsive {
     height: 35px;
-    margin-right: 0px;
+    margin-right: 0;
     display: inline-block;
 }
 

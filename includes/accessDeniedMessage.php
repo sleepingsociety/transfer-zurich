@@ -1,6 +1,6 @@
 <h2>Zugriff verweigert</h2>
 <div id="forbiddenMessage">
-    <img src="img/stopSign.png" alt="Stopshild">
+    <img src="../img/stopSign.png" alt="Stopshild">
 
     <p>
         Sie haben auf diesen Teil der Webseite keinen Zugriff.

@@ -1,21 +1,5 @@
 <?php
-$dbname = $_SERVER['DB_NAME'];
-$servername = $_SERVER['DB_HOST'];
-$dbusername = $_SERVER['DB_USERNAME'];
-$dbpassword = $_SERVER['DB_PASSWORD'];
-
-$connection = new mysqli($servername, $dbusername, $dbpassword);
-
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
-
-if(!isset($_SESSION)){
-    session_start();
-}
-
-if (!$_SESSION["login"]) header('Location: /index.php');
-
+include_once ("./includes/connection/db_connection.php");
 ?>
 
 <html>
@@ -23,8 +7,6 @@ if (!$_SESSION["login"]) header('Location: /index.php');
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Transfer-Zurich</title>
-    <script src="javascript/jquery-3.1.1.min.js" type="text/javascript"></script>
-
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
