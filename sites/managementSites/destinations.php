@@ -338,7 +338,7 @@ include_once ("../../includes/connection/db_connection.php");
                         </div>
                         <div class="form-group">
                             <label for="typ">Typ</label><br>
-                            <input type="text" class="form-control" name="typ"  ?">
+                            <input type="text" class="form-control" name="typ">
                         </div>
                         <div class="form-group">
                             <label for="maut_auswahl">Benötigtes Maut.</label><br>
@@ -362,29 +362,29 @@ include_once ("../../includes/connection/db_connection.php");
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="distance_from_zrh">Distanz von Zürich Flugafen</label><br>
-                                <input type="text" class="form-control" name="distance_from_zrh"  40">
+                                <input type="text" class="form-control" name="distance_from_zrh">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="distance_from_bsl">Distanz von Basel </label><br>
-                                <input type="text" class="form-control" name="distance_from_bsl"  30">
+                                <input type="text" class="form-control" name="distance_from_bsl">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="distance_from_alt">Distanz von Altenrieden</label><br>
-                                <input type="text" class="form-control" name="distance_from_alt"  50">
+                                <input type="text" class="form-control" name="distance_from_alt">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="route_from_zrh">Route von Zürich</label><br>
-                                <input type="file" class="form-control" name="route_from_zrh"  Bild">
+                                <input type="file" class="form-control" name="route_from_zrh">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="route_from_bsl">Route von Basel</label><br>
-                                <input type="file" class="form-control" name="route_from_bsl"  Bild">
+                                <input type="file" class="form-control" name="route_from_bsl">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="route_from_alt">Route von Altenrieden</label><br>
-                                <input type="file" class="form-control" name="route_from_alt"  Bild">
+                                <input type="file" class="form-control" name="route_from_alt">
                             </div>
                         </div>
 
@@ -392,31 +392,30 @@ include_once ("../../includes/connection/db_connection.php");
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="time_zrh">Zeit von Zürich</label><br>
-                                <input type="text" class="form-control" name="time_zrh"  01:00">
+                                <input type="text" class="form-control" name="time_zrh">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="time_bsl">Zeit von Basel</label><br>
-                                <input type="text" class="form-control" name="time_bsl"  00:40">
+                                <input type="text" class="form-control" name="time_bsl">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="time_alt">Zeit von Altenrieden</label><br>
-                                <input type="text" class="form-control" name="time_alt"  01:10">
+                                <input type="text" class="form-control" name="time_alt">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="traffic_jam_surcharge">Stau Zuschlag</label><br>
-                                <input type="text" class="form-control" name="traffic_jam_surcharge"
-                                        5.- / h">
+                                <input type="text" class="form-control" name="traffic_jam_surcharge">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="search_on_site">Suche vor Ort</label><br>
-                                <input type="text" class="form-control" name="search_on_site"  ?">
+                                <input type="text" class="form-control" name="search_on_site">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="breaks">Pausen</label><br>
-                                <input type="text" class="form-control" name="breaks"  Zeit">
+                                <input type="text" class="form-control" name="breaks">
                             </div>
                         </div>
                         <div class="form-group">

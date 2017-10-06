@@ -1,5 +1,5 @@
 <?php
-include_once ("../../includes/connection/db_connection.php");
+include_once("../../includes/connection/db_connection.php");
 ?>
 
 <html>
@@ -27,14 +27,8 @@ include_once ("../../includes/connection/db_connection.php");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+
     <script src="../../javascript/loginPage.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function () {
-            //getHotelDetails();
-        });
-    </script>
-
-
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../../stylesheet/taskView.css">
 
@@ -58,7 +52,8 @@ include_once ("../../includes/connection/db_connection.php");
                             </button>
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <a href="../../adminOverview.php"><img src="../../img/atap-logo.png" class="img-nav img-responsive"
+                            <a href="../../adminOverview.php"><img src="../../img/atap-logo.png"
+                                                                   class="img-nav img-responsive"
                                                                    id="imgLogo"></a>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="../../adminOverview.php">Auftragsverwaltung</a></li>
@@ -102,7 +97,7 @@ include_once ("../../includes/connection/db_connection.php");
                         $sql1 = "INSERT INTO test (destination) VALUES ('$destination')";
                         */
 
-                        mysqli_select_db($dbname,$connection);
+                        mysqli_select_db($dbname, $connection);
                         $retval = mysqli_query($connection, $sql);
                         if (!$retval) {
                             die('could not enter date: ' . mysqli_error($connection));
@@ -150,8 +145,8 @@ include_once ("../../includes/connection/db_connection.php");
                                 <label for="hotel_country_add">Country</label><br>
                                 <input type="text" class="form-control" name="hotel_country_add">
                             </div>
-                            <input name = "add" type = "submit" id = "add" class="btn btn-default"
-                                   value = "Add Hotel">
+                            <input name="add" type="submit" id="add" class="btn btn-default"
+                                   value="Add Hotel">
                         </form>
                     <?php } ?>
                 </div>
@@ -201,7 +196,8 @@ include_once ("../../includes/connection/db_connection.php");
                                 <input type="text" class="form-control" name="hotel_country_edit">
                             </div>
 
-                            <button class="btn btn-default" type="submit" value="saveEdits">Änderungen Speichern </button>
+                            <button class="btn btn-default" type="submit" value="saveEdits">Änderungen Speichern
+                            </button>
 
                         </form>
 

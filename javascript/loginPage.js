@@ -116,10 +116,8 @@ function checkIfPastDate(value1, value2) {
    // console.log(parts[0]+"-"+parts[1]+"-"+parts[2])
     var comparedDate = new Date(parts[0]+"-"+parts[1]+"-"+parts[2])
     //console.log(currentDate.toDateString() + "   " + comparedDate.toDateString())
-    if (currentDate.getTime() > comparedDate.getTime()){
-        return true;
-    }
-    return false;
+    return currentDate.getTime() > comparedDate.getTime();
+
 }
 
 Date.prototype.addDays = function(days) {
@@ -150,11 +148,9 @@ function checkIfDateLater(value1, value2, time) {
     // console.log(parts[0]+"-"+parts[1]+"-"+parts[2])
     var comparedDate = new Date(parts[0]+"-"+parts[1]+"-"+parts[2])
     //console.log(currentDate.toDateString() + "   " + maxDate.toDateString())
-    if (currentDate.getTime() < comparedDate.getTime() && comparedDate.getTime() <= maxDate.getTime()){
-        return true;
-    }
+    return currentDate.getTime() < comparedDate.getTime() && comparedDate.getTime() <= maxDate.getTime();
 
-    return false;
+
 }
 
 function changeAllTasksTable(which) {
@@ -222,7 +218,7 @@ function getCurrentDate() {
     if(mm<10) {
         mm='0'+mm
     }
-    return new Array(dd, mm, yyyy)
+    return [dd, mm, yyyy]
 }
 
 function fillAllTasksTable() {
@@ -252,11 +248,9 @@ function createUsers() {
         };
 
         var img = document.createElement("img");
-        var imgSrc = "../../img/icon-user-default.png";
-        img.src = imgSrc;
+        img.src = "../../img/icon-user-default.png";
 
         var text = document.createElement('p');
-        text.inner
 
         div.appendChild(img);
         div.appendChild(text);

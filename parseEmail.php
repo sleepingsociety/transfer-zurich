@@ -247,5 +247,5 @@ if($contractor != ""){
 
 header("location: /taskEntry.php");
 
-?>
+
 

@@ -32,12 +32,6 @@ include_once ("./includes/connection/db_connection.php");
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
 
-    <script>
-        $(document).ready(function() {
-            createRows("request")
-        });
-    </script>
-
 </head>
 
 <body>

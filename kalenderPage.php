@@ -1,60 +1,50 @@
 <?php
-include_once ("./includes/connection/db_connection.php");
+include_once("./includes/connection/db_connection.php");
 ?>
 
 <html>
 
-    <head>
-        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-        <title>Transfer-Zurich</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transfer-Zurich</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-              crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
 
 
-        <!-- Optional theme -->
-        <link rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-              integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-              crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-                crossorigin="anonymous"></script>
-        <script src="javascript/loginPage.js" type="text/javascript"></script>
-        <script>
-            $(document).ready(function() {
-                createUsers();
-            });
-        </script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="javascript/loginPage.js" type="text/javascript"></script>
 
 
-        <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
 
 
-    </head>
+</head>
 
-    <body>
-        <div id="pageContainer">
-            <?php
-                /*
-                 * Example how we can do this then
-                 * Mostly used with the error message then
-                 *
-                 *
-                 */
+<body>
+<div id="pageContainer">
+    <?php
 
 
-                $mode = 2;
-                if($mode == 1) {
-                    echo '<div id="policyCol" class="container-fluid">
+
+    $mode = 2;
+    if ($mode == 1) {
+        echo '<div id="policyCol" class="container-fluid">
                         <div class="row">
                             <div id="driverPolicy" class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                 <div>
@@ -131,10 +121,10 @@ include_once ("./includes/connection/db_connection.php");
                             </div>
                         </div>
                     </div>';
-                } else {
-                    include_once 'includes/accessDeniedMessage.php';
-                }
-            ?>
-        </div>
-    </body>
+    } else {
+        include_once 'includes/accessDeniedMessage.php';
+    }
+    ?>
+</div>
+</body>
 </html>

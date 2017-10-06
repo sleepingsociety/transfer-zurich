@@ -1,5 +1,20 @@
 <?php
-include_once ("./includes/connection/db_connection.php");
+$dbname = $_SERVER['DB_NAME'];
+$servername = $_SERVER['DB_HOST'];
+$dbusername = $_SERVER['DB_USERNAME'];
+$dbpassword = $_SERVER['DB_PASSWORD'];
+
+$connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (!$_SESSION["login"]) header('Location: /index.php');
 
 
 $message = array();
@@ -23,13 +38,13 @@ if (!empty($_POST)) {
             '$2a$10$' . $salt
         );
 
-        $connection = @new mysqli($servername, $dbusername , $dbpassword, $dbname );
+        $connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
         if ($connection->connect_error) {
             $message['error'] = 'Datenbankverbindung fehlgeschlagen: ' . $connection->connect_error;
         }
         $query = sprintf(
             "INSERT INTO users (username, password)
-				SELECT * FROM (SELECT '%s', '%s') as new_user
+				SELECT * FROM (SELECT '%s', '%s') AS new_user
 				WHERE NOT EXISTS (
 					SELECT username FROM users WHERE username = '%s'
 				) LIMIT 1;",
@@ -73,11 +88,6 @@ if (!empty($_POST)) {
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <script src="javascript/loginPage.js" type="text/javascript"></script>
-    <script>
-        $(document).ready(function() {
-            createUsers();
-        });
-    </script>
 
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet/taskView.css">
@@ -87,22 +97,28 @@ if (!empty($_POST)) {
 <body>
 <form action="/register.php" method="post">
     <?php if (isset($message['error'])): ?>
-        <fieldset class="error"><legend>Fehler</legend><?php echo $message['error'] ?></fieldset>
+        <fieldset class="error">
+            <legend>Fehler</legend><?php echo $message['error'] ?></fieldset>
     <?php endif;
     if (isset($message['success'])): ?>
-        <fieldset class="success"><legend>Erfolg</legend><?php echo $message['success'] ?></fieldset>
+        <fieldset class="success">
+            <legend>Erfolg</legend><?php echo $message['success'] ?></fieldset>
     <?php endif;
     if (isset($message['notice'])): ?>
-        <fieldset class="notice"><legend>Hinweis</legend><?php echo $message['notice'] ?></fieldset>
+        <fieldset class="notice">
+            <legend>Hinweis</legend><?php echo $message['notice'] ?></fieldset>
     <?php endif; ?>
     <fieldset>
         <legend>Benutzerdaten</legend>
-        <div><label for="username">Benutzername</label> <input type="text" name="f[username]" id="username"<?php echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?> /></div>
-        <div><label for="password">Kennwort</label> <input type="password" name="f[password]" id="password" /></div>
-        <div><label for="password_again">Kennwort wiederholen</label> <input type="password" name="f[password_again]" id="password_again" /></div>
+        <div><label for="username">Benutzername</label> <input type="text" name="f[username]"
+                                                               id="username"<?php echo isset($_POST['f']['username']) ? ' value="' . htmlspecialchars($_POST['f']['username']) . '"' : '' ?> />
+        </div>
+        <div><label for="password">Kennwort</label> <input type="password" name="f[password]" id="password"/></div>
+        <div><label for="password_again">Kennwort wiederholen</label> <input type="password" name="f[password_again]"
+                                                                             id="password_again"/></div>
     </fieldset>
     <fieldset>
-        <div><input type="submit" name="submit" value="Registrieren" /></div>
+        <div><input type="submit" name="submit" value="Registrieren"/></div>
     </fieldset>
 </form>
 </body>

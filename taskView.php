@@ -15,7 +15,6 @@ include_once ("./includes/connection/db_connection.php");
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
 
     <!-- Optional theme -->

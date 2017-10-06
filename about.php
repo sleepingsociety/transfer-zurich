@@ -1,5 +1,19 @@
 <?php
-include_once ("./includes/connection/db_connection.php");
+$dbname = $_SERVER['DB_NAME'];
+$servername = $_SERVER['DB_HOST'];
+$dbusername = $_SERVER['DB_USERNAME'];
+$dbpassword = $_SERVER['DB_PASSWORD'];
+
+$connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 ?>
 <html>
 
@@ -7,7 +21,14 @@ include_once ("./includes/connection/db_connection.php");
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transfer-Zurich</title>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Font Family Roboto, Weight 100 & 400 -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400" rel="stylesheet">
 
 
     <!-- Latest compiled and minified CSS -->
@@ -27,6 +48,7 @@ include_once ("./includes/connection/db_connection.php");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+
     <script src="javascript/loginPage.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="public/css/main.css">
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
@@ -57,12 +79,11 @@ include_once ("./includes/connection/db_connection.php");
 <div id="pageContainerL">
     <div class="container">
         <div id="about">
-            <h3>Willkommen auf der ATAP Transfer Seite</h3>
+            <h2>Willkommen auf der ATAP Transfer Seite</h2>
             <hr>
-            <div class="row">
-
+            <div class="row text-left">
                 <div class="col-sm-12 col-md-7 col-lg-7">
-                    <h4>Über uns</h4>
+                    <h3>Über uns</h3>
                     <p>
                         Der ATAP Transfers ist Mitglied von der ATAP Gruppe Switzerland.
                         Wir haben uns auf persönlichen Service und Transportdienstleistungen
@@ -78,20 +99,6 @@ include_once ("./includes/connection/db_connection.php");
                         Unser Service ist persönlich, schnell, diskret und komfortabel.
                         <br>
                         Wir garantieren Ihnen ein optimales Preis-Leistungsverhältnis.
-                    </p>
-                    <h4>Über diese Seite</h4>
-                    <p>
-                        Dies ist die interne Seite von diesem Unternehmen, welches von den
-                        Schülern Lukas Auriquio, David Kalchofner & Dominik O’Kerwin erstellt wurde.
-                        Diese haben den Auftrag von Johann Widmer, einer ihrer Lehrpersonen von der
-                        technischen Berufsschule Zürich, erhalten, welcher einer der Geschäftsleiter ist.
-                        Auf dieser Seite werden die verschiedenen Arbeitsabläufe halbautomatisiert, wodurch
-                        sich der Zeitaufwand und Fehler reduziert haben.
-                    </p>
-                    <h4>Technische Details</h4>
-                    <p>
-                        Die Entwickler dieser Seite haben verschiedene Technologien verwendet,
-                        unteranderem: HTML, SASS, PHP, JavaScript / JQuery und MySQL.
                     </p>
                 </div>
                 <div class="col-sm-12 col-md-5 col-lg-5">

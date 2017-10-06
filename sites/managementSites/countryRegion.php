@@ -220,6 +220,7 @@ include_once ("../../includes/connection/db_connection.php");
             $sqlRegion = "INSERT INTO region (region, country_fs) VALUES ('$region', '$country_fs')";
 
 
+
             mysqli_select_db($connection, $dbname);
 
             $retval = mysqli_query($connection, $sqlRegion);

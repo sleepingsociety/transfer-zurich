@@ -26,4 +26,3 @@ if (empty($_SESSION['login'])) {
 			</div>
 		';
 }
-?>

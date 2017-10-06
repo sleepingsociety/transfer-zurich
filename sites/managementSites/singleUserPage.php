@@ -72,11 +72,11 @@ include_once ("../../includes/connection/db_connection.php");
                         <?php
                             $mode = 1;
                             if($mode == 1) {
-                                include_once 'includes/changeUserinfoLow.php';
+                                include_once '../../includes/changeUserinfoLow.php';
                             } else if($mode == 2) {
-                                include_once 'includes/changeUserinfoMed.php';
+                                include_once '../../includes/changeUserinfoMed.php';
                             } else {
-                                include_once 'includes/createNewUser.php';
+                                include_once '../../includes/createNewUser.php';
                             }
                         ?>
                     </div>

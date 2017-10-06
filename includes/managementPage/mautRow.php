@@ -2,7 +2,7 @@
     <div>
         <h3>Maut-Verwaltung</h3>
 
-        <img src="../..//img/vehicleImg.png" alt="Region"/><br>
+        <img src="../../img/vehicleImg.png" alt="Region"/><br>
         <h4>Beschreibung</h4>
         <p>
             In diesem Abschnitt können die Maut's verwaltet werden.

@@ -1,5 +1,19 @@
 <?php
-include_once ("./includes/connection/db_connection.php");
+$dbname = $_SERVER['DB_NAME'];
+$servername = $_SERVER['DB_HOST'];
+$dbusername = $_SERVER['DB_USERNAME'];
+$dbpassword = $_SERVER['DB_PASSWORD'];
+
+$connection = @new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 ?>
 <!DOCTYPE HTML>
 <html xml:lang="de" lang="de">
@@ -30,6 +44,7 @@ include_once ("./includes/connection/db_connection.php");
     <script src="javascript/loginPage.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="public/css/main.css">
     <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+
 </head>
 <body>
 
@@ -53,11 +68,9 @@ include_once ("./includes/connection/db_connection.php");
 
 <div id="pageContainer">
     <section>
-        <span></span>
         <?php
         if (isset($_SESSION['login'])) {
-            //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/adminOverview.php');
-            header('Location: ./adminOverview.php');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/adminOverview.php');
         } else {
             if (!empty($_POST)) {
                 if (
@@ -77,16 +90,15 @@ include_once ("./includes/connection/db_connection.php");
                         $result = $connection->query($query);
                         if ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                             if (crypt($_POST['f']['password'], $row['password']) == $row['password']) {
-                                session_start();
-                                /*   $_SESSION = array(
+                                  $_SESSION = array(
                                        'login' => true,
                                        'user' => array(
                                            'username' => $row['username']
                                        )
-                                   );*/
+                                   );
                                 $_SESSION['login'] = true;
                                 $_SESSION['username'] = $row['username'];
-                                $message['success'] = 'Anmeldung erfolgreich, <a href="adminOverview.php">weiter zum Inhalt.';
+                                $message['success'] = 'Anmeldung erfolgreich,weiter zum Inhalt.';
                                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/adminOverview.php');
                             } else {
                                 $message['error'] = 'Das Kennwort ist nicht korrekt.';
@@ -98,8 +110,8 @@ include_once ("./includes/connection/db_connection.php");
                     }
                 }
             } else {
-                $message['notice'] = 'Geben Sie Ihre Zugangsdaten ein um sich anzumelden.<br />' .
-                    'Wenn Sie noch kein Konto haben, gehen Sie <a href="/register.php">zur Registrierung</a>.';
+                $message['notice'] = 'Geben Sie Ihre Zugangsdaten ein um sich anzumelden.';
+
             }
         }
         ?>
