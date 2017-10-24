@@ -65,7 +65,6 @@ if (!isset($_SESSION)) {
     <i class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" onclick="openNav()"></i>
 
 </div>
-
 <div id="pageContainer">
     <section>
         <?php
