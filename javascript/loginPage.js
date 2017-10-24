@@ -85,7 +85,55 @@ $(document).ready(function() {
         console.log("test")
     });
 
+
+
 });
+
+$(document).on('change', '#addDestinationRegionSelect', function(e) {
+    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
+    //
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                console.log(result);
+                // $("#addDestinationCountrySelect select").val(result);
+                $("#addDestinationCountrySelect option[value=" + result + "]").prop('selected', 'selected');
+
+                // $("#addDestinationCountrySelect").val("Deutschland");
+            }
+        }
+    );
+});
+
+$(document).on('change', '#editDestinationRegionSelect', function(e) {
+    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
+    //
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                console.log(result);
+                // $("#addDestinationCountrySelect select").val(result);
+                $("#editDestinationCountrySelect option[value=" + result + "]").prop('selected', 'selected');
+
+                // $("#addDestinationCountrySelect").val("Deutschland");
+            }
+        }
+    );
+});
+
+
 
 function hideAttention() {
     document.getElementById("attention").hidden = true;

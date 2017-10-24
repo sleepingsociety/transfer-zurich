@@ -326,14 +326,13 @@ include_once ("../../includes/connection/db_connection.php");
                 $getRegionAndCountryResult = mysqli_query($connection, $getRegionAndCountry) or die (mysqli_error($connection));
 
                 while ($row = mysqli_fetch_array($getRegionAndCountryResult)) {
-
                     ?>
 
                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="region">Region</label><br>
-                                <input type="text" value="<?php echo $row['region']; ?>" class="form-control"
+                                <input type="text" value="<?php echo $row[1]; ?>" class="form-control"
                                        name="region">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -346,8 +345,19 @@ include_once ("../../includes/connection/db_connection.php");
 
                                     $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
 
-                                    while ($selectCountryRow = mysqli_fetch_array($selectCountryResult)) {
-                                        echo "<option value=" . $selectCountryRow['country_id'] == 2 ? 'selected="selected"' : '""' .  ">" . $selectCountryRow['country'] . "</option>";
+                                    $selectCountryRows = array();
+
+                                    while($selectCountryRow = $selectCountryResult->fetch_assoc()) {
+                                        $selectCountryRows[] = $selectCountryRow;
+                                    }
+
+                                    var_dump($selectCountryRow);
+
+                                    for($i = 0; $i < sizeOf($selectCountryRows); $i++) {
+                                        if($row[2] == $selectCountryRows[$i]["country_id"])
+                                            echo "<option value=" . $selectCountryRows[$i]["country"] .  ' selected="selected"' . ">" . $selectCountryRows[$i]["country"] . "</option>";
+                                        else
+                                            echo "<option value=" . $selectCountryRows[$i]["country"] . ">" . $selectCountryRows[$i]["country"] . "</option>";
                                     }
                                     ?>
                                 </select>
@@ -360,11 +370,10 @@ include_once ("../../includes/connection/db_connection.php");
                         </div>
                     </form>
                     <?php
-                }
+                    }
                 ?>
             </div>
         </div>
-
     </div>
 </div>
 </body>

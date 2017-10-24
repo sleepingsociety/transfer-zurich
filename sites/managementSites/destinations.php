@@ -28,13 +28,6 @@ include_once ("../../includes/connection/db_connection.php");
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <script src="../../javascript/loginPage.js" type="text/javascript"></script>
-    <script>
-     /*   $(document).ready(function () {
-            createUsers();
-        });*/
-    </script>
-
-
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../../stylesheet/taskView.css">
 
@@ -156,7 +149,7 @@ include_once ("../../includes/connection/db_connection.php");
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
                                     <label for="country">Land</label><br>
-                                    <select class="form-control" name="country">
+                                    <select id="addDestinationCountrySelect" class="form-control" name="country">
                                         <?php
                                         $selectCountryQuery = "SELECT country_id, country FROM country";
 
@@ -179,7 +172,7 @@ include_once ("../../includes/connection/db_connection.php");
                                     $getRegionIdResult = mysqli_query($connection, $getRegionId) or die (mysqli_error($connection));
                                     ?>
 
-                                    <select class="form-control" name="region_id">
+                                    <select id="addDestinationRegionSelect" class="form-control" name="region_id">
                                         <?php
                                         while ($row = mysqli_fetch_array($getRegionIdResult)) {
                                             echo "<option value=" . $row['region_id'] . ">" . $row['region'] . "</option>";
@@ -303,7 +296,7 @@ include_once ("../../includes/connection/db_connection.php");
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
                                 <label for="country">Land</label><br>
-                                <select class="form-control" name="country">
+                                <select id="editDestinationCountrySelect" class="form-control" name="country">
                                     <?php
                                     $selectCountryQuery = "SELECT country_id, country FROM country";
 
@@ -326,7 +319,7 @@ include_once ("../../includes/connection/db_connection.php");
                                 $getRegionIdResult = mysqli_query($connection, $getRegionId) or die (mysqli_error($connection));
                                 ?>
 
-                                <select class="form-control" name="region_id">
+                                <select id="editDestinationRegionSelect" class="form-control" name="region_id">
                                     <?php
                                     while ($row = mysqli_fetch_array($getRegionIdResult)) {
                                         echo "<option value=" . $row['region_id'] . ">" . $row['region'] . "</option>";
