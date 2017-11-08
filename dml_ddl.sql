@@ -19,7 +19,13 @@ CREATE TABLE transfer_type (
   PRIMARY KEY (transfer_id)
 );
 
-insert into transfer_type (transfer_type) VALUE ('cash');
+DROP TABLE IF EXISTS type;
+CREATE TABLE type (
+  type_id INTEGER NOT NULL AUTO_INCREMENT,
+  type VARCHAR(30) NOT NULL,
+  PRIMARY KEY (type_id)
+);
+
 DROP TABLE IF EXISTS partner;
 CREATE TABLE partner (
   partner_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -105,7 +111,6 @@ CREATE TABLE region (
   FOREIGN KEY (country_fs) REFERENCES country (country_id)
 );
 
-
 DROP TABLE IF EXISTS driver;
 CREATE TABLE driver (
   driver_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -129,26 +134,16 @@ CREATE TABLE destination (
   destination VARCHAR(80) NOT NULL,
   country_fs INTEGER,
   region_fs INTEGER,
-  dist_from_zrh INTEGER,
-  dist_from_bsl INTEGER,
-  dist_from_alt INTEGER,
-  route_from_zrh VARCHAR(255),
-  route_from_bsl VARCHAR(255),
-  route_from_alt VARCHAR(255),
-  time_zrh TIME,
-  time_bsl TIME,
-  time_alt TIME,
-  breaks TIME,
-  traffic_jam_surcharge TIME,
-  search_at_place TIME,
-  type VARCHAR(30),
+  breaks INT,
+  traffic_jam_surcharge INT,
+  search_at_place INT,
+  type_fs INTEGER,
   maut_fs INTEGER,
-  suntransfers BOOLEAN DEFAULT FALSE,
-  foxtravels BOOLEAN DEFAULT FALSE,
   PRIMARY KEY (destination_id),
   FOREIGN KEY (country_fs) REFERENCES country (country_id),
   FOREIGN KEY (region_fs) REFERENCES region (region_id),
-  FOREIGN KEY (maut_fs) REFERENCES maut (maut_id)
+  FOREIGN KEY (maut_fs) REFERENCES maut (maut_id),
+  FOREIGN KEY (type_fs) REFERENCES type (type_id)
 );
 
 
@@ -222,7 +217,10 @@ CREATE TABLE income_transfer (
 INSERT INTO maut (maut_strecke, maut_preis_saison_pw, maut_preis_ohne_saison_pw,
                   maut_preis_saison_bus, maut_preis_ohne_saison_bus, maut_preis_saison_bus_anhaenger,
                   maut_preis_ohne_saison_bus_anhaenger, maut_bemerkung) VALUES ('Keine', 0.0,0.0,0.0,0.0,0.0,0.0,'Keine');
+INSERT INTO type (type) VALUE ('City');
+INSERT INTO type (type) VALUE ('Resort');
 
+insert into transfer_type (transfer_type) VALUE ('cash');
 
 INSERT into destination (destination) VALUES ('Strausburg');
 
