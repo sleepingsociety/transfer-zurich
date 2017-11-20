@@ -224,7 +224,7 @@ include_once("../../includes/connection/db_connection.php");
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="destination_id">ID</label><br>
-                            <select class="form-control" name="destination_id">
+                            <select id="destination_id_select" class="form-control" name="destination_id">
                                 <?php
                                 while ($row = mysqli_fetch_array($getDestinationIdResult)) {
                                     echo "<option value=" . $row['destination_id'] . ">" . $row['destination'] . "</option>";
@@ -242,7 +242,7 @@ include_once("../../includes/connection/db_connection.php");
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="destination">Destination</label><br>
-                            <input type="text" class="form-control" name="destination">
+                            <input type="text" class="form-control" name="destination" id="destination_id_select_destination">
                         </div>
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
@@ -289,7 +289,7 @@ include_once("../../includes/connection/db_connection.php");
                             $type_ID = 1;
                             $getTypeIdResult = mysqli_query($connection, $getTypeId) or die (mysqli_error($connection));
                             ?>
-                            <select class="form-control" name="type_id">
+                            <select class="form-control" name="type_id" id="destination_id_select_type">
                                 <?php
                                 while ($row = mysqli_fetch_array($getTypeIdResult)) {
                                     echo "<option value=" . $row['type_id'] . ">" . $row['type'] . "</option>";
@@ -307,7 +307,7 @@ include_once("../../includes/connection/db_connection.php");
                             $getMautIdResult = mysqli_query($connection, $getMautId) or die (mysqli_error($connection));
                             ?>
 
-                            <select class="form-control" name="maut_id">
+                            <select class="form-control" id="destination_id_select_maut"  name="maut_id">
                                 <?php
                                 while ($row = mysqli_fetch_array($getMautIdResult)) {
                                     echo "<option value=" . $row['maut_id'] . ">" . $row['maut_strecke'] . "</option>";
@@ -319,15 +319,15 @@ include_once("../../includes/connection/db_connection.php");
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="traffic_jam_surcharge">Stau Zuschlag</label><br>
-                            <input type="text" class="form-control" name="traffic_jam_surcharge">
+                            <input type="text" class="form-control" name="traffic_jam_surcharge" id="destination_id_select_traffic_jam_surcharge">
                         </div>
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="search_on_site">Suche vor Ort</label><br>
-                            <input type="text" class="form-control" name="search_on_site">
+                            <input type="text" class="form-control" name="search_on_site" id="destination_id_select_search_on_site">
                         </div>
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="breaks">Pausen</label><br>
-                            <input type="text" class="form-control" name="breaks">
+                            <input type="text" class="form-control" name="breaks" id="destination_id_select_breaks">
                         </div>
                     </div>
                     <button name="editDestination" class="btn btn-default" type="submit" value="editDestination">

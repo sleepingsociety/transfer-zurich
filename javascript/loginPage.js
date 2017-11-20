@@ -91,12 +91,62 @@ $(document).ready(function() {
 
 $(document).on('change', '#addDestinationRegionSelect', function(e) {
     // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
+    console.log(this.options[e.target.selectedIndex].text)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "countryRegion"
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                console.log(result);
+                // $("#addDestinationCountrySelect select").val(result);
+                $("#addDestinationCountrySelect option[value=" + result + "]").prop('selected', 'selected');
+
+                // $("#addDestinationCountrySelect").val("Deutschland");
+            }
+        }
+    );
+});
+
+$(document).on('change', '#destination_id_select', function(e) {
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "destination"
+            },
+            type: "POST",
+            datatype: "JSON",
+            success: function(result){
+                var data = JSON.parse(result);
+                console.log(data)
+                $('#destination_id_select_destination').attr("value",data.destination);
+                $('#destination_id_select_traffic_jam_surcharge').attr("value",data.traffic_jam_surcharge);
+                $('#destination_id_select_search_on_site').attr("value",data.search_at_place);
+                $('#destination_id_select_breaks').attr("value",data.breaks);
+
+                 $("#editDestinationCountrySelect option[value=" + data.country + "]").prop('selected', 'selected');
+                 $("#editDestinationRegionSelect option[value=" + data.region + "]").prop('selected', 'selected');
+                 $("#destination_id_select_type option[value=" + data.type + "]").prop('selected', 'selected');
+            }
+        }
+    );
+});
+
+$(document).on('change', '#addDestinationRegionSelect', function(e) {
+    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
     //
     $.ajax(
         {
             url: "../../helper/Functions.php",
             data: {
-                "action": this.options[e.target.selectedIndex].text
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "countryRegion"
             },
             type: "POST",
             datatype: "html",
