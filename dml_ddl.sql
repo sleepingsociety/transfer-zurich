@@ -118,20 +118,21 @@ CREATE TABLE driver (
   firstname VARCHAR(255) NOT NULL,
   surname VARCHAR(255) NOT NULL,
   adress VARCHAR(255) NOT NULL,
-  places_fs INTEGER NOT NULL,
+  destination_fs INTEGER NOT NULL,
   phone VARCHAR(15) NOT NULL,
   drivers_license VARCHAR(255) NOT NULL UNIQUE ,
   drivers_license_back VARCHAR(255) NOT NULL UNIQUE,
   identity_card VARCHAR(255) NOT NULL UNIQUE,
   identitiy_card_back VARCHAR(255) NOT NULL UNIQUE,
   PRIMARY KEY (driver_id),
-  FOREIGN KEY (places_fs) REFERENCES places (places_id)
+  FOREIGN KEY (destination_fs) REFERENCES destination (destination_id)
 );
 
 DROP TABLE IF EXISTS destination;
 CREATE TABLE destination (
   destination_id INTEGER NOT NULL AUTO_INCREMENT,
   destination VARCHAR(80) NOT NULL,
+  zipCode     VARCHAR(15) NOT NULL,
   country_fs INTEGER,
   region_fs INTEGER,
   breaks INT,
@@ -153,11 +154,9 @@ CREATE TABLE hotel (
   hotel VARCHAR(150) NOT NULL,
   hotel_url VARCHAR(255) NOT NULL,
   adresse VARCHAR(200) NOT NULL,
-  places_fs INTEGER NOT NULL,
   country_fs INTEGER NOT NULL,
-  destination_fs INTEGER,
+  destination_fs INTEGER NOT NULL ,
   PRIMARY KEY (hotel_id),
-  FOREIGN KEY (places_fs) REFERENCES places(places_id),
   FOREIGN KEY (country_fs) REFERENCES country (country_id),
   FOREIGN KEY (destination_fs) REFERENCES destination (destination_id)
 );

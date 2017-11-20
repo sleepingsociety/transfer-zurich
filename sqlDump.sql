@@ -51,6 +51,7 @@ DROP TABLE IF EXISTS `destination`;
 CREATE TABLE `destination` (
   `destination_id` int(11) NOT NULL AUTO_INCREMENT,
   `destination` varchar(80) NOT NULL,
+  `zipCode` varchar(15) NOT NULL,
   `country_fs` int(11) DEFAULT NULL,
   `region_fs` int(11) DEFAULT NULL,
   `breaks` int(11) DEFAULT NULL,
@@ -92,7 +93,7 @@ CREATE TABLE `driver` (
   `firstname` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `adress` varchar(255) NOT NULL,
-  `places_fs` int(11) NOT NULL,
+  `destination_fs` int(11) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `drivers_license` varchar(255) NOT NULL,
   `drivers_license_back` varchar(255) NOT NULL,
@@ -104,8 +105,8 @@ CREATE TABLE `driver` (
   UNIQUE KEY `drivers_license_back` (`drivers_license_back`),
   UNIQUE KEY `identity_card` (`identity_card`),
   UNIQUE KEY `identitiy_card_back` (`identitiy_card_back`),
-  KEY `places_fs` (`places_fs`),
-  CONSTRAINT `driver_ibfk_1` FOREIGN KEY (`places_fs`) REFERENCES `places` (`places_id`)
+  KEY `destination_fs` (`destination_fs`),
+  CONSTRAINT `driver_ibfk_1` FOREIGN KEY (`destination_fs`) REFERENCES `destination` (`destination_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -130,16 +131,13 @@ CREATE TABLE `hotel` (
   `hotel` varchar(150) NOT NULL,
   `hotel_url` varchar(255) NOT NULL,
   `adresse` varchar(200) NOT NULL,
-  `places_fs` int(11) NOT NULL,
   `country_fs` int(11) NOT NULL,
-  `destination_fs` int(11) DEFAULT NULL,
+  `destination_fs` int(11) NOT NULL,
   PRIMARY KEY (`hotel_id`),
-  KEY `places_fs` (`places_fs`),
   KEY `country_fs` (`country_fs`),
   KEY `destination_fs` (`destination_fs`),
-  CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`places_fs`) REFERENCES `places` (`places_id`),
-  CONSTRAINT `hotel_ibfk_2` FOREIGN KEY (`country_fs`) REFERENCES `country` (`country_id`),
-  CONSTRAINT `hotel_ibfk_3` FOREIGN KEY (`destination_fs`) REFERENCES `destination` (`destination_id`)
+  CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`country_fs`) REFERENCES `country` (`country_id`),
+  CONSTRAINT `hotel_ibfk_2` FOREIGN KEY (`destination_fs`) REFERENCES `destination` (`destination_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -269,31 +267,6 @@ CREATE TABLE `partner` (
 LOCK TABLES `partner` WRITE;
 /*!40000 ALTER TABLE `partner` DISABLE KEYS */;
 /*!40000 ALTER TABLE `partner` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `places`
---
-
-DROP TABLE IF EXISTS `places`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `places` (
-  `places_id` int(11) NOT NULL AUTO_INCREMENT,
-  `plz` varchar(20) NOT NULL,
-  `city` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`places_id`),
-  UNIQUE KEY `plz` (`plz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `places`
---
-
-LOCK TABLES `places` WRITE;
-/*!40000 ALTER TABLE `places` DISABLE KEYS */;
-/*!40000 ALTER TABLE `places` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -485,4 +458,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-07 22:12:15
+-- Dump completed on 2017-11-20 22:02:14

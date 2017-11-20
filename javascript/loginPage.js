@@ -126,6 +126,7 @@ $(document).on('change', '#destination_id_select', function(e) {
                 var data = JSON.parse(result);
                 console.log(data)
                 $('#destination_id_select_destination').attr("value",data.destination);
+                $('#destination_id_select_zipCode').attr("value",data.zipCode);
                 $('#destination_id_select_traffic_jam_surcharge').attr("value",data.traffic_jam_surcharge);
                 $('#destination_id_select_search_on_site').attr("value",data.search_at_place);
                 $('#destination_id_select_breaks').attr("value",data.breaks);
