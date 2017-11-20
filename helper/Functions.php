@@ -20,7 +20,7 @@ if(isset($_POST['action'])) {
         $action = $_POST['action'];
 
         //$query = "SELECT country_id FROM country c JOIN region r ON r.country_fs=c.country_id WHERE region='". $action . "' LIMIT 1;";
-        $query = "SELECT destination, zipCode country_fs, region_fs, breaks, traffic_jam_surcharge, search_at_place, type_fs, maut_fs FROM destination d
+        $query = "SELECT destination, zipCode, country_fs, region_fs, breaks, traffic_jam_surcharge, search_at_place, type_fs, maut_fs FROM destination d
                   WHERE d.destination='$action' LIMIT 1;";
 
 
