@@ -6,7 +6,7 @@ include_once("../../includes/connection/db_connection.php");
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Transfer-Zurich</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
@@ -92,11 +92,15 @@ include_once("../../includes/connection/db_connection.php");
                         if (!$retval) {
                             die('could not enter date: ' . mysqli_error($connection));
                         }
-
-                        echo "Entered data successfully\n";
-
-                    } else {
-                        ?>
+                    ?>
+                    <script>
+                        $(document).ready(function () {
+                            showToast("Entered data successfully");
+                        });
+                    </script>
+                    <?php
+                        }
+                    ?>
 
                         <h1>Neue Destination hinzufügen</h1>
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -111,7 +115,7 @@ include_once("../../includes/connection/db_connection.php");
                                     <label for="addDestinationCountrySelect">Land</label><br>
                                     <select id="addDestinationCountrySelect" class="form-control" name="country">
                                         <?php
-                                        $selectCountryQuery = "SELECT country_id, country FROM country";
+                                        $selectCountryQuery = "SELECT country_id, country FROM country GROUP BY country_id;";
 
                                         $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
 
@@ -204,18 +208,21 @@ include_once("../../includes/connection/db_connection.php");
                             </button>
 
                         </form>
-                        <?php
-                    }
-                    ?>
-
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-lg-6">
 
                     <?php
 
-                    if (isset($_POST["addDestination"])) {
+                    if (isset($_POST["editDestination"])) {
 
+                        if (!get_magic_quotes_gpc()) {
+
+                            $destination_ID = addslashes($_POST["destination_id"]);
+
+                        } else {
+                            $destination_ID  = $_POST["destination_id"];
+                        }
 
                         if (!get_magic_quotes_gpc()) {
                             $destination = addslashes($_POST["destination"]);
@@ -234,22 +241,33 @@ include_once("../../includes/connection/db_connection.php");
 
                         // SQL for updating the database record
 
-                        $updateDestinationQuery = "UPDATE destination 
-                    SET destination = '$destination', SET zipCode = '$zipCode', SET country_fs = '$country', 
-                    SET region_fs = '$region', SET breaks = '$breaks', SET traffic_jam_surcharge = '$traffic_jam_surcharge', 
-                    SET search_at_place = '$search_on_site', SET type_fs = '$type_id', SET maut_fs = '$maut_auswahl'
-                    WHERE destination_id = $destination_ID";
+                    $updateDestinationQuery = "UPDATE destination 
+                                               SET destination = '" . $destination . "', 
+                                               zipCode = '" . $zipCode . "', 
+                                               country_fs = " . $country . ", 
+                                               region_fs = " . $region . ", 
+                                               breaks = " . $breaks . ", 
+                                               traffic_jam_surcharge = " . $traffic_jam_surcharge . ", 
+                                               search_at_place = " . $search_on_site . ", 
+                                               type_fs = " . $type_id . ", 
+                                               maut_fs = " . $maut_auswahl . "
+                                               WHERE destination_id = " . $destination_ID . ";";
 
                         mysqli_select_db($connection, $dbname);
 
                         $updateDestination = mysqli_query($connection, $updateDestinationQuery);
 
                         if (!$updateDestination) {
-                            die('could not enter date: ' . mysqli_error($connection));
+                            die('could not enter update: ' . mysqli_error($connection));
                         }
-                        echo "Entered data successfully\n";
-
-                    } else {
+                    ?>
+                    <script>
+                        $(document).ready(function () {
+                            showToast("Entered data successfully");
+                        });
+                    </script>
+                    <?php
+                    }
                         ?>
                         <h1>Destinationen Editieren</h1>
                         <?php
@@ -273,31 +291,34 @@ include_once("../../includes/connection/db_connection.php");
                         }
                         ?>
 
-                        <div class="row">
-                            <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                <label for="destination_id_select">ID</label><br>
-                                <select id="destination_id_select" class="form-control" name="destination_id">
-                                    <?php
-                                    while ($row = mysqli_fetch_array($getDestinationIdResult)) {
-                                        echo "<option value=" . $row['destination_id'] . ">" . $row['destination'] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
+
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <div class="row">
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="destination_id_select">ID</label><br>
+                                    <select id="destination_id_select" class="form-control" name="destination_id">
+                                        <?php
+                                        while ($row = mysqli_fetch_array($getDestinationIdResult)) {
+                                            echo "<option value=" . $row['destination_id'] . ">" . $row['destination'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="destination_id_select_destination">Destination</label><br>
                                     <input type="text" class="form-control" name="destination"
                                            id="destination_id_select_destination">
                                 </div>
+
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
                                     <label for="editDestinationCountrySelect">Land</label><br>
                                     <select id="editDestinationCountrySelect" class="form-control" name="country">
                                         <?php
-                                        $selectCountryQuery = "SELECT country_id, country FROM country";
+                                        $selectCountryQuery = "SELECT country_id, country FROM country GROUP BY country_id";
 
                                         $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
 
@@ -391,14 +412,11 @@ include_once("../../includes/connection/db_connection.php");
                                 Änderungen Speichern
                             </button>
                         </form>
-                        <?php
-                    }
-                    ?>
-
                 </div>
-
             </div>
         </div>
+        <div id="snackbar"></div>
+
     </div>
 </body>
 </html>

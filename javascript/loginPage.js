@@ -184,6 +184,33 @@ $(document).on('change', '#editDestinationRegionSelect', function(e) {
     );
 });
 
+function showToast(message) {
+    var x = $("#snackbar");
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute("class", "toast");
+    newDiv.innerHTML = message;
+    newDiv.setAttribute("style", "bottom: 30px; display: inline-block;");
+    document.getElementById("snackbar").appendChild(newDiv);
+
+    $.when($(newDiv).fadeIn(400).delay(5000).fadeOut(400)).done(function() {
+        // this.remove();
+    });
+    var toasts = $("div#snackbar div.toast");
+
+    if(toasts.length > 5) {
+        toasts[0].remove();
+    }
+
+    $(toasts).each(function (i) {
+        if(i !== toasts.length-1) {
+            var bottom = (parseInt($(toasts[i]).css('bottom').replace("px", "")) + 60) + "px";
+            $(toasts[i]).css('bottom', bottom);
+        }
+        var width = "-" +(parseInt($(toasts[i]).css('width'))/2) + "px";
+        $(toasts[i]).css('margin-left', width);
+    });
+}
+
 
 
 function hideAttention() {
