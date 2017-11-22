@@ -91,12 +91,63 @@ $(document).ready(function() {
 
 $(document).on('change', '#addDestinationRegionSelect', function(e) {
     // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
+    console.log(this.options[e.target.selectedIndex].text)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "countryRegion"
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                console.log(result);
+                // $("#addDestinationCountrySelect select").val(result);
+                $("#addDestinationCountrySelect option[value=" + result + "]").prop('selected', 'selected');
+
+                // $("#addDestinationCountrySelect").val("Deutschland");
+            }
+        }
+    );
+});
+
+$(document).on('change', '#destination_id_select', function(e) {
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "destination"
+            },
+            type: "POST",
+            datatype: "JSON",
+            success: function(result){
+                var data = JSON.parse(result);
+                console.log(data)
+                $('#destination_id_select_destination').attr("value",data.destination);
+                $('#destination_id_select_zipCode').attr("value",data.zipCode);
+                $('#destination_id_select_traffic_jam_surcharge').attr("value",data.traffic_jam_surcharge);
+                $('#destination_id_select_search_on_site').attr("value",data.search_at_place);
+                $('#destination_id_select_breaks').attr("value",data.breaks);
+
+                 $("#editDestinationCountrySelect option[value=" + data.country + "]").prop('selected', 'selected');
+                 $("#editDestinationRegionSelect option[value=" + data.region + "]").prop('selected', 'selected');
+                 $("#destination_id_select_type option[value=" + data.type + "]").prop('selected', 'selected');
+            }
+        }
+    );
+});
+
+$(document).on('change', '#addDestinationRegionSelect', function(e) {
+    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
     //
     $.ajax(
         {
             url: "../../helper/Functions.php",
             data: {
-                "action": this.options[e.target.selectedIndex].text
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "countryRegion"
             },
             type: "POST",
             datatype: "html",
@@ -132,6 +183,33 @@ $(document).on('change', '#editDestinationRegionSelect', function(e) {
         }
     );
 });
+
+function showToast(message) {
+    var x = $("#snackbar");
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute("class", "toast");
+    newDiv.innerHTML = message;
+    newDiv.setAttribute("style", "bottom: 30px; display: inline-block;");
+    document.getElementById("snackbar").appendChild(newDiv);
+
+    $.when($(newDiv).fadeIn(400).delay(5000).fadeOut(400)).done(function() {
+        // this.remove();
+    });
+    var toasts = $("div#snackbar div.toast");
+
+    if(toasts.length > 5) {
+        toasts[0].remove();
+    }
+
+    $(toasts).each(function (i) {
+        if(i !== toasts.length-1) {
+            var bottom = (parseInt($(toasts[i]).css('bottom').replace("px", "")) + 60) + "px";
+            $(toasts[i]).css('bottom', bottom);
+        }
+        var width = "-" +(parseInt($(toasts[i]).css('width'))/2) + "px";
+        $(toasts[i]).css('margin-left', width);
+    });
+}
 
 
 

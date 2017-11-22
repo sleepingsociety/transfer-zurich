@@ -15,4 +15,3 @@ if (!isset($_SESSION)) {
 }
 
 if (!$_SESSION["login"]) header('Location: /index.php');
-

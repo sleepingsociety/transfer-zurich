@@ -1,21 +1,18 @@
 <?php
-include_once ("../../includes/connection/db_connection.php");
+include_once("../../includes/connection/db_connection.php");
 ?>
 
 <html>
-
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>Transfer-Zurich</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
-
 
     <!-- Optional theme -->
     <link rel="stylesheet"
@@ -28,17 +25,8 @@ include_once ("../../includes/connection/db_connection.php");
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
     <script src="../../javascript/loginPage.js" type="text/javascript"></script>
-    <script>
-       /* $(document).ready(function () {
-            createUsers();
-        });*/
-    </script>
-
-
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="../../stylesheet/taskView.css">
-
-
 </head>
 
 <body>
@@ -158,6 +146,8 @@ include_once ("../../includes/connection/db_connection.php");
                                 }
                                 ?>
                             </select>
+
+
                         </div>
 
                         <div id="confirmCountryButton" class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -167,7 +157,6 @@ include_once ("../../includes/connection/db_connection.php");
                         </div>
 
                     </div>
-
 
                 </form>
                 <?php
