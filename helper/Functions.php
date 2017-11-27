@@ -45,6 +45,73 @@ if(isset($_POST['action'])) {
         }
 
         echo json_encode($response);
+    } else if($_POST['type'] === "CountryRegionEditCountry") {
+        $action = $_POST['action'];
+
+        $query = "SELECT country, short FROM country
+                  WHERE country='$action' LIMIT 1;";
+
+        $selectCountryQuery = $query;
+
+        $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
+
+        $response = [];
+
+        while ($row = mysqli_fetch_array($selectCountryResult)) {
+            $response = [
+                'country' => $row['country'],
+                'short' => $row['short']
+            ];
+        }
+
+        echo json_encode($response);
+    } else if($_POST['type'] === "CountryRegionEditRegion") {
+        $action = $_POST['action'];
+
+        $query = "SELECT region, country FROM region
+                  JOIN country ON country_id=country_fs
+                  WHERE region='$action' LIMIT 1;";
+
+        $selectCountryQuery = $query;
+
+        $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
+
+        $response = [];
+
+        while ($row = mysqli_fetch_array($selectCountryResult)) {
+            $response = [
+                'countryName' => $row['country'],
+                'regionName' => $row['region']
+            ];
+        }
+
+        echo json_encode($response);
+    } else if($_POST['type'] === "MautEdit") {
+        $action = $_POST['action'];
+
+        $query = "SELECT maut_strecke, maut_preis_saison_pw, maut_preis_ohne_saison_pw, maut_preis_saison_bus, 
+                    maut_preis_ohne_saison_bus, maut_preis_saison_bus_anhaenger, maut_preis_ohne_saison_bus_anhaenger, maut_bemerkung FROM maut WHERE maut_id = $action";
+
+        $selectCountryQuery = $query;
+
+        $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
+
+        $response = [];
+
+        while ($row = mysqli_fetch_array($selectCountryResult)) {
+            $response = [
+                'maut_strecke' => $row['maut_strecke'],
+                'maut_preis_saison_pw' => $row['maut_preis_saison_pw'],
+                'maut_preis_ohne_saison_pw' => $row['maut_preis_ohne_saison_pw'],
+                'maut_preis_saison_bus' => $row['maut_preis_saison_bus'],
+                'maut_preis_ohne_saison_bus' => $row['maut_preis_ohne_saison_bus'],
+                'maut_preis_saison_bus_anhaenger' => $row['maut_preis_saison_bus_anhaenger'],
+                'maut_preis_ohne_saison_bus_anhaenger' => $row['maut_preis_ohne_saison_bus_anhaenger'],
+                'maut_bemerkung' => $row['maut_bemerkung']
+            ];
+        }
+
+        echo json_encode($response);
     }
 
 }

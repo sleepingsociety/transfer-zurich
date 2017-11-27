@@ -79,15 +79,15 @@ var allTasks = [{name:"Auftrag01", date:"2017 02 14", status:"Abgeschlossen"},
     {name:"Auftrag13", date:"2017 04 13", status:"Abgelehnt"}];
 
 
-$(document).ready(function() {
-    document.getElementById("attention").hidden = true;
-    $( ".footer" ).click(function() {
-        console.log("test")
-    });
-
-
-
-});
+// $(document).ready(function() {
+//     document.getElementById("attention").hidden = true;
+//     $( ".footer" ).click(function() {
+//         console.log("test")
+//     });
+//
+//
+//
+// });
 
 $(document).on('change', '#addDestinationRegionSelect', function(e) {
     // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
@@ -124,7 +124,6 @@ $(document).on('change', '#destination_id_select', function(e) {
             datatype: "JSON",
             success: function(result){
                 var data = JSON.parse(result);
-                console.log(data)
                 $('#destination_id_select_destination').attr("value",data.destination);
                 $('#destination_id_select_zipCode').attr("value",data.zipCode);
                 $('#destination_id_select_traffic_jam_surcharge').attr("value",data.traffic_jam_surcharge);
@@ -179,6 +178,73 @@ $(document).on('change', '#editDestinationRegionSelect', function(e) {
                 $("#editDestinationCountrySelect option[value=" + result + "]").prop('selected', 'selected');
 
                 // $("#addDestinationCountrySelect").val("Deutschland");
+            }
+        }
+    );
+});
+
+$(document).on('change', '#editCountryRegionSelectEditCountry', function(e) {
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "CountryRegionEditCountry"
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                var data = JSON.parse(result);
+                console.log(data.country)
+                $('#editCountryRegionInputEditCountryName').val(data.country);
+                $('#editCountryRegionInputEditCountryShort').val(data.short);
+            }
+        }
+    );
+});
+
+$(document).on('change', '#editCountryRegionSelectEditRegion', function(e) {
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].text,
+                "type": "CountryRegionEditRegion"
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                var data = JSON.parse(result);
+                $('#editCountryRegionInputEditRegionName').val(data.regionName);
+                $("#editCountryRegionInputEditRegionCountry option[value=" + data.countryName + "]").prop('selected', 'selected');
+            }
+        }
+    );
+});
+
+$(document).on('change', '#editMautSelect', function(e) {
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].value,
+                "type": "MautEdit"
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                var data = JSON.parse(result);
+                console.log(data)
+                $('#maut_strecke').val(data.maut_strecke);
+                $('#maut_preis_saison_pw').val(data.maut_preis_saison_pw);
+                $('#maut_preis_ohne_saison_pw').val(data.maut_preis_ohne_saison_pw);
+                $('#maut_preis_saison_bus').val(data.maut_preis_saison_bus);
+                $('#maut_preis_ohne_saison_bus').val(data.maut_preis_ohne_saison_bus);
+                $('#maut_preis_saison_bus_anhaenger').val(data.maut_preis_saison_bus_anhaenger);
+                $('#maut_preis_ohne_saison_bus_anhaenger').val(data.maut_preis_ohne_saison_bus_anhaenger);
+                $('#maut_bemerkung').val(data.maut_bemerkung);
+
+
             }
         }
     );
