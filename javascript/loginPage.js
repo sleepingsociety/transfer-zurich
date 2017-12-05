@@ -112,6 +112,96 @@ $(document).on('change', '#addDestinationRegionSelect', function(e) {
     );
 });
 
+$(document).on('change', '#editDestinationCountrySelectSearch', function(e) {
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].value,
+                "type": "editDestinationCountrySelectSearch"
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                $('#editDestinationRegionSelectSearch')
+                    .find('option')
+                    .remove()
+                    .end()
+                ;
+
+                $('#destination_id_select')
+                    .find('option')
+                    .remove()
+                    .end()
+                ;
+
+                var json = JSON.parse(result);
+
+                json[0].forEach(function(data) {
+                    $('#editDestinationRegionSelectSearch')
+                        .append('<option value=' + data['region_id'] + '>'  + data['region'] + '</option>')
+                    ;
+                });
+
+                json[1].forEach(function(data) {
+                    $('#destination_id_select')
+                        .append('<option value=' + data['destination_id'] + '>'  + data['destination'] + '</option>')
+                    ;
+                });
+
+                $('#destination_id_select_destination').attr("value",json[2][0]['destination']);
+                $('#destination_id_select_zipCode').attr("value",json[2][0]['zipCode']);
+                $('#destination_id_select_traffic_jam_surcharge').attr("value",json[2][0]['traffic_jam_surcharge']);
+                $('#destination_id_select_search_on_site').attr("value",json[2][0]['search_at_place']);
+                $('#destination_id_select_breaks').attr("value",json[2][0]['breaks']);
+
+                $("#editDestinationCountrySelect option[value=" + json[2][0]['country'] + "]").prop('selected', 'selected');
+                $("#editDestinationRegionSelect option[value=" + json[2][0]['region'] + "]").prop('selected', 'selected');
+                $("#destination_id_select_type option[value=" + json[2][0]['type'] + "]").prop('selected', 'selected');
+            }
+        }
+    );
+});
+
+$(document).on('change', '#editDestinationRegionSelectSearch', function(e) {
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: {
+                "action": this.options[e.target.selectedIndex].value,
+                "type": "editDestinationRegionSelectSearch"
+            },
+            type: "POST",
+            datatype: "html",
+            success: function(result){
+                $('#destination_id_select')
+                    .find('option')
+                    .remove()
+                    .end()
+                ;
+
+                var json = JSON.parse(result);
+
+                json[0].forEach(function(data) {
+                    $('#destination_id_select')
+                        .append('<option value=' + data['destination_id'] + '>'  + data['destination'] + '</option>')
+                    ;
+                });
+
+                $('#destination_id_select_destination').attr("value",json[1][0]['destination']);
+                $('#destination_id_select_zipCode').attr("value",json[1][0]['zipCode']);
+                $('#destination_id_select_traffic_jam_surcharge').attr("value",json[1][0]['traffic_jam_surcharge']);
+                $('#destination_id_select_search_on_site').attr("value",json[1][0]['search_at_place']);
+                $('#destination_id_select_breaks').attr("value",json[1][0]['breaks']);
+
+                $("#editDestinationCountrySelect option[value=" + json[1][0]['country'] + "]").prop('selected', 'selected');
+                $("#editDestinationRegionSelect option[value=" + json[1][0]['region'] + "]").prop('selected', 'selected');
+                $("#destination_id_select_type option[value=" + json[1][0]['type'] + "]").prop('selected', 'selected');
+            }
+        }
+    );
+});
+
 $(document).on('change', '#destination_id_select', function(e) {
     $.ajax(
         {

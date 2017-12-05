@@ -80,7 +80,7 @@ include_once("../../includes/connection/db_connection.php");
                         $type_id = $_POST['type_id'];
                         $country = $_POST['country'];
                         $maut_auswahl = $_POST['maut_id'];
-                        $region = 1;
+                        $region = $_POST['region_id'];
 
                         $sql = "INSERT INTO destination (destination, zipCode, country_fs, region_fs, breaks, traffic_jam_surcharge, search_at_place, type_fs, maut_fs)
                         VALUES ('$destination', '$zipCode','$country', '$region', '$breaks','$traffic_jam_surcharge','$search_on_site', '$type_id', '$maut_auswahl')";
@@ -88,6 +88,7 @@ include_once("../../includes/connection/db_connection.php");
                         mysqli_select_db($connection, $dbname);
 
                         $retval = mysqli_query($connection, $sql);
+
 
                         if (!$retval) {
                             die('could not enter date: ' . mysqli_error($connection));
@@ -252,7 +253,7 @@ include_once("../../includes/connection/db_connection.php");
                                                type_fs = " . $type_id . ", 
                                                maut_fs = " . $maut_auswahl . "
                                                WHERE destination_id = " . $destination_ID . ";";
-
+                        unset($_POST);
                         mysqli_select_db($connection, $dbname);
 
                         $updateDestination = mysqli_query($connection, $updateDestinationQuery);
@@ -272,9 +273,9 @@ include_once("../../includes/connection/db_connection.php");
                         <h1>Destinationen Editieren</h1>
                         <?php
 
-
+                        //SELECT destination_id, destination FROM destination WHERE region_fs=(SELECT region_id FROM region WHERE country_fs=(SELECT MIN(country_id) FROM country));
                         // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
-                        $getDestinationId = "SELECT destination_id, destination FROM destination";
+                        $getDestinationId = "SELECT destination_id, destination FROM destination WHERE region_fs=(SELECT MIN(region_id) FROM region WHERE country_fs=(SELECT MIN(country_id) FROM country));";
                         $getDestinationIdResult = mysqli_query($connection, $getDestinationId) or die (mysqli_error($connection));
 
                         $destination_ID = 1;
@@ -295,6 +296,40 @@ include_once("../../includes/connection/db_connection.php");
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
+
+                                    <label for="editDestinationCountrySelect">Land</label><br>
+                                    <select id="editDestinationCountrySelectSearch" class="form-control" name="country">
+                                        <?php
+                                        $selectCountryQuery = "SELECT country_id, country FROM country GROUP BY country_id";
+
+                                        $selectCountryResult = mysqli_query($connection, $selectCountryQuery);
+
+                                        $country_id = $selectCountryRow['country_id'];
+
+                                        while ($selectCountryRow = mysqli_fetch_array($selectCountryResult)) {
+                                            echo "<option value=" . $selectCountryRow['country_id'] . ">" . $selectCountryRow['country'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
+                                    <label for="region">Region</label><br>
+
+                                    <?php
+                                    // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
+                                    $getRegionId = "SELECT region_id, region, country_fs FROM region WHERE country_fs=(SELECT MIN(country_id) FROM country);";
+                                    $getRegionIdResult = mysqli_query($connection, $getRegionId) or die (mysqli_error($connection));
+                                    ?>
+
+                                    <select id="editDestinationRegionSelectSearch" class="form-control" name="region_id">
+                                        <?php
+                                        while ($row = mysqli_fetch_array($getRegionIdResult)) {
+                                            echo "<option value=" . $row['region_id'] . ">" . $row['region'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="destination_id_select">ID</label><br>
                                     <select id="destination_id_select" class="form-control" name="destination_id">
                                         <?php
@@ -305,7 +340,6 @@ include_once("../../includes/connection/db_connection.php");
                                     </select>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="destination_id_select_destination">Destination</label><br>
