@@ -201,7 +201,7 @@ include_once ("../../includes/connection/db_connection.php");
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="maut_id">ID</label><br>
-                            <select class="form-control" name="maut_id">
+                            <select class="form-control" name="maut_id" id="editMautSelect">
                                 <?php
                                 while ($row = mysqli_fetch_array($getMautIdResult)) {
                                     echo "<option value=" . $row['maut_id'] . ">" . $row['maut_strecke'] . "</option>";
@@ -233,43 +233,43 @@ include_once ("../../includes/connection/db_connection.php");
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="maut_strecke">Maut</label><br>
                                 <input type="text" value="<?php echo $row['maut_strecke']; ?>" class="form-control"
-                                       name="maut_strecke">
+                                       name="maut_strecke" id="maut_strecke">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="bemerkung">Bemerkung</label><br>
                                 <input type="text" value="<?php echo $row['maut_bemerkung']; ?>" class="form-control"
-                                       name="bemerkung">
+                                       name="bemerkung" id="maut_bemerkung">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="preis_saison_pw">Preis Saison PW</label><br>
-                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_saison_pw']; ?>" class="form-control" name="preis_saison_pw">
+                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_saison_pw']; ?>" class="form-control" name="preis_saison_pw" id="maut_preis_saison_pw">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="preise_ohne_saison_pw">Preis ohne Saison PW</label><br>
-                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_ohne_saison_pw']; ?>" class="form-control" name="preise_ohne_saison_pw">
+                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_ohne_saison_pw']; ?>" class="form-control" name="preise_ohne_saison_pw" id="maut_preis_ohne_saison_pw">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="preis_saison_bus">Preis Saison Bus</label><br>
-                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_saison_bus']; ?>" class="form-control" name="preis_saison_bus">
+                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_saison_bus']; ?>" class="form-control" name="preis_saison_bus" id="maut_preis_saison_bus">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="preis_ohne_saison_bus">Preis ohne Saison Bus</label><br>
-                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_ohne_saison_bus']; ?>" class="form-control" name="preis_ohne_saison_bus">
+                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_ohne_saison_bus']; ?>" class="form-control" name="preis_ohne_saison_bus" id="maut_preis_ohne_saison_bus">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="preis_saison_anhaenger">Preis Saison Bus Anhänger</label><br>
-                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_saison_bus_anhaenger']; ?>" class="form-control" name="preis_saison_anhaenger">
+                                <input type="number" step="0.05" value="<?php echo $row['maut_preis_saison_bus_anhaenger']; ?>" class="form-control" name="preis_saison_anhaenger" id="maut_preis_saison_bus_anhaenger">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="preis_ohne_saison_anhaenger">Preis ohne Saison Bus Anhänger</label><br>
                                 <input type="number" step="0.05" value="<?php echo $row['maut_preis_ohne_saison_bus_anhaenger']; ?>" class="form-control"
-                                       name="preis_ohne_saison_anhaenger">
+                                       name="preis_ohne_saison_anhaenger" id="maut_preis_ohne_saison_bus_anhaenger">
                             </div>
                         </div>
                         <div id="saveEditsButton">

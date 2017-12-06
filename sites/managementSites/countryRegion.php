@@ -86,7 +86,13 @@ include_once("../../includes/connection/db_connection.php");
                         die('could not enter date: ' . mysqli_error($connection));
                     }
 
-                    echo "Entered data successfully\n";
+                    ?>
+                <script>
+                    $(document).ready(function () {
+                        showToast("Entered data successfully");
+                    });
+                </script>
+                <?php
 
                 }
                 ?>
@@ -112,7 +118,7 @@ include_once("../../includes/connection/db_connection.php");
 
             <?php
             // SQL for Getting Data from DB & Put it in Form, & Update it when saved etc.
-            $getCountryId = "SELECT country_id, country FROM country";
+            $getCountryId = "SELECT country_id, country FROM country GROUP BY country_id";
             $getCountryIdResult = mysqli_query($connection, $getCountryId) or die (mysqli_error($connection));
             ?>
 
@@ -139,7 +145,7 @@ include_once("../../includes/connection/db_connection.php");
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="country">ID</label><br>
-                            <select class="form-control" name="country_id">
+                            <select class="form-control" name="country_id" id="editCountryRegionSelectEditCountry">
                                 <?php
                                 while ($row = mysqli_fetch_array($getCountryIdResult)) {
                                     echo "<option value=" . $row['country_id'] . ">" . $row['country'] . "</option>";
@@ -149,13 +155,6 @@ include_once("../../includes/connection/db_connection.php");
 
 
                         </div>
-
-                        <div id="confirmCountryButton" class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <button name="confirmCountryButton" class="btn btn-default" type="submit" value="saveEdits">
-                                Auswählen
-                            </button>
-                        </div>
-
                     </div>
 
                 </form>
@@ -171,13 +170,13 @@ include_once("../../includes/connection/db_connection.php");
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="countryEdit">Land</label><br>
                                 <input type="text" value="<?php echo $row['country']; ?>" class="form-control"
-                                       name="countryEdit">
+                                       name="countryEdit" id="editCountryRegionInputEditCountryName">
                             </div>
 
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="shortEdit">Kürzel</label><br>
                                 <input type="text" value="<?php echo $row['short']; ?>" class="form-control"
-                                       name="shortEdit">
+                                       name="shortEdit" id="editCountryRegionInputEditCountryShort">
                             </div>
                         </div>
                         <div id="saveEditsButton">
@@ -218,7 +217,13 @@ include_once("../../includes/connection/db_connection.php");
                 die('could not enter date: ' . mysqli_error($connection));
             }
 
-            echo "Entered data successfully\n";
+            ?>
+            <script>
+                $(document).ready(function () {
+                    showToast("Entered data successfully");
+                });
+            </script>
+            <?php
 
         }
         ?>
@@ -290,7 +295,7 @@ include_once("../../includes/connection/db_connection.php");
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
                             <label for="region">ID</label><br>
-                            <select class="form-control" name="region_id">
+                            <select class="form-control" name="region_id" id="editCountryRegionSelectEditRegion">
                                 <?php
                                 while ($row = mysqli_fetch_array($getRegionIdResult)) {
                                     echo "<option value=" . $row['region_id'] . ">" . $row['region'] . "</option>";
@@ -298,20 +303,13 @@ include_once("../../includes/connection/db_connection.php");
                                 ?>
                             </select>
                         </div>
-
-                        <div id="confirmRegionButton" class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <button name="confirmRegionButton" class="btn btn-default" type="submit" value="saveEdits">
-                                Auswählen
-                            </button>
-                        </div>
-
                     </div>
 
 
                 </form>
 
                 <?php
-                $getRegionAndCountry = "SELECT region_id, region, country_fs FROM region WHERE region_id = $region_ID";
+                $getRegionAndCountry = "SELECT region_id, region, country_fs FROM region WHERE region_id = $region_ID GROUP BY region_id";
                 $getRegionAndCountryResult = mysqli_query($connection, $getRegionAndCountry) or die (mysqli_error($connection));
 
                 while ($row = mysqli_fetch_array($getRegionAndCountryResult)) {
@@ -322,12 +320,12 @@ include_once("../../includes/connection/db_connection.php");
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="region">Region</label><br>
                                 <input type="text" value="<?php echo $row[1]; ?>" class="form-control"
-                                       name="region">
+                                       name="region" id="editCountryRegionInputEditRegionName">
                             </div>
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
                                 <label for="country_fs">Land</label><br>
-                                <select class="form-control" name="country_fs">
+                                <select class="form-control" name="country_fs" id="editCountryRegionInputEditRegionCountry">
                                     <?php
 
                                     $selectCountryQuery = "SELECT country_id, country FROM country";
@@ -364,6 +362,7 @@ include_once("../../includes/connection/db_connection.php");
             </div>
         </div>
     </div>
+    <div id="snackbar"></div>
 </div>
 </body>
 </html>
