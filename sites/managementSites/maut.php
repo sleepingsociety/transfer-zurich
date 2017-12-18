@@ -209,14 +209,6 @@ include_once ("../../includes/connection/db_connection.php");
                                 ?>
                             </select>
                         </div>
-
-                        <div id="confirmCountryButton" class="form-group col-sm-4 col-md-4 col-lg-4">
-                            <label for="confirmMautButton"> Kuuhle Button</label><br>
-                            <button name="confirmMautButton" class="btn btn-default" type="submit" value="saveMautID">
-                                Auswählen
-                            </button>
-                        </div>
-
                     </div>
 
 
@@ -228,7 +220,7 @@ include_once ("../../includes/connection/db_connection.php");
 
                 while ($row = mysqli_fetch_array($getCountryAndShortResult)) {
                     ?>
-                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form id="maut_form" method="post">
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="maut_strecke">Maut</label><br>
@@ -272,11 +264,10 @@ include_once ("../../includes/connection/db_connection.php");
                                        name="preis_ohne_saison_anhaenger" id="maut_preis_ohne_saison_bus_anhaenger">
                             </div>
                         </div>
-                        <div id="saveEditsButton">
-                            <button name="saveCountryEdits" class="btn btn-default" type="submit" value="saveEdits">
+
+                            <button id="mautUpdateButton" class="btn btn-default" type="button" onclick="updateMaut()">
                                 Speichern
                             </button>
-                        </div
                     </form>
                     <?php
                 }

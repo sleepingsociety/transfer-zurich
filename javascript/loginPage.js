@@ -78,17 +78,6 @@ var allTasks = [{name:"Auftrag01", date:"2017 02 14", status:"Abgeschlossen"},
     {name:"Auftrag12", date:"2017 04 30", status:"Angenommen"},
     {name:"Auftrag13", date:"2017 04 13", status:"Abgelehnt"}];
 
-
-// $(document).ready(function() {
-//     document.getElementById("attention").hidden = true;
-//     $( ".footer" ).click(function() {
-//         console.log("test")
-//     });
-//
-//
-//
-// });
-
 $(document).on('change', '#addDestinationRegionSelect', function(e) {
     // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
     console.log(this.options[e.target.selectedIndex].text)
@@ -229,8 +218,6 @@ $(document).on('change', '#destination_id_select', function(e) {
 });
 
 $(document).on('change', '#addDestinationRegionSelect', function(e) {
-    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
-    //
     $.ajax(
         {
             url: "../../helper/Functions.php",
@@ -252,8 +239,6 @@ $(document).on('change', '#addDestinationRegionSelect', function(e) {
 });
 
 $(document).on('change', '#editDestinationRegionSelect', function(e) {
-    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
-    //
     $.ajax(
         {
             url: "../../helper/Functions.php",
@@ -264,10 +249,7 @@ $(document).on('change', '#editDestinationRegionSelect', function(e) {
             datatype: "html",
             success: function(result){
                 console.log(result);
-                // $("#addDestinationCountrySelect select").val(result);
                 $("#editDestinationCountrySelect option[value=" + result + "]").prop('selected', 'selected');
-
-                // $("#addDestinationCountrySelect").val("Deutschland");
             }
         }
     );
@@ -339,6 +321,35 @@ $(document).on('change', '#editMautSelect', function(e) {
         }
     );
 });
+
+function updateMaut() {
+    var data = $('#maut_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("editMautSelect").options[document.getElementById("editMautSelect").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateMaut"
+        }
+    );
+    console.log(data)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                console.log(result);
+            }
+        }
+    );
+}
+
+
 
 function showToast(message) {
     var x = $("#snackbar");

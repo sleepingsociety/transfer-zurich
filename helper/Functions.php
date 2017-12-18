@@ -231,6 +231,42 @@ if(isset($_POST['action'])) {
         array_push($responses, $response2);
 
         echo json_encode($responses);
+    } else if($_POST['type'] === "updateMaut") {
+        $action = $_POST['action'];
+        $route = $_POST['maut_strecke'];
+        $priceWSeason = $_POST['preis_saison_pw'];
+        $priceWOSeason = $_POST['preis_ohne_saison_pw'];
+        $priceWSeasonBus = $_POST['preis_saison_bus'];
+        $priceWOSeasonBus = $_POST['preis_ohne_saison_bus'];
+        $priceWSeasonBusTrailer = $_POST['preis_saison_bus_anhaenger'];
+        $priceWOSeasonBusTrailer = $_POST['preis_ohne_saison_bus_anhaenger'];
+        $notice = $_POST['bemerkung'];
+
+        $query = "UPDATE 
+                      maut 
+                  SET 
+                      maut_strecke='$route',
+                      maut_preis_saison_pw='$priceWSeason',  
+                      maut_preis_ohne_saison_pw='$priceWOSeason', 
+                      maut_preis_saison_bus='$priceWSeasonBus', 
+                      maut_preis_ohne_saison_bus='$priceWOSeasonBus', 
+                      maut_preis_saison_bus_anhaenger='$priceWSeasonBusTrailer', 
+                      maut_preis_ohne_saison_bus_anhaenger='$priceWOSeasonBusTrailer', 
+                      maut_bemerkung='$notice' 
+                  WHERE 
+                      maut_id = $action";
+
+        $selectCountryQuery = $query;
+
+        if (mysqli_query($connection, $selectCountryQuery) === TRUE) {
+            $response = "Record updated successfully";
+        } else {
+            $response = "Error updating record: " . $connection->error;
+        }
+        echo json_encode($response);
+        unset($_POST);
+
     }
+
     unset($_POST);
 }
