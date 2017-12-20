@@ -78,17 +78,6 @@ var allTasks = [{name:"Auftrag01", date:"2017 02 14", status:"Abgeschlossen"},
     {name:"Auftrag12", date:"2017 04 30", status:"Angenommen"},
     {name:"Auftrag13", date:"2017 04 13", status:"Abgelehnt"}];
 
-
-// $(document).ready(function() {
-//     document.getElementById("attention").hidden = true;
-//     $( ".footer" ).click(function() {
-//         console.log("test")
-//     });
-//
-//
-//
-// });
-
 $(document).on('change', '#addDestinationRegionSelect', function(e) {
     // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
     console.log(this.options[e.target.selectedIndex].text)
@@ -158,6 +147,7 @@ $(document).on('change', '#editDestinationCountrySelectSearch', function(e) {
                 $("#editDestinationCountrySelect option[value=" + json[2][0]['country'] + "]").prop('selected', 'selected');
                 $("#editDestinationRegionSelect option[value=" + json[2][0]['region'] + "]").prop('selected', 'selected');
                 $("#destination_id_select_type option[value=" + json[2][0]['type'] + "]").prop('selected', 'selected');
+                $("#destination_id_select_maut option[value=" + json[2][0]['maut_fs'] + "]").prop('selected', 'selected');
             }
         }
     );
@@ -197,6 +187,7 @@ $(document).on('change', '#editDestinationRegionSelectSearch', function(e) {
                 $("#editDestinationCountrySelect option[value=" + json[1][0]['country'] + "]").prop('selected', 'selected');
                 $("#editDestinationRegionSelect option[value=" + json[1][0]['region'] + "]").prop('selected', 'selected');
                 $("#destination_id_select_type option[value=" + json[1][0]['type'] + "]").prop('selected', 'selected');
+                $("#destination_id_select_maut option[value=" + json[1][0]['maut_fs'] + "]").prop('selected', 'selected');
             }
         }
     );
@@ -213,6 +204,7 @@ $(document).on('change', '#destination_id_select', function(e) {
             type: "POST",
             datatype: "JSON",
             success: function(result){
+                console.log(result)
                 var data = JSON.parse(result);
                 $('#destination_id_select_destination').attr("value",data.destination);
                 $('#destination_id_select_zipCode').attr("value",data.zipCode);
@@ -222,15 +214,14 @@ $(document).on('change', '#destination_id_select', function(e) {
 
                  $("#editDestinationCountrySelect option[value=" + data.country + "]").prop('selected', 'selected');
                  $("#editDestinationRegionSelect option[value=" + data.region + "]").prop('selected', 'selected');
-                 $("#destination_id_select_type option[value=" + data.type + "]").prop('selected', 'selected');
+                $("#destination_id_select_type option[value=" + data.type + "]").prop('selected', 'selected');
+                $("#destination_id_select_maut option[value=" + data.maut_fs + "]").prop('selected', 'selected');
             }
         }
     );
 });
 
 $(document).on('change', '#addDestinationRegionSelect', function(e) {
-    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
-    //
     $.ajax(
         {
             url: "../../helper/Functions.php",
@@ -252,8 +243,6 @@ $(document).on('change', '#addDestinationRegionSelect', function(e) {
 });
 
 $(document).on('change', '#editDestinationRegionSelect', function(e) {
-    // $(location).attr('href', "../../helper/Functions.php?action=" + this.options[e.target.selectedIndex].text)
-    //
     $.ajax(
         {
             url: "../../helper/Functions.php",
@@ -264,10 +253,7 @@ $(document).on('change', '#editDestinationRegionSelect', function(e) {
             datatype: "html",
             success: function(result){
                 console.log(result);
-                // $("#addDestinationCountrySelect select").val(result);
                 $("#editDestinationCountrySelect option[value=" + result + "]").prop('selected', 'selected');
-
-                // $("#addDestinationCountrySelect").val("Deutschland");
             }
         }
     );
@@ -339,6 +325,115 @@ $(document).on('change', '#editMautSelect', function(e) {
         }
     );
 });
+
+function updateRegion() {
+    var data = $('#regionEdit_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("editCountryRegionSelectEditRegion").options[document.getElementById("editCountryRegionSelectEditRegion").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateRegion"
+        }
+    );
+    console.log(data)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                location.reload();
+            }
+        }
+    );
+}
+
+function updateCountry() {
+    var data = $('#countryEdit_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("editCountryRegionSelectEditCountry").options[document.getElementById("editCountryRegionSelectEditCountry").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateCountry"
+        }
+    );
+    console.log(data)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                location.reload();
+            }
+        }
+    );
+}
+
+function updateDestination() {
+    var data = $('#destinationEdit_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("destination_id_select").options[document.getElementById("destination_id_select").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateDestination"
+        }
+    );
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                location.reload();
+            }
+        }
+    );
+}
+
+function updateMaut() {
+    var data = $('#maut_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("editMautSelect").options[document.getElementById("editMautSelect").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateMaut"
+        }
+    );
+    console.log(data)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                location.reload();
+            }
+        }
+    );
+}
+
+
 
 function showToast(message) {
     var x = $("#snackbar");
