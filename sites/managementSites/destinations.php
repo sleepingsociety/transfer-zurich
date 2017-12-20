@@ -74,16 +74,14 @@ include_once("../../includes/connection/db_connection.php");
                             $destination = $_POST["destination"];
                             $zipCode = $_POST["zipCode"];
                         }
-                        $traffic_jam_surcharge = $_POST['traffic_jam_surcharge'];
-                        $search_on_site = $_POST['search_on_site'];
                         $breaks = $_POST['breaks'];
                         $type_id = $_POST['type_id'];
                         $country = $_POST['country'];
                         $maut_auswahl = $_POST['maut_id'];
                         $region = $_POST['region_id'];
 
-                        $sql = "INSERT INTO destination (destination, zipCode, country_fs, region_fs, breaks, traffic_jam_surcharge, search_at_place, type_fs, maut_fs)
-                        VALUES ('$destination', '$zipCode','$country', '$region', '$breaks','$traffic_jam_surcharge','$search_on_site', '$type_id', '$maut_auswahl')";
+                        $sql = "INSERT INTO destination (destination, zipCode, country_fs, region_fs, breaks, type_fs, maut_fs)
+                        VALUES ('$destination', '$zipCode','$country', '$region', '$breaks', '$type_id', '$maut_auswahl')";
 
                         mysqli_select_db($connection, $dbname);
 
@@ -188,16 +186,6 @@ include_once("../../includes/connection/db_connection.php");
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="destination_id_add_traffic_jam_surcharge">Stau Zuschlag</label><br>
-                                    <input id="destination_id_add_traffic_jam_surcharge" type="text"
-                                           class="form-control" name="traffic_jam_surcharge">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="destination_id_add_search_on_site">Suche vor Ort</label><br>
-                                    <input id="destination_id_add_search_on_site" type="text" class="form-control"
-                                           name="search_on_site">
-                                </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="destination_id_add_breaks">Pausen</label><br>
                                     <input id="destination_id_add_breaks" type="text" class="form-control"
