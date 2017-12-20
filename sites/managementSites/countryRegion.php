@@ -140,7 +140,7 @@ include_once("../../includes/connection/db_connection.php");
                 }
                 ?>
 
-                <form method="post" action=" <?php echo $_SERVER['PHP_SELF']; ?> ">
+                <form method="post">
 
                     <div class="row">
                         <div class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -164,7 +164,7 @@ include_once("../../includes/connection/db_connection.php");
 
                 while ($row = mysqli_fetch_array($getCountryAndShortResult)) {
                     ?>
-                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form method="post" id="countryEdit_form">
 
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
@@ -180,7 +180,7 @@ include_once("../../includes/connection/db_connection.php");
                             </div>
                         </div>
                         <div id="saveEditsButton">
-                            <button name="saveCountryEdits" class="btn btn-default" type="submit" value="saveEdits">
+                            <button name="saveCountryEdits" class="btn btn-default" type="button" onclick="updateCountry()" value="saveEdits">
                                 Speichern
                             </button>
                         </div
@@ -315,7 +315,7 @@ include_once("../../includes/connection/db_connection.php");
                 while ($row = mysqli_fetch_array($getRegionAndCountryResult)) {
                     ?>
 
-                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form method="post" id="regionEdit_form">
                         <div class="row">
                             <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                 <label for="region">Region</label><br>
@@ -351,7 +351,7 @@ include_once("../../includes/connection/db_connection.php");
                             </div>
                         </div>
                         <div id="saveEditsButton">
-                            <button name="saveRegionEdits" class="btn btn-default" type="submit" value="saveEdits">
+                            <button name="saveRegionEdits" class="btn btn-default" type="button" onclick="updateRegion()" value="saveEdits">
                                 Speichern
                             </button>
                         </div>

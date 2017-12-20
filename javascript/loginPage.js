@@ -147,6 +147,7 @@ $(document).on('change', '#editDestinationCountrySelectSearch', function(e) {
                 $("#editDestinationCountrySelect option[value=" + json[2][0]['country'] + "]").prop('selected', 'selected');
                 $("#editDestinationRegionSelect option[value=" + json[2][0]['region'] + "]").prop('selected', 'selected');
                 $("#destination_id_select_type option[value=" + json[2][0]['type'] + "]").prop('selected', 'selected');
+                $("#destination_id_select_maut option[value=" + json[2][0]['maut_fs'] + "]").prop('selected', 'selected');
             }
         }
     );
@@ -186,6 +187,7 @@ $(document).on('change', '#editDestinationRegionSelectSearch', function(e) {
                 $("#editDestinationCountrySelect option[value=" + json[1][0]['country'] + "]").prop('selected', 'selected');
                 $("#editDestinationRegionSelect option[value=" + json[1][0]['region'] + "]").prop('selected', 'selected');
                 $("#destination_id_select_type option[value=" + json[1][0]['type'] + "]").prop('selected', 'selected');
+                $("#destination_id_select_maut option[value=" + json[1][0]['maut_fs'] + "]").prop('selected', 'selected');
             }
         }
     );
@@ -202,6 +204,7 @@ $(document).on('change', '#destination_id_select', function(e) {
             type: "POST",
             datatype: "JSON",
             success: function(result){
+                console.log(result)
                 var data = JSON.parse(result);
                 $('#destination_id_select_destination').attr("value",data.destination);
                 $('#destination_id_select_zipCode').attr("value",data.zipCode);
@@ -211,7 +214,8 @@ $(document).on('change', '#destination_id_select', function(e) {
 
                  $("#editDestinationCountrySelect option[value=" + data.country + "]").prop('selected', 'selected');
                  $("#editDestinationRegionSelect option[value=" + data.region + "]").prop('selected', 'selected');
-                 $("#destination_id_select_type option[value=" + data.type + "]").prop('selected', 'selected');
+                $("#destination_id_select_type option[value=" + data.type + "]").prop('selected', 'selected');
+                $("#destination_id_select_maut option[value=" + data.maut_fs + "]").prop('selected', 'selected');
             }
         }
     );
@@ -322,6 +326,86 @@ $(document).on('change', '#editMautSelect', function(e) {
     );
 });
 
+function updateRegion() {
+    var data = $('#regionEdit_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("editCountryRegionSelectEditRegion").options[document.getElementById("editCountryRegionSelectEditRegion").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateRegion"
+        }
+    );
+    console.log(data)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                location.reload();
+            }
+        }
+    );
+}
+
+function updateCountry() {
+    var data = $('#countryEdit_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("editCountryRegionSelectEditCountry").options[document.getElementById("editCountryRegionSelectEditCountry").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateCountry"
+        }
+    );
+    console.log(data)
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                location.reload();
+            }
+        }
+    );
+}
+
+function updateDestination() {
+    var data = $('#destinationEdit_form').serializeArray();
+    data.push(
+        {
+            name: "action",
+            value: document.getElementById("destination_id_select").options[document.getElementById("destination_id_select").options['selectedIndex']].value,
+
+        },
+        {
+            name: "type",
+            value: "updateDestination"
+        }
+    );
+    $.ajax(
+        {
+            url: "../../helper/Functions.php",
+            data: data,
+            type: "POST",
+            datatype: "JSON",
+            complete: function(result){
+                location.reload();
+            }
+        }
+    );
+}
+
 function updateMaut() {
     var data = $('#maut_form').serializeArray();
     data.push(
@@ -343,7 +427,7 @@ function updateMaut() {
             type: "POST",
             datatype: "JSON",
             complete: function(result){
-                console.log(result);
+                location.reload();
             }
         }
     );

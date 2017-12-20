@@ -20,7 +20,7 @@ if(isset($_POST['action'])) {
     } else if($_POST['type'] === 'destination') {
         $action = $_POST['action'];
 
-        $query = "SELECT destination, zipCode, country_fs, region_fs, breaks, traffic_jam_surcharge, search_at_place, type_fs, maut_fs FROM destination d
+        $query = "SELECT destination, zipCode, country_fs, region_fs, breaks, type_fs, maut_fs FROM destination d
                   WHERE d.destination='$action' LIMIT 1;";
 
 
@@ -37,8 +37,6 @@ if(isset($_POST['action'])) {
                 'country' => $row['country_fs'],
                 'region' => $row['region_fs'],
                 'breaks' => $row['breaks'],
-                'traffic_jam_surcharge' => $row['traffic_jam_surcharge'],
-                'search_at_place' => $row['search_at_place'],
                 'type' => $row['type_fs'],
                 'maut_fs' => $row['maut_fs'],
             ];
@@ -155,7 +153,7 @@ if(isset($_POST['action'])) {
 
         $testVar1 = $responses[1][0]['destination_id'];
 
-        $query2 = "SELECT destination, zipCode, country_fs, region_fs, breaks, traffic_jam_surcharge, search_at_place, type_fs, maut_fs FROM destination d
+        $query2 = "SELECT destination, zipCode, country_fs, region_fs, breaks, type_fs, maut_fs FROM destination d
                   WHERE d.destination_id=$testVar1 LIMIT 1;";
 
         $selectCountryQuery2 = $query2;
@@ -171,8 +169,6 @@ if(isset($_POST['action'])) {
                 'country' => $row['country_fs'],
                 'region' => $row['region_fs'],
                 'breaks' => $row['breaks'],
-                'traffic_jam_surcharge' => $row['traffic_jam_surcharge'],
-                'search_at_place' => $row['search_at_place'],
                 'type' => $row['type_fs'],
                 'maut_fs' => $row['maut_fs'],
             ]);
@@ -205,7 +201,7 @@ if(isset($_POST['action'])) {
 
         $testVar1 = $responses[0][0]['destination_id'];
 
-        $query2 = "SELECT destination, zipCode, country_fs, region_fs, breaks, traffic_jam_surcharge, search_at_place, type_fs, maut_fs FROM destination d
+        $query2 = "SELECT destination, zipCode, country_fs, region_fs, breaks, type_fs, maut_fs FROM destination d
                   WHERE d.destination_id=$testVar1 LIMIT 1;";
 
         $selectCountryQuery2 = $query2;
@@ -221,10 +217,8 @@ if(isset($_POST['action'])) {
                 'country' => $row['country_fs'],
                 'region' => $row['region_fs'],
                 'breaks' => $row['breaks'],
-                'traffic_jam_surcharge' => $row['traffic_jam_surcharge'],
-                'search_at_place' => $row['search_at_place'],
                 'type' => $row['type_fs'],
-                'maut_fs' => $row['maut_fs'],
+                'maut_fs' => $row['maut_fs']
             ]);
         }
 
@@ -255,6 +249,83 @@ if(isset($_POST['action'])) {
                       maut_bemerkung='$notice' 
                   WHERE 
                       maut_id = $action";
+
+        $selectCountryQuery = $query;
+
+        if (mysqli_query($connection, $selectCountryQuery) === TRUE) {
+            $response = "Record updated successfully";
+        } else {
+            $response = "Error updating record: " . $connection->error;
+        }
+        echo json_encode($response);
+        unset($_POST);
+
+    } else if($_POST['type'] === "updateRegion") {
+        $action = $_POST['action'];
+        $region = $_POST['region'];
+        $country = $_POST['country_fs'];
+        $query = "UPDATE 
+                      region 
+                  SET 
+                      region='$region',
+                      country_fs=(SELECT country_id FROM country WHERE country='$country')  
+                  WHERE 
+                      region_id = '$action'";
+
+        $selectCountryQuery = $query;
+
+        if (mysqli_query($connection, $selectCountryQuery) === TRUE) {
+            $response = "Record updated successfully";
+        } else {
+            $response = "Error updating record: " . $connection->error;
+        }
+        echo json_encode($response);
+        unset($_POST);
+
+    } else if($_POST['type'] === "updateCountry") {
+        $action = $_POST['action'];
+        $country = $_POST['countryEdit'];
+        $countryShort = $_POST['shortEdit'];
+        $query = "UPDATE 
+                      country 
+                  SET 
+                      country='$country',
+                      short='$countryShort'  
+                  WHERE 
+                      country_id = '$action'";
+
+        $selectCountryQuery = $query;
+
+        if (mysqli_query($connection, $selectCountryQuery) === TRUE) {
+            $response = "Record updated successfully";
+        } else {
+            $response = "Error updating record: " . $connection->error;
+        }
+        echo json_encode($response);
+        unset($_POST);
+
+    } else if($_POST['type'] === "updateDestination") {
+        $action = $_POST['action'];
+        print_r($_POST);
+        $destination = $_POST['destination'];
+        $zipCode = $_POST['zipCode'];
+        $country_fs = $_POST['country'];
+        $region_id = $_POST['region_id'];
+        $breaks = $_POST['breaks'];
+        $type_id = $_POST['type_id'];
+        $maut_id = $_POST['maut_id'];
+        $query = "UPDATE 
+                      destination 
+                  SET 
+                      destination='$destination',
+                      zipCode='$zipCode',  
+                      country_fs=$country_fs,  
+                      region_fs=$region_id,  
+                      breaks=$breaks,  
+                      type_fs=$type_id,  
+                      maut_fs=$maut_id  
+                  WHERE 
+                      destination_id = '$action'";
 
         $selectCountryQuery = $query;
 

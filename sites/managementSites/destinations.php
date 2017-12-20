@@ -293,12 +293,12 @@ include_once("../../includes/connection/db_connection.php");
                         ?>
 
 
-                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <form method="post" id="destinationEdit_form">
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
 
                                     <label for="editDestinationCountrySelect">Land</label><br>
-                                    <select id="editDestinationCountrySelectSearch" class="form-control" name="country">
+                                    <select id="editDestinationCountrySelectSearch" class="form-control" name="country_search">
                                         <?php
                                         $selectCountryQuery = "SELECT country_id, country FROM country GROUP BY country_id";
 
@@ -321,7 +321,7 @@ include_once("../../includes/connection/db_connection.php");
                                     $getRegionIdResult = mysqli_query($connection, $getRegionId) or die (mysqli_error($connection));
                                     ?>
 
-                                    <select id="editDestinationRegionSelectSearch" class="form-control" name="region_id">
+                                    <select id="editDestinationRegionSelectSearch" class="form-control" name="region_id_search">
                                         <?php
                                         while ($row = mysqli_fetch_array($getRegionIdResult)) {
                                             echo "<option value=" . $row['region_id'] . ">" . $row['region'] . "</option>";
@@ -331,7 +331,7 @@ include_once("../../includes/connection/db_connection.php");
                                 </div>
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="destination_id_select">ID</label><br>
-                                    <select id="destination_id_select" class="form-control" name="destination_id">
+                                    <select id="destination_id_select" class="form-control" name="destination_id_search">
                                         <?php
                                         while ($row = mysqli_fetch_array($getDestinationIdResult)) {
                                             echo "<option value=" . $row['destination_id'] . ">" . $row['destination'] . "</option>";
@@ -426,22 +426,12 @@ include_once("../../includes/connection/db_connection.php");
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="destination_id_select_traffic_jam_surcharge">Stau Zuschlag</label><br>
-                                    <input type="text" class="form-control" name="traffic_jam_surcharge"
-                                           id="destination_id_select_traffic_jam_surcharge">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
-                                    <label for="destination_id_select_search_on_site">Suche vor Ort</label><br>
-                                    <input type="text" class="form-control" name="search_on_site"
-                                           id="destination_id_select_search_on_site">
-                                </div>
-                                <div class="form-group col-sm-4 col-md-4 col-lg-4">
                                     <label for="destination_id_select_breaks">Pausen</label><br>
                                     <input type="text" class="form-control" name="breaks"
                                            id="destination_id_select_breaks">
                                 </div>
                             </div>
-                            <button name="editDestination" class="btn btn-default" type="submit"
+                            <button name="editDestination" class="btn btn-default" type="button" onclick="updateDestination()"
                                     value="editDestination">
                                 Änderungen Speichern
                             </button>
